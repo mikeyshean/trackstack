@@ -1,0 +1,43 @@
+
+.button {
+  display: inline-block;
+  position: relative;
+  height: 26px;
+  min-width: 25px;
+  border: 1px solid #e5e5e5;
+  border-radius: 3px;
+  margin-right: 5px;
+  padding: 2px 11px 2px 10px;
+  cursor: pointer;
+  color: #333;
+  font-size: 14px;
+  line-height: 20px;
+  white-space: nowrap;
+  font-weight: 100;
+  text-align: center;
+  vertical-align: baseline;
+}
+
+
+.button-follow {
+  min-width: 31px;
+  margin-right: 5px;
+}
+
+
+.button.focus {
+  background: #f50;
+  border-color: #f50;
+  color: #fff;
+}
+
+button[data-follow-state="false"]:after {
+  content: "Follow";
+
+}
+button[data-follow-state="true"]:after {
+  content: "Following";
+
+}
+
+// "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;

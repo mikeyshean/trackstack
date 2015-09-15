@@ -7,7 +7,7 @@ window.Trackstack = {
     var collection =
       Trackstack.Collections.users = new Trackstack.Collections.Users()
 
-    new Trackstack.Routers.Router({ $rootEl: $("#main"), collection: collection })
+    new Trackstack.Routers.Router({ $rootEl: $("#content"), collection: collection })
     Backbone.history.start();
   }
 };

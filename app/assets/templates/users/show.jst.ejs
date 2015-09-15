@@ -1,16 +1,38 @@
-<h1><%= user.escape("username") %></h1>
-<h4>
-  <%= user.escape("fname") %>
-  <%= user.escape("lname") %>
-</h4>
+<div class="profile-header">
+  <div class="profile-header-info">
+    <div class="profile-header-avatar">
+    </div>
+    <div class="profile-user-info">
+      <h3><%= user.escape("username") %></h3>
+      <h4>
+        <%= user.escape("fname") %>
+        <%= user.escape("lname") %>
+      </h4>
+    </div>
+  </div>
+</div>
 
-<% if (user.get("current_user") === false) { %>
-  <button
-    class="follow-button"
-    data-user-id=<%= user.id %>
-    data-follow-state="<%= user.get('followed') %>">
-  </button>
-<% } %>
+<div class="horizontal-bar">
+</div>
+
+<section class="content-wrapper">
+  <div class="main">
+
+    <% if (user.get("current_user") === false) { %>
+      <button
+        class="button follow-button
+          <% if (user.get('followed')) { %>
+            <%= 'focus' %>
+          <% } %>"
+        data-user-id=<%= user.id %>
+        data-follow-state="<%= user.get('followed') %>">
+      </button>
+    <% } %>
+
+  </div>
+  <div class="sidebar">
+  </div>
+</section>
 
 <p>Followers: <%= user.followers().length %>
 
