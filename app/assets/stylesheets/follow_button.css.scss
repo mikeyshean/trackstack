@@ -1,0 +1,9 @@
+
+button[data-follow-state="false"]:after {
+  content: "Follow";
+
+}
+button[data-follow-state="true"]:after {
+  content: "Following";
+
+}

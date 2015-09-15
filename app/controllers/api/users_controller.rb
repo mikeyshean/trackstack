@@ -10,8 +10,27 @@ module Api
     end
 
     def followers
-      @follows = current_user.followers
+      @follows = User.find(params[:id]).followers
     end
+
+    def start_following
+      @follower = current_user
+
+      if current_user.start_following(params[:id])
+        render :follower
+      else
+        render json: current_user.errors.full_messages, status: 422
+      end
+    end
+
+    def stop_following
+      @follower = current_user
+
+      current_user.stop_following(params[:id])
+      render :follower
+    end
+
+
 
   end
 end

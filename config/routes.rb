@@ -6,8 +6,9 @@ Rails.application.routes.draw do
 
   namespace :api, defaults: { format: :json } do
     resources :users, only: [:index, :show] do
-      get "followers", on: :member
-      get "followees", on: :member
+      get "followers", on: :member, to: "users#followers"
+      post "followers", on: :member, to: "users#start_following"
+      delete "followers/:current_user_id", on: :member, to: "users#stop_following"
     end
 
   end

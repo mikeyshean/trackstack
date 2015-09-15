@@ -1,5 +1,13 @@
 Trackstack.Collections.Followers = Backbone.Collection.extend({
-  url: "api/users/" + this.userId + "/followers",
-  model: Trackstack.Models.User
+
+  url: function () {
+    return "api/users/" + this.user_id + "/followers"
+  },
+
+  model: Trackstack.Models.Follower,
+
+  initialize: function(models, options) {
+    this.user_id = options.user_id
+  }
 
 });

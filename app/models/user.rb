@@ -43,11 +43,21 @@ class User < ActiveRecord::Base
     self.session_token ||= User.generate_session_token
   end
 
+
 # User Authentication End
 
-  private
+  def following?(other_user)
+    other_user.followers.include?(self)
+  end
 
-  def add_follower(follower_id)
-    Following.create({followee_id: self.id, follower_id: follower_id})
+  def start_following(followee_id)
+    Following.create({follower_id: self.id, followee_id: followee_id})
+  end
+
+  def stop_following(followee_id)
+    following = Following.where("follower_id = :current_user_id AND followee_id = :followee_id",
+      { :current_user_id => self.id, :followee_id => followee_id })
+
+    following.first.destroy
   end
 end

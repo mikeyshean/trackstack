@@ -3,7 +3,15 @@
   <%= user.escape("fname") %>
   <%= user.escape("lname") %>
 </h4>
-<button class="follow-button" data-follow-state="">Follow!</button>
+
+<% if (user.get("current_user") === false) { %>
+  <button
+    class="follow-button"
+    data-user-id=<%= user.id %>
+    data-follow-state="<%= user.get('followed') %>">
+  </button>
+<% } %>
+
 <p>Followers: <%= user.followers().length %>
 
 <a href="#">Back to Index</a>
