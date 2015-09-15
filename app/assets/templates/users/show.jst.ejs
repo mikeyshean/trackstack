@@ -3,5 +3,7 @@
   <%= user.escape("fname") %>
   <%= user.escape("lname") %>
 </h4>
+<button class="follow-button" data-follow-state="">Follow!</button>
+<p>Followers: <%= user.followers().length %>
 
 <a href="#">Back to Index</a>
