@@ -35,6 +35,7 @@ header {
   height: 46px;
   background: #333;
   position: fixed;
+  z-index: 10;
 }
 
 body {

@@ -38,12 +38,9 @@ that everything works before moving onto phase 2.
 
 [Details][phase-one]
 
-### Phase 2: Upload/Play Tracks, Create Playlists (~2 days)
-I plan to use native HTML5 audio for track playback and the Filepicker.io API
-for track uploads.  I will add API routes to serve track URLs as JSON, then add Backbone
-models and collections that fetch data from those routes.  For Playlists, I will
-migrate a "playlists" and "playlistings" join table. By the end of this
-phase, users will be able upload tracks, play them, and make playlists.
+### Phase 2: Upload Tracks, Create Playlists (~2 days)
+I plan to use a third party API for track uploads.  I will add API routes to serve track URLs as JSON, then add Backbone models and collections that fetch data from those routes.  For Playlists, I will migrate a "playlists" and "playlistings" join table. By the end of this
+phase, users will be able upload tracks and create playlists.
 
 [Details][phase-two]
 
@@ -65,10 +62,14 @@ collection fetches from the new route.
 [Details][phase-four]
 
 ### Phase 5: Main Feed, Sidebar Composite Views (~2 days)
-Finally, I'll add a the main page the user will see after logging in.  This feed
+I will add the main page that the user will see after logging in.  This feed
 will consist of all new tracks/playlists created by the user's followees.
 I will also use the associations mentioned previously to create composite views
  to be used in the side bar.
+
+### Phase 5: Audio Playback, CSS (~2 days)
+Finally, I will use native HTML5 audio for track playback and add CSS to best replicate
+ the SoundCloud look and feel.
 
 [Details][phase-five]
 
