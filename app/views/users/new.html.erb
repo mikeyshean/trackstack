@@ -1,0 +1,13 @@
+<h1>Sign Up</h1>
+
+<form action="/users" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+  <label>Username<br>
+    <input name="user[username]" type="text"><br>
+  </label><br>
+  <label>Password<br>
+    <input name="user[password]" type="password"><br>
+  </label><br>
+  <button>Submit</button><br>
+</form>
+Already have an account? <a href="<%= new_session_url %>">Sign In.</a>
