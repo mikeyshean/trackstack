@@ -25,6 +25,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'bcrypt'
 gem 'backbone-on-rails'
 gem 'newrelic_rpm'
+gem 'faker'
+
 
 
 # Use ActiveModel has_secure_password
@@ -43,7 +45,6 @@ group :development, :test do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'quiet_assets'
-  gem 'faker'
 
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console', '~> 2.0'
