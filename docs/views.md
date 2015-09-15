@@ -1,5 +1,8 @@
 # View Wireframes
 
+## Sign In/Sign Up
+![login]
+
 ## User Show
 ![user-show]
 
@@ -22,3 +25,4 @@
 [track_show]: ./wireframes/track_show.JPG
 [home]: ./wireframes/home.jpg
 [upload_track]: ./wireframes/upload_track.JPG
+[login]: ./wireframes/login.JPG

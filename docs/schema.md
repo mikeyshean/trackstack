@@ -4,6 +4,7 @@
 column name        | data type | details
 -------------------|-----------|-----------------------
 id                 | integer   | not null, primary key
+email              | string    | not null, unique
 username           | string    | not null, index
 fname              | string    |
 lname              | string    |
@@ -42,6 +43,7 @@ column name | data type | details
 id          | integer   | not null, primary key
 title       | string    | not null
 description | string    |
+author_id   | integer   | not null, foreign key (references users), index
 
 ## comments
 column name | data type | details
@@ -49,6 +51,7 @@ column name | data type | details
 id          | integer   | not null, primary key
 text        | text      | not null
 track_id    | integer   | not null, foreign key (references tracks), index
+author_id   | integer   | not null, foreign key (references users), index
 submitted_at| date/time |
 
 ## taggings (polymorphic)

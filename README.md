@@ -2,7 +2,7 @@
 
 [Heroku link][heroku]
 
-[heroku]: http://flux-capacitr.herokuapp.com
+[heroku]: http://.herokuapp.com
 
 ## Minimum Viable Product
 TrackStack is a clone of SoundCloud built on Rails and Backbone. Users can:
