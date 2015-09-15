@@ -1,1 +1,1 @@
-json.partial! "user", user: @follower
+json.partial! "user", user: current_user

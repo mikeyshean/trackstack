@@ -1,7 +1,6 @@
 Trackstack.Models.User = Backbone.Model.extend({
   urlRoot: "api/users",
 
-
   parse: function (response) {
     if (response.followers) {
       this.followers().set(response.followers);

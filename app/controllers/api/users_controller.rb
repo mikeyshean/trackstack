@@ -14,8 +14,6 @@ module Api
     end
 
     def start_following
-      @follower = current_user
-
       if current_user.start_following(params[:id])
         render :follower
       else
@@ -24,13 +22,10 @@ module Api
     end
 
     def stop_following
-      @follower = current_user
-
       current_user.stop_following(params[:id])
+
       render :follower
     end
-
-
 
   end
 end
