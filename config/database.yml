@@ -78,8 +78,3 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: trackstack_production
-  username: trackstack
-  password: <%= ENV['TRACKSTACK_DATABASE_PASSWORD'] %>
