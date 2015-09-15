@@ -1,0 +1,3 @@
+<% users.each(function (user) { %>
+  <a href="#/users/<%= user.id %>"><%= user.escape("username") %></a><br>
+<% }) %>

@@ -4,10 +4,15 @@ window.Trackstack = {
   Views: {},
   Routers: {},
   initialize: function() {
-    alert('Hello from Backbone!');
+    var collection =
+      Trackstack.Collections.users = new Trackstack.Collections.Users()
+
+    new Trackstack.Routers.Router({ $rootEl: $("#main"), collection: collection })
+    Backbone.history.start();
   }
 };
 
 $(document).ready(function(){
   Trackstack.initialize();
+
 });
