@@ -11,8 +11,3 @@ window.Trackstack = {
     Backbone.history.start();
   }
 };
-
-$(document).ready(function(){
-  Trackstack.initialize();
-
-});

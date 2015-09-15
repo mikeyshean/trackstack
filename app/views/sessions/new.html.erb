@@ -1,13 +1,40 @@
 <h1>Sign In</h1>
+<div class="modal modal-background">
+  <div class="signin-modal group">
 
-<form action="/session" method="post">
-  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-  <label>Username<br>
-    <input name="user[username]" type="text"><br>
-  </label><br>
-  <label>Password<br>
-    <input name="user[password]" type="password"><br>
-  </label><br>
-  <button>Submit</button><br>
-</form>
-<a href="<%= new_user_url %>">Create Account</a>
+    <div class="logo-wrapper">
+      <div class="logo">TrackStack</div>
+    </div>
+    <div class="tabs">
+      <ul class="tabs-options">
+        <li><a href="#create-account">Create Account</a></li>
+
+
+        <form action="/session" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <label>Username<br>
+            <input name="user[username]" type="text"><br>
+          </label><br>
+          <label>Password<br>
+            <input name="user[password]" type="password"><br>
+          </label><br>
+          <button>Submit</button><br>
+        </form>
+        <a href="<%= new_user_url %>">Create Account</a>
+
+
+        <li><a href="#signin-content">Sign In</a></li>
+      </ul>
+    </div>
+
+    <section class="tab-contents">
+      <article id="signin-content">
+
+      </article>
+      <article id="create-account-content">
+
+      </article>
+
+    </section>
+  </div>
+</div>

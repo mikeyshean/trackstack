@@ -1,0 +1,13 @@
+/*
+.modal-background {
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.2);
+}*/
+
+body input {
+  border: 1px solid #aaa;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
