@@ -1,6 +1,27 @@
 <div id="app">
   <header>
-    <nav id="nav">
+    <nav id="nav" class="group">
+      <div class="nav-left left">
+        <div class="logo-left left">
+          <a href="#">LOGO</a>
+        </div>
+
+        <div class="nav-buttons-left left">
+          <ul class="group">
+            <li class="left"><a href="#">Home</a></li>
+            <li class=left><a href="#">Collection</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="nav-right right">
+        <ul class="nav-buttons-right group">
+          <li class="left"><a href="#/tracks/new">Upload</a></li>
+          <li class="left"><a href="#/users/<%= current_user.id %>"><%= current_user.username %></a></li>
+          <li class="left"><%= button_to "Sign Out", session_url, method: :delete, class: "sign-out" %></li>
+        </ul>
+      </div>
     </nav>
   </header>
   <section id="content">

@@ -15,7 +15,7 @@
  */
 
 
-html, body, section, div, ul, li, a, button, form, input {
+html, body, header, nav, section, div, ul, li, a, button, form, input {
   border: 0;
   margin: 0;
   padding: 0;
@@ -43,6 +43,10 @@ body {
   overflow-y: scroll;
   padding-bottom: 75px;
   font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+}
+
+ul {
+  list-style: none;
 }
 
 #content {

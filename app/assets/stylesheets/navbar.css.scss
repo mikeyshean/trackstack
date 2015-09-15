@@ -1,6 +1,44 @@
-nav {
+header nav {
+  font-family: "Interstate","Lucida Grande",Arial,sans-serif;
   width: 1240px;
   margin: 0 auto;
-  background: orange;
+  // background: orange;
   height: 100%;
+  position: relative;
+  color: #ccc;
+  font-weight: 100;
+  font-size: 14px;
+  text-align: center;
+  // letter-spacing: 1.5;
+}
+
+nav * {
+  height: 100%;
+}
+.left {
+  float: left;
+}
+
+.right {
+ float: right;
+}
+nav .logo-left {
+  background: #f50;
+  width: 69px;
+  color: #fff;
+}
+
+.nav-left li {
+  border-right: 1px solid #000;
+  width: 104px;
+}
+
+nav a, nav input  {
+  display: block;
+  height: 100%;
+  padding: 14px 10px;
+}
+
+.sign-out {
+  cursor: pointer;
 }
