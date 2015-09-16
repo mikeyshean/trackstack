@@ -4,8 +4,10 @@ window.Trackstack = {
   Views: {},
   Routers: {},
   initialize: function() {
+    var $el = $("#user-nav-dropdown")
+    var currentUserId = $el.data("id")
 
-    new Trackstack.Views.NavDropdown({el: $("#user-nav-dropdown") }).render()
+    new Trackstack.Views.NavDropdown({el: $el, currentUserId: currentUserId }).render()
     var collection =
       Trackstack.Collections.users = new Trackstack.Collections.Users()
 

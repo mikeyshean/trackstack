@@ -4,6 +4,7 @@ Trackstack.Views.NavDropdown = Backbone.View.extend({
 
   initialize: function (options) {
     this.currentUserId = options.currentUserId
+    debugger
   },
 
   render: function () {
