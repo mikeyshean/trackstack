@@ -55,11 +55,18 @@ nav a:hover, nav input:hover  {
   display: block;
   padding: 10px 20px;
   text-align: left;
+  font-size: 12px;
+  letter-spacing: .5px;
 }
 
 #user-nav-dropdown:hover {
   background: #111;
 }
+#user-nav-dropdown:hover #username {  /* ehh */
+  color: #fff
+}
+
+
 
 #user-nav-dropdown li:hover {
   background: #333;
