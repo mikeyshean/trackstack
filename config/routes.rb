@@ -11,10 +11,10 @@ Rails.application.routes.draw do
         post "followers", to: "users#start_following"
         delete "followers/:current_user_id", to: "users#stop_following"
 
-        resources :tracks, param: :track_id
+        resources :tracks, param: :track_id, only: [:index, :show ]
         resources :playlists, param: :playlist_id
       end
     end
-
+    resources :tracks, only: [:show, :create, :update, :destroy]
   end
 end

@@ -6,19 +6,18 @@ module Api
       author = User.find(params[:id])
       @tracks = author.tracks
 
-      render json: @tracks
+      render :index
     end
 
     def show
-      author = User.find(params[:id])
-      @track = author.tracks.find(params[:track_id])
+      @track = Track.find(params[:id])
 
-      render json: @track
+      render :track
     end
 
     def update
 
-      @track = current_user.tracks.find(params[:track_id])
+      @track = current_user.tracks.find(params[:id])
 
       if @track.update(track_params)
         render :show
@@ -28,7 +27,7 @@ module Api
     end
 
     def destroy
-      @track = current_user.tracks.find(params[:track_id])
+      @track = current_user.tracks.find(params[:id])
       @track.destroy
     end
 

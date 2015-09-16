@@ -1,0 +1,23 @@
+<div class="modal">
+  <div class="modal-wrapper group">
+    <div class="sign-in-header-text">
+      <div class="logo-wrapper">
+        <div class="logo">TrackStack</div>
+      </div>
+  </div>
+
+  <section class="tab-content group">
+    <article id="signin-content" class="active tab-content-item">
+      <form action="/session" method="post">
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+        <label class="input-label">Your username</label><br>
+          <input name="user[username]" type="text" class="form-field"><br>
+        <br>
+        <label class="input-label">Your password</label><br>
+        <input name="user[password]" type="password" class="form-field"><br>
+        <button class="button button-orange">Sign In</button><br>
+      </form>
+
+    </article>
+  </section>
+</div>

@@ -5,11 +5,12 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.41);
+  background: rgba(242,242,242,.9);
+  /*background: rgba(0, 0, 0, 0.41);*/
   z-index: 11
 }
 
-.modal .modal-wrapper, .tab-content {
+.modal-background .modal .modal-wrapper, .tab-content {
   height: 100%;
 
 }
@@ -17,10 +18,10 @@
 .sign-in-modal {
   border-radius: 5px;
   overflow: hidden;
-  box-shadow: -1.5px 1.5px rgba(0, 0, 0, 0.24),
-              -2px 2px 4px rgba(0, 0, 0, 0.2),
-              1.5px 0 rgba(0, 0, 0, 0.24),
-              2px 0 4px rgba(0, 0, 0, 0.2)
+  box-shadow: -1.5px 1.5px rgba(0, 0, 0, 0.14),
+              -2px 2px 4px rgba(0, 0, 0, 0.1),
+              1.5px 0 rgba(0, 0, 0, 0.14),
+              2px 0 4px rgba(0, 0, 0, 0.1)
 }
 
 .modal input {
@@ -30,13 +31,13 @@
 }
 
 
-.modal .sign-in-modal {
+.modal-background .modal {
   position: relative;
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
   width: 500px;
-  height: 500px;
+  height: 350px;  /* use 500px when adding omniauth options */
   background: #fff;
 
 }
@@ -85,7 +86,7 @@
 
 
 .tab-content .button {
-  margin-top: 60px;
+  margin-top: 50px;
   float: right;
 }
 
