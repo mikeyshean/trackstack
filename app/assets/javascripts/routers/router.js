@@ -2,14 +2,12 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
   routes: {
     "": "index",
-    "users/:id": "show",
-    "users/:id/tracks/new": "tracksNew"
+    "users/:id": "show"
   },
 
   initialize: function (options) {
     this.collection = options.collection;
     this.$rootEl = options.$rootEl;
-    this.$modalEl = this.$rootEl.find("#modal")
   },
 
   index: function () {
@@ -22,12 +20,6 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     var user = this.collection.getOrFetch(id)
     var view = new Trackstack.Views.UserShow({ model: user })
     this._swapView(view)
-  },
-
-  tracksNew: function (id) {
-    var track = new Trackstack.Models.Track()
-    var view = new Trackstack.Views.TrackUpload({ model: track })
-    this._appendModal(view)
   },
 
   _swapView: function (view) {

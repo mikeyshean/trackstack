@@ -15,9 +15,10 @@
 
 }
 
-.sign-in-modal {
+.modal {
   border-radius: 5px;
   overflow: hidden;
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
   box-shadow: -1.5px 1.5px rgba(0, 0, 0, 0.14),
               -2px 2px 4px rgba(0, 0, 0, 0.1),
               1.5px 0 rgba(0, 0, 0, 0.14),
@@ -72,6 +73,12 @@
   background: #fff;
   border-radius: 10px 10px 0 0;
   color: #333;
+}
+
+/* Track Upload */
+
+.modal.upload-modal {
+  border-top: 1px solid #ccc;
 }
 
 

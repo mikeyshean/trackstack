@@ -16,7 +16,7 @@
 
     <div class="nav-right right">
       <ul class="nav-buttons-right group">
-        <li class="left"><a href="#/tracks/new">Upload</a></li>
+        <li class="left"><a href="#/tracks/new" id="upload">Upload</a></li>
 
         <% if current_user %>
           <li class="left nav-dropdown" id="user-nav-dropdown" data-id="<%= current_user.id %>"><a href="#"><%= current_user.username %></a></li>
