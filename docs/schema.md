@@ -28,7 +28,7 @@ title       | string    | not null
 description | string    |
 img_url     | string    |
 track_url   | string    | not null
-user_id     | integer   | not null foreign key (references users), index
+author_id     | integer   | not null foreign key (references users), index
 
 ## playlistings
 column name | data type | details

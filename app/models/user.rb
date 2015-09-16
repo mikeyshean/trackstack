@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   has_many :in_follows, class_name: "Following", foreign_key: :followee_id
   has_many :followers, through: :in_follows, source: :follower
   has_many :followees, through: :out_follows, source: :followee
+  has_many :playlists
+  has_many :tracks
 
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true

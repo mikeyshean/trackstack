@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916002959) do
+ActiveRecord::Schema.define(version: 20150916152131) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,38 @@ ActiveRecord::Schema.define(version: 20150916002959) do
 
   add_index "followings", ["followee_id"], name: "index_followings_on_followee_id", using: :btree
   add_index "followings", ["follower_id"], name: "index_followings_on_follower_id", using: :btree
+
+  create_table "playlistings", force: :cascade do |t|
+    t.integer  "track_id",    null: false
+    t.integer  "playlist_id", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "playlistings", ["playlist_id"], name: "index_playlistings_on_playlist_id", using: :btree
+  add_index "playlistings", ["track_id"], name: "index_playlistings_on_track_id", using: :btree
+
+  create_table "playlists", force: :cascade do |t|
+    t.string   "title",       null: false
+    t.string   "description"
+    t.integer  "author_id",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "playlists", ["author_id"], name: "index_playlists_on_author_id", using: :btree
+
+  create_table "tracks", force: :cascade do |t|
+    t.string   "title",       null: false
+    t.string   "description"
+    t.string   "img_url"
+    t.string   "track_url",   null: false
+    t.integer  "author_id",   null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "tracks", ["author_id"], name: "index_tracks_on_author_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "username",        null: false
