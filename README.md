@@ -2,16 +2,16 @@
 
 [Heroku link][heroku]
 
-[heroku]: http://.herokuapp.com
+[heroku]: http://trackstack.herokuapp.com
 
 ## Minimum Viable Product
 TrackStack is a clone of SoundCloud built on Rails and Backbone. Users can:
 
 <!-- This is a Markdown checklist. Use it to keep track of your progress! -->
 
-- [ ] Create accounts
-- [ ] Create sessions (log in)
-- [ ] Follow other users
+- [x] Create accounts
+- [x] Create sessions (log in)
+- [x] Follow other users
 - [ ] Upload Tracks
 - [ ] Play Tracks
 - [ ] Create Playlists
