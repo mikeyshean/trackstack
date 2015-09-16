@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916152131) do
+ActiveRecord::Schema.define(version: 20150916204849) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,27 +45,36 @@ ActiveRecord::Schema.define(version: 20150916152131) do
   add_index "playlists", ["author_id"], name: "index_playlists_on_author_id", using: :btree
 
   create_table "tracks", force: :cascade do |t|
-    t.string   "title",       null: false
+    t.string   "title",              null: false
     t.string   "description"
-    t.string   "img_url"
-    t.string   "track_url",   null: false
-    t.integer  "author_id",   null: false
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.integer  "author_id",          null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "track_file_name"
+    t.string   "track_content_type"
+    t.integer  "track_file_size"
+    t.datetime "track_updated_at"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
   end
 
   add_index "tracks", ["author_id"], name: "index_tracks_on_author_id", using: :btree
 
   create_table "users", force: :cascade do |t|
-    t.string   "username",        null: false
+    t.string   "username",         null: false
     t.string   "fname"
     t.string   "lname"
     t.text     "description"
-    t.string   "password_digest", null: false
-    t.string   "session_token",   null: false
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "img_url"
+    t.string   "password_digest",  null: false
+    t.string   "session_token",    null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
   end
 
   add_index "users", ["session_token"], name: "index_users_on_session_token", unique: true, using: :btree

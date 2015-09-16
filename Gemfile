@@ -26,6 +26,8 @@ gem 'bcrypt'
 gem 'backbone-on-rails'
 gem 'newrelic_rpm'
 gem 'faker'
+gem 'paperclip'
+gem 'figaro'
 
 
 
