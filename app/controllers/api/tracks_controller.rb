@@ -34,7 +34,7 @@ module Api
     private
 
     def track_params
-      params.require(:track).permit(:title, :description, :img_url)
+      params.require(:track).permit(:title, :description)
     end
 
   end

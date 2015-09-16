@@ -28,6 +28,7 @@ gem 'newrelic_rpm'
 gem 'faker'
 gem 'paperclip'
 gem 'figaro'
+gem 'aws-sdk'
 
 
 

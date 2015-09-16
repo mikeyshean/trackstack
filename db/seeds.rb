@@ -12,7 +12,6 @@ User.create({
   session_token: "abc",
   fname: "Mikey",
   lname: "Shean",
-  img_url: Faker::Avatar.image,
   description: Faker::Lorem.paragraph
   })
 
@@ -28,7 +27,6 @@ User.create({
     username: "#{username}#{i}",
     password_digest: "#{token}#{i}",
     session_token: "#{token}#{i}",
-    img_url: Faker::Avatar.image,
     description: Faker::Lorem.paragraph
   })
 end
@@ -44,8 +42,6 @@ end
     User.find(id).tracks.create!({
       title: Faker::Book.title,
       description: Faker::Lorem.paragraph,
-      img_url: Faker::Avatar.image,
-      track_url: Faker::Internet.url
     })
 
     User.find(id).playlists.create!({

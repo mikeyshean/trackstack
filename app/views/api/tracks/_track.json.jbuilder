@@ -1,1 +1,3 @@
-json.extract! track, :title, :description, :img_url, :track_url
+json.extract! track, :title, :description
+
+json.img_url asset_path(track.img.url(:badge))

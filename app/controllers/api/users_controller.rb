@@ -27,5 +27,11 @@ module Api
       render :follower
     end
 
+    private
+
+    def user_params
+      params.require(:user).permit(:fname, :lname, :description)
+    end
+
   end
 end
