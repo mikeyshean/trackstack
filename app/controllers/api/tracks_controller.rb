@@ -4,14 +4,14 @@ module Api
 
     def index
       author = User.find(params[:id])
-      @tracks = user.tracks
+      @tracks = author.tracks
 
       render json: @tracks
     end
 
     def show
       author = User.find(params[:id])
-      @track = user.tracks.find(params[:track_id])
+      @track = author.tracks.find(params[:track_id])
 
       render json: @track
     end
