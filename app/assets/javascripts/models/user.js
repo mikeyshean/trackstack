@@ -7,6 +7,21 @@ Trackstack.Models.User = Backbone.Model.extend({
       delete response.followers;
     }
 
+    if (response.followees) {
+      this.followees().set(response.followees);
+      delete response.followees;
+    }
+
+    if (response.tracks) {
+      this.tracks().set(response.tracks);
+      delete response.tracks;
+    }
+
+    if (response.playlists) {
+      this.playlists().set(response.playlists);
+      delete response.playlists;
+    }
+
     return response;
   },
 
@@ -16,5 +31,29 @@ Trackstack.Models.User = Backbone.Model.extend({
     }
 
     return this._followers
+  },
+
+  followees: function () {
+    if (!this._followees) {
+      this._followees = new Trackstack.Collections.Followees([], { user_id: this.id })
+    }
+
+    return this._followees
+  },
+
+  tracks: function () {
+    if (!this._tracks) {
+      this._tracks = new Trackstack.Collections.Tracks([], { user_id: this.id })
+    }
+
+    return this._tracks
+  },
+
+  playlists: function () {
+    if (!this._playlists) {
+      this._playlists = new Trackstack.Collections.Playlists([], { user_id: this.id })
+    }
+
+    return this._playlists
   }
 });
