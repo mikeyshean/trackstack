@@ -5,12 +5,22 @@
   left: 0;
   height: 100%;
   width: 100%;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.41);
   z-index: 11
 }
 
-.modal .sign-in-header, .tab-content {
+.modal .modal-wrapper, .tab-content {
   height: 100%;
+
+}
+
+.sign-in-modal {
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: -1.5px 1.5px rgba(0, 0, 0, 0.24),
+              -2px 2px 4px rgba(0, 0, 0, 0.2),
+              1.5px 0 rgba(0, 0, 0, 0.24),
+              2px 0 4px rgba(0, 0, 0, 0.2)
 }
 
 .modal input {
@@ -29,7 +39,6 @@
   height: 500px;
   background: #fff;
 
-  border: 5px solid #f50;
 }
 
 
@@ -84,7 +93,7 @@
 }
 
 .tab-content .button {
-  margin-top: 75px;
+  margin-top: 60px;
   float: right;
 }
 

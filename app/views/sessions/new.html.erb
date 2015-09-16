@@ -1,7 +1,7 @@
 
 <div class="modal modal-background">
   <div class="sign-in-modal">
-    <div class="sign-in-header group">
+    <div class="modal-wrapper group">
       <div class="sign-in-header-text">
         <div class="logo-wrapper">
           <div class="logo">TrackStack</div>
@@ -34,13 +34,11 @@
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <label class="input-label">Enter a username</label><br>
             <input name="user[username]" type="text" class="form-field"><br>
-
+            <br>
           <label class="input-label">Password</label><br>
             <input name="user[password]" type="password" class="form-field"><br>
           <button class="button button-focus">Create Account</button><br>
         </form>
-        Already have an account? <a href="<%= new_session_url %>">Sign In.</a>
-
       </article>
 
     </section>
