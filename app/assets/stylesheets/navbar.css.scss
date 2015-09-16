@@ -37,6 +37,35 @@ nav a, nav input  {
   padding: 14px 10px;
 }
 
+nav a:hover, nav input:hover  {
+  color: #fff;
+}
+
 .sign-out {
   cursor: pointer;
+}
+
+.nav-dropdown-wrapper {
+  display: none;
+  position: absolute;
+
+  height: auto;
+}
+.nav-dropdown-list a {
+  display: block;
+  padding: 10px 20px;
+  text-align: left;
+}
+
+#user-nav-dropdown:hover {
+  background: #111;
+}
+
+#user-nav-dropdown li:hover {
+  background: #333;
+}
+
+#user-nav-dropdown:hover .nav-dropdown-wrapper {
+  display: block;
+  background: #111;
 }

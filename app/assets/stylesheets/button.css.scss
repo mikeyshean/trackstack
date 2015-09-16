@@ -24,10 +24,15 @@
   margin-right: 5px;
 }
 
-.button-focus {
+.button-orange {
   background: #f50;
   border-color: #f50;
   color: #fff;
+}
+.button-orange-border {
+  background: #fff;
+  border: 1px solid #f50;
+  color: #f50;
 }
 
 button[data-follow-state="false"]:after {

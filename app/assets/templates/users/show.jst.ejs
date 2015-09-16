@@ -20,9 +20,9 @@
 
     <% if (user.get("current_user") === false) { %>
       <button
-        class="button follow-button
+        class="button button-orange follow-button
           <% if (user.get('followed')) { %>
-            <%= 'button-focus' %>
+            <%= 'button-orange-border' %>
           <% } %>"
         data-user-id=<%= user.id %>
         data-follow-state="<%= user.get('followed') %>">
