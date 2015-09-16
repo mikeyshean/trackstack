@@ -29,7 +29,7 @@ module Api
 
     def destroy
       @track = current_user.tracks.find(params[:track_id])
-
+      @track.destroy
     end
 
     private
