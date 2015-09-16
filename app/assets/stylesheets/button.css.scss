@@ -13,7 +13,8 @@
   font-size: 14px;
   line-height: 20px;
   white-space: nowrap;
-  font-weight: 100;
+  font-weight: 400;
+  // font-weight: 100;
   text-align: center;
   vertical-align: baseline;
 }
@@ -23,7 +24,7 @@
   margin-right: 5px;
 }
 
-.button.focus {
+.button-focus {
   background: #f50;
   border-color: #f50;
   color: #fff;
@@ -37,5 +38,3 @@ button[data-follow-state="true"]:after {
   content: "Following";
 
 }
-
-// "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;

@@ -1,15 +1,13 @@
 header nav {
-  font-family: "Interstate","Lucida Grande",Arial,sans-serif;
   width: 1240px;
   margin: 0 auto;
-  // background: orange;
   height: 100%;
   position: relative;
   color: #ccc;
-  font-weight: 100;
+  font-weight: 400;
+  // font-weight: 100;
   font-size: 14px;
   text-align: center;
-  // letter-spacing: 1.5;
 }
 
 nav * {
@@ -29,7 +27,7 @@ nav .logo-left {
 }
 
 .nav-left li {
-  border-right: 1px solid #000;
+  border-right: 1px solid #111;
   width: 104px;
 }
 

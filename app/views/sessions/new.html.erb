@@ -1,39 +1,56 @@
-<h1>Sign In</h1>
+
 <div class="modal modal-background">
-  <div class="signin-modal group">
+  <div class="sign-in-modal">
+    <div class="sign-in-header group">
+      <div class="sign-in-header-text">
+        <div class="logo-wrapper">
+          <div class="logo">TrackStack</div>
+        </div>
 
-    <div class="logo-wrapper">
-      <div class="logo">TrackStack</div>
+        <div class="tabs group">
+          <ul class="tab-options group" data-tab-content=".tab-content">
+            <li class="left"><a class="disabled" href="#create-account-content">Create account</a></li>
+            <li class="left"><a class="active" href="#signin-content">Sign in</a></li>
+          </ul>
+        </div>
+
     </div>
-    <div class="tabs">
-      <ul class="tabs-options">
 
-
+    <section class="tab-content group">
+      <article id="signin-content" class="active tab-content-item">
         <form action="/session" method="post">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
-          <label>Username<br>
-            <input name="user[username]" type="text"><br>
-          </label><br>
-          <label>Password<br>
-            <input name="user[password]" type="password"><br>
-          </label><br>
-          <button>Submit</button><br>
+          <label class="input-label">Your username</label><br>
+            <input name="user[username]" type="text" class="form-field"><br>
+          <br>
+          <label class="input-label">Your password</label><br>
+          <input name="user[password]" type="password" class="form-field"><br>
+          <button class="button button-focus">Sign In</button><br>
         </form>
-        <a href="<%= new_user_url %>">Create Account</a>
-
-
-        <li><a href="#signin-content">Sign In</a></li>
-      </ul>
-    </div>
-
-    <section class="tab-contents">
-      <article id="signin-content">
 
       </article>
-      <article id="create-account-content">
+      <article id="create-account-content" class="tab-content-item" >
+        <form action="/users" method="post">
+          <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+          <label class="input-label">Enter a username</label><br>
+            <input name="user[username]" type="text" class="form-field"><br>
+
+          <label class="input-label">Password</label><br>
+            <input name="user[password]" type="password" class="form-field"><br>
+          <button class="button button-focus">Create Account</button><br>
+        </form>
+        Already have an account? <a href="<%= new_session_url %>">Sign In.</a>
 
       </article>
 
     </section>
   </div>
 </div>
+
+<script>
+  $(function () {
+    $(".form-field").first().focus();
+    $(".tab-options").tabs();
+  });
+
+</script>

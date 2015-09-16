@@ -1,13 +1,97 @@
-/*
+
 .modal-background {
   position: fixed;
+  top: 0;
+  left: 0;
   height: 100%;
   width: 100%;
   background: rgba(0, 0, 0, 0.2);
-}*/
+  z-index: 11
+}
 
-body input {
+.modal .sign-in-header, .tab-content {
+  height: 100%;
+}
+
+.modal input {
   border: 1px solid #aaa;
   border-radius: 5px;
   padding: 5px 10px;
+}
+
+
+.modal .sign-in-modal {
+  position: relative;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 500px;
+  height: 500px;
+  background: #fff;
+
+  border: 5px solid #f50;
+}
+
+
+/* Header Tabs */
+
+.sign-in-modal .sign-in-header-text {
+  padding: 25px 20px;
+  height: 65px;
+  background: #333;
+  text-size: 18px;
+}
+
+.sign-in-modal .logo-wrapper {
+  float: left;
+}
+
+.sign-in-modal .logo {
+  color: #fff;
+}
+
+.sign-in-modal .tabs {
+  float: right;
+}
+
+.tab-options a {
+  padding: 7px 15px 23px 15px;
+}
+
+.tab-options a.active {
+  background: #fff;
+  border-radius: 10px 10px 0 0;
+  color: #333;
+}
+
+
+/* Form */
+
+.tab-content {
+  /*border: 5px solid yellow;*/
+  padding: 45px 50px;
+  height: auto;
+}
+
+.input-label {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.form-field {
+  margin-top: 5px;
+  width: 100%;
+}
+
+.tab-content .button {
+  margin-top: 75px;
+  float: right;
+}
+
+.tab-content-item {
+  display: none;
+}
+
+.tab-content-item.active {
+  display: block;
 }

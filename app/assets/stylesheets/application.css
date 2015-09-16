@@ -42,11 +42,18 @@ body {
   background: #f2f2f2;
   overflow-y: scroll;
   padding-bottom: 75px;
-  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  letter-spacing: .3px;
+  font-family: "Interstate", "Roboto", "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
 
 ul {
   list-style: none;
+}
+
+input {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: 0;
 }
 
 #content {
@@ -67,4 +74,8 @@ ul {
   content: "";
   display: block;
   clear: both;
+}
+
+.disabled {
+  color: #999
 }
