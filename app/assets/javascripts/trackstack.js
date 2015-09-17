@@ -4,7 +4,7 @@ window.Trackstack = {
   Views: {},
   Routers: {},
   initialize: function() {
-    var $el = $("#nav");
+    var $el = $("#app");
     var $navBarDropdown = $("#user-nav-dropdown");
     var currentUserId = $navBarDropdown.data("id");
 

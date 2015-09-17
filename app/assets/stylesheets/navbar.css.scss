@@ -5,7 +5,6 @@ header nav {
   position: relative;
   color: #ccc;
   font-weight: 400;
-  // font-weight: 100;
   font-size: 14px;
   text-align: center;
 }
@@ -13,13 +12,15 @@ header nav {
 nav * {
   height: 100%;
 }
+
 .left {
   float: left;
 }
 
 .right {
- float: right;
+  float: right;
 }
+
 nav .logo-left {
   background: #f50;
   width: 69px;
@@ -37,6 +38,11 @@ nav a, nav input  {
   padding: 14px 10px;
 }
 
+nav .active {
+  background: #111;
+  color: #fff
+}
+
 nav a:hover, nav input:hover  {
   color: #fff;
 }
@@ -46,33 +52,18 @@ nav a:hover, nav input:hover  {
 }
 
 .nav-dropdown-wrapper {
-  display: none;
   position: absolute;
-
+  background: #111;
   height: auto;
 }
+
 .nav-dropdown-list a {
-  display: block;
   padding: 10px 20px;
   text-align: left;
   font-size: 12px;
   letter-spacing: .5px;
 }
 
-#user-nav-dropdown:hover {
-  background: #111;
-}
-#user-nav-dropdown:hover #username {  /* ehh */
-  color: #fff
-}
-
-
-
 #user-nav-dropdown li:hover {
   background: #333;
-}
-
-#user-nav-dropdown:hover .nav-dropdown-wrapper {
-  display: block;
-  background: #111;
 }
