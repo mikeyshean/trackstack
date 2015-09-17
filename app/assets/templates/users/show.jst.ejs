@@ -1,13 +1,26 @@
-<div class="profile-header">
-  <div class="profile-header-info">
-    <div class="profile-header-avatar">
-    </div>
-    <div class="profile-user-info">
-      <h3><%= user.escape("username") %></h3>
-      <h4>
-        <%= user.escape("fname") %>
-        <%= user.escape("lname") %>
-      </h4>
+<div class="banner">
+  <div class="profile-header">
+    <div class="profile-header-info group">
+      <div class="profile-header-avatar left">
+      </div>
+      <div class="profile-edit">
+        <div class="profile-user-info">
+          <div class="profile-user-details left">
+            <h3 class="profile-user-text"><%= user.escape("username") %></h3><br>
+            <h4 class="profile-user-text">
+              <%= user.escape("fname") %>
+              <%= user.escape("lname") %>
+
+            </h4>
+          </div>
+          <% if (user.get("current_user") === true) { %>
+            <div class="profile-current-user right">
+              <button class="button header-photo-button right">Upload header image</button>
+            </div>
+          <% }; %>
+
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -1,0 +1,47 @@
+
+.profile-header {
+  height: 260px;
+  margin-left: -30px;
+  margin-right: -30px;
+  background: #f50;
+  padding: 30px;
+  position: relative;
+  color: #fff;
+}
+
+.profile-header .profile-header-info {
+  position: relative;
+  background: #ccc;
+  height: 100%;
+}
+
+.profile-header .profile-header-avatar {
+  height: 200px;
+  width: 200px;
+  margin-right: 30px;
+  background: yellow;
+}
+
+.profile-header .profile-edit {
+  padding: 30px;
+  left: 200px;
+  height: 200px;
+  position: absolute;
+  right: 0;
+}
+
+
+.profile-header .profile-user-text {
+  background: #000;
+  display: inline-block;
+  position: relative;
+  padding: 0 5px;
+}
+
+.profile-header h3 {
+  font-size: 34px;
+}
+
+.profile-header h4 {
+  font-size: 16px;
+}

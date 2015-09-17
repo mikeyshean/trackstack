@@ -15,10 +15,11 @@
  *= require navbar
  *= require form
  *= require modal
+ *= require user_show
  */
 
 
-html, body, header, nav, section, div, ul, li, a, button, form, input {
+html, body, header, nav, section, div, ul, li, a, h3, h4, h1, button, form, input {
   border: 0;
   margin: 0;
   padding: 0;
@@ -68,15 +69,22 @@ input {
   background: #fff;
 }
 
-/*#content:before {
-  content: "";
-  display: table;
-}*/
-
 .group:after {
   content: "";
   display: block;
   clear: both;
+}
+
+h1 {
+
+}
+
+h3 {
+  font-size: 14px
+}
+
+.banner {
+
 }
 
 .disabled {
