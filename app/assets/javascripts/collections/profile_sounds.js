@@ -7,7 +7,8 @@ Trackstack.Collections.ProfileSounds = Backbone.Collection.extend({
   model: Trackstack.SoundModel,
 
   initialize: function(models, options) {
-    this.user = options.user
+    this.user = options.user;
+    this.comparator = "updated_at";
   },
 
   parse: function (response) {
@@ -19,16 +20,17 @@ Trackstack.Collections.ProfileSounds = Backbone.Collection.extend({
       response.forEach(function (model) {
         if (model.sound_type === "Track") {
           sound = new Trackstack.Models.Track(model.sound);
-          user.tracks().add(sound)
+          user.tracks().add(sound, {silent: true})
         } else if (model.sound_type === "Playlist") {
           sound = new Trackstack.Models.Playlist(model.sound);
-          user.playlists().add(sound)
+          user.playlists().add(sound, {silent: true})
         }
         var feed = new Trackstack.SoundModel(model)
 
         feed.sound().set(model.sound)
         that.add(feed)
       })
+      user.tracks().trigger("reset")
       delete response
     }
   }

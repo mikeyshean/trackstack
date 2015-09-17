@@ -8,14 +8,17 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   initialize: function (options) {
     this.feed = options.feed
-
     this.followers = this.model.followers();
-    this.listenTo(this.model, "sync", this.render);
+    this.tracks = this.model.tracks();
+
+    // this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.followers, "sync remove", this.render);
     this.listenTo(this.feed, "add", this.addFeedSubview);
+    this.listenTo(this.tracks, "reset", this.render);
   },
 
   render: function () {
+    console.log("show")
     this.$el.html(this.template({ user: this.model }));
     this.attachSubviews()
     return this;

@@ -1,7 +1,7 @@
 Trackstack.SoundModel = Backbone.Model.extend({
   initialize: function (options) {
     if (options && options.tracks) {
-      this.tracks().set(options.tracks)
+      this.tracks().set(options.tracks, { silent: true })
     }
   },
 

@@ -1,6 +1,6 @@
 
 json.array! @feed.each do |feed|
-  json.extract! feed, :id, :sound_type, :sound_id
+  json.extract! feed, :id, :sound_type, :sound_id, :updated_at
 
   json.sound do
     sound = feed.sound
