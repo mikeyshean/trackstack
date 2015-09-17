@@ -16,7 +16,7 @@ class Track < ActiveRecord::Base
     if feed
       feed.update(updated_at: track.updated_at)
     else
-      track.feeds.create
+      track.feeds.create({ author_id: track.author_id })
     end
   end
 

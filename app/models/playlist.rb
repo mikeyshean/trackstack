@@ -11,7 +11,7 @@ class Playlist < ActiveRecord::Base
     if feed
       feed.update(updated_at: playlist.updated_at)
     else
-      playlist.feeds.create
+      playlist.feeds.create({ author_id: playlist.author_id })
     end
   end
 

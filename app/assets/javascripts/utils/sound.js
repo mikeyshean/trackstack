@@ -1,6 +1,6 @@
 Trackstack.SoundModel = Backbone.Model.extend({
   initialize: function (options) {
-    if (options.tracks) {
+    if (options && options.tracks) {
       this.tracks().set(options.tracks)
     }
   },
@@ -11,6 +11,14 @@ Trackstack.SoundModel = Backbone.Model.extend({
     }
 
     return this._tracks;
+  },
+
+  sound: function () {
+    if (!this._sound) {
+      this._sound = new Trackstack.SoundModel()
+    }
+
+    return this._sound;
   }
 
 });
