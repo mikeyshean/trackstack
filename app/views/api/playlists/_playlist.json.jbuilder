@@ -1,4 +1,4 @@
-json.extract! playlist, :title, :description
+json.extract! playlist, :id, :title, :description
 
 json.tracks do
   json.array! playlist.tracks do |track|

@@ -11,14 +11,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150916204849) do
+ActiveRecord::Schema.define(version: 20150917152928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "feeds", force: :cascade do |t|
+    t.integer  "sound_id"
+    t.string   "sound_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "feeds", ["sound_id", "sound_type"], name: "index_feeds_on_sound_id_and_sound_type", unique: true, using: :btree
+
   create_table "followings", force: :cascade do |t|
-    t.integer "follower_id", null: false
-    t.integer "followee_id", null: false
+    t.integer  "follower_id", null: false
+    t.integer  "followee_id", null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "followings", ["followee_id"], name: "index_followings_on_followee_id", using: :btree

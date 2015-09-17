@@ -4,7 +4,7 @@ Trackstack.Collections.Tracks = Backbone.Collection.extend({
     return "api/users/" + this.user_id + "/tracks"
   },
 
-  model: Trackstack.Models.Track,
+  model: Trackstack.SoundModel,
 
   initialize: function(models, options) {
     this.user_id = options.user_id

@@ -1,4 +1,4 @@
-Trackstack.Views.UserShow = Backbone.View.extend({
+Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   template: JST['users/show'],
 
@@ -6,15 +6,24 @@ Trackstack.Views.UserShow = Backbone.View.extend({
     "click .follow-button": "toggleFollowState"
   },
 
-  initialize: function () {
+  initialize: function (options) {
+    this.feed = options.feed
+
     this.followers = this.model.followers();
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.followers, "sync remove", this.render)
+    this.listenTo(this.followers, "sync remove", this.render);
+    this.listenTo(this.feed, "add", this.addFeedSubview);
   },
 
   render: function () {
     this.$el.html(this.template({ user: this.model }));
+    this.attachSubviews()
     return this;
+  },
+
+  addFeedSubview: function (model) {
+    var view = new Trackstack.Views.UserFeed({model: model})
+    this.addSubview("#feed", view);
   },
 
   toggleFollowState: function (e) {
@@ -48,5 +57,4 @@ Trackstack.Views.UserShow = Backbone.View.extend({
 
     }
   }
-
 });
