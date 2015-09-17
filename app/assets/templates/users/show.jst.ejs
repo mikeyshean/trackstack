@@ -2,6 +2,11 @@
   <div class="profile-header">
     <div class="profile-header-info group">
       <div class="profile-header-avatar left">
+        <% if (user.get("current_user") === true) { %>
+          <div class="profile-current-user avatar-button">
+            <button class="button header-avatar-button">Update image</button>
+          </div>
+        <% }; %>
       </div>
       <div class="profile-edit">
         <div class="profile-user-info">
@@ -15,7 +20,11 @@
           </div>
           <% if (user.get("current_user") === true) { %>
             <div class="profile-current-user right">
-              <button class="button header-photo-button right">Upload header image</button>
+              <form class="">
+                <input class="file-input" type="file" name="user[img]" value="gfg">
+                <button class="button header-photo-button right">Upload header image</button>
+
+              </form>
             </div>
           <% }; %>
 
@@ -26,6 +35,17 @@
 </div>
 
 <div class="horizontal-bar">
+  <div class="user-tabs-wrapper">
+    <div class="user-tabs-container group">
+      <ul class="user-tabs-list left">
+        <li class="left"><a class="active" href="#">All</a></li>
+        <li class="left"><a href="#">Tracks</a></li>
+        <li class="left"><a href="#">Playlists</a></li>
+
+      </ul>
+
+    </div>
+  </div>
 </div>
 
 <section class="content-wrapper">
