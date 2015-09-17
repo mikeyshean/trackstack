@@ -18,18 +18,19 @@ Trackstack.Views.UserShow = Backbone.View.extend({
   },
 
   toggleFollowState: function (e) {
-    var $currentTarget = $(e.currentTarget)
-    $currentTarget.attr("disabled", true)
-    var beforeState = $currentTarget.data("follow-state")
+    var $followButton = $(e.currentTarget)
+    $followButton.attr("disabled", true)
+    var beforeState = $followButton.data("follow-state")
 
     this.model.set({ followed: !beforeState })
-    $currentTarget.attr("data-follow-state", !beforeState)
+    $followButton.attr("data-follow-state", !beforeState)
 
     if (beforeState === true) {
       var current_user = this.followers.findWhere({ current_user: true })
+
       current_user.destroy({
         success: function () {
-          $currentTarget.removeAttr("disabled");
+          $followButton.removeAttr("disabled");
         },
         error: function () {
           this.model.set({ followed: beforeState })
@@ -38,7 +39,7 @@ Trackstack.Views.UserShow = Backbone.View.extend({
     } else {
       this.followers.create({}, {
         success: function () {
-          $currentTarget.removeAttr("disabled");
+          $followButton.removeAttr("disabled");
         },
         error: function (model) {
           this.model.set({ followed: beforeState })

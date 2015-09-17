@@ -1,6 +1,6 @@
 
 json.partial! "user", user: @user, img_badge: false
-json.current_user @user == current_user
+
 
 json.followees do
   json.array! @user.followees do |followee|
