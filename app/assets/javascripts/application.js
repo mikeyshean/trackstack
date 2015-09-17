@@ -15,6 +15,7 @@
 
 //= require underscore
 //= require backbone
+//= require_tree ./utils
 //= require trackstack
 //= require ./plugins/tabbable
 //= require_tree ../templates

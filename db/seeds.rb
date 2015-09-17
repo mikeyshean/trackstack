@@ -36,18 +36,22 @@ end
 20.times do |i|
   id = i + 1
 
-  15.times do
+  20.times do
     Following.create({follower_id: id, followee_id: Random.new.rand(1..21)})
 
     User.find(id).tracks.create!({
       title: Faker::Book.title,
       description: Faker::Lorem.paragraph,
     })
+  end
+
+  5.times do
 
     User.find(id).playlists.create!({
       title: Faker::Book.title,
       description: Faker::Lorem.paragraph
     })
+
   end
 end
 

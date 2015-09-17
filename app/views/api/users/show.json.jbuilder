@@ -1,5 +1,6 @@
 
 json.partial! "user", user: @user, img_badge: false
+json.current_user @user == current_user
 
 json.followees do
   json.array! @user.followees do |followee|
@@ -14,11 +15,6 @@ json.followers do
   end
 end
 
-json.tracks do
-  json.array! @user.tracks do |track|
-    json.partial! "api/tracks/track", track: track
-  end
-end
 
 json.img_profile asset_path(@user.img.url(:profile))
 json.img_comment asset_path(@user.img.url(:comment))
