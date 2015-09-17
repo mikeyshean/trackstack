@@ -36,7 +36,7 @@ end
 20.times do |i|
   id = i + 1
 
-  20.times do
+  15.times do
     Following.create({follower_id: id, followee_id: Random.new.rand(1..21)})
 
     User.find(id).tracks.create!({
@@ -56,7 +56,7 @@ end
 User.all.each do |user|
   user.playlists.each do |playlist|
     10.times do
-      playlist.playlistings.create({track_id: Random.new.rand(1..201)})
+      playlist.playlistings.create({track_id: Random.new.rand(1..301)})
 
     end
   end
