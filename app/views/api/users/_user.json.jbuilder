@@ -8,6 +8,6 @@ if img_badge
 end
 
 if user == current_user
-  json.img_cover asset_path(user.img.url(:cover))
+  json.img_cover asset_path(user.cover_img.url(:cover))
   json.img_profile asset_path(user.img.url(:profile))
 end

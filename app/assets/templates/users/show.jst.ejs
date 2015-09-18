@@ -26,6 +26,8 @@
             </div>
           <!-- </div> -->
       <div class="profile-header-avatar banner-raise left">
+        <div class="profile-photo" style="background-image: url(<%= user.escape('img_profile') %>);">
+        </div>
         <% if (user.get("current_user") === true) { %>
           <div class="profile-current-user avatar-button">
             <button class="button header-avatar-button css-file-input" data-form-type="#profile-file-input-button">Update image</button>

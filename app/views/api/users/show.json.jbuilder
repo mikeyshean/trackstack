@@ -17,4 +17,5 @@ end
 
 
 json.img_profile asset_path(@user.img.url(:profile))
+json.img_cover asset_path(@user.cover_img.url(:cover))
 json.img_comment asset_path(@user.img.url(:comment))

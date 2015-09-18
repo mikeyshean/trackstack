@@ -70,13 +70,13 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   submit: function(e){
     event.preventDefault();
-    // debugger
-    var $form = $(e.currentTarget)
 
+    var $form = $(e.currentTarget)
+    var attribute = $(e.currentTarget).find(".file-input-button").attr("name")
     var file = $form.find(".file-input-button")[0].files[0];
 
     var formData = new FormData();
-    formData.append("user[img]", file);
+    formData.append(attribute, file);
 
     var that = this;
     this.model.saveFormData(formData, {
@@ -89,7 +89,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   fileInputChange: function(e){
     console.log(e.currentTarget.files[0]);
     var formType = $(e.currentTarget).data("form-type")
-    // debugger
+    var attribute = $(e.currentTarget).attr("name")
+
     var that = this;
     var file = e.currentTarget.files[0];
     var reader = new FileReader();
@@ -113,8 +114,9 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   openFileBrowser: function (e) {
     e.preventDefault();
-    // debugger
+
     var formType = $(e.currentTarget).data("form-type")
+
     $(formType).click();
   }
 
