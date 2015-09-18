@@ -14,7 +14,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-    this.feed = options.feed
+    this.feed = options.feed;
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
     this.playlists = this.model.playlists();
@@ -28,7 +28,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     this.feedTypes = {
       "Tracks": this.tracks,
-      "Playlists": this.playlists
+      "Playlists": this.playlists,
+      "All": this.feed
     }
   },
 
@@ -43,9 +44,11 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   swapFeedView: function (e) {
     e.preventDefault();
-    alert()
+    var $currentTarget = $(e.currentTarget)
+    this.$(".feed-links").removeClass("active")
+    $currentTarget.addClass("active")
     this.feedView && this.feedView.remove();
-    var newFeedType = $(e.currentTarget).data("feed-type")
+    var newFeedType = $currentTarget.data("feed-type")
     this.feedView = new Trackstack.Views.FeedComposite({ collection: this.feedTypes[newFeedType] })
     this.addSubview("#feed", this.feedView)
   },
