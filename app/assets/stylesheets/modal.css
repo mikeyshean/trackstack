@@ -81,6 +81,20 @@
 }
 
 /* Track Upload */
+.modal .modal-header {
+
+}
+
+.modal .tab-content .upload-submit {
+  font-size: 16px;
+  font-weight: 300;
+  height: 30px;
+
+  /*left: -200%;*/
+
+}
+
+/* Modal Plugin Selectors */
 
 .modal#track-upload {
   border-top: 1px solid #ccc;
@@ -125,6 +139,11 @@
 .modal#profile-photo.transitioning {
   top: 20%;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
+}
+
+.modal-raised.photo-modal {
+  height: 600px;  /* remove this when increasing total modal size */
+  width: 600px;
 }
 
 

@@ -4,19 +4,27 @@
 <div class="modal-raised">
   <div class="modal upload-modal" id="track-upload">
     <div class="modal-wrapper group">
-      <div class="sign-in-header-text">
-        <div class="logo-wrapper">
-          <div class="logo">TrackStack</div>
-        </div>
+      <div class="modal-header">
+
+        <div class="modal-header-text"><h1>Upload to TrackStack</h1></div>
+
       </div>
 
       <section class="tab-content group">
         <article id="signin-content" class="active tab-content-item">
-          <form action="/session" method="post">
-            <label class="input-label">Your password</label>
-            <input name="user[password]" type="password" class="form-field">
-            <button class="button button-orange">Sign In</button>
+          <form class="file-input-plugin">
+            <label class="input-label">Title</label>
+            <input class="form-field" type="text" name="track[title]" id="track_title">
+            <label class="input-label">Description</label>
+            <input class="form-field" type="text" name="track[description]" id="track_description">
+
+            <div class="input-hider">
+              <input class="file-input file-input-button" data-form-type="#track-upload" id="track-file-input-button" type="file" name="track[track]">
+            </div>
+            <button class="button button-orange submit upload-submit">Save</button>
+          <button class="button button orange css-file-input">Choose file to upload</button>
           </form>
+
 
         </article>
       </section>

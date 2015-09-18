@@ -22,7 +22,10 @@ Trackstack.Views.NavBar = Backbone.View.extend({
   uploadModal: function (e) {
     e.preventDefault();
     var track = new Trackstack.Models.Track()
-    this.$modalEl.html(this.uploadTemplate({ model: track }))
+    var view = new Trackstack.Views.TrackUpload({ model: track })
+    // this.$modalEl.html(this.uploadTemplate({ model: track }))
+    this.$modalEl.html(view.render().$el)
+
     setTimeout(function () {
       $(".modal-background").addClass("transitioning")
       $("#track-upload").addClass("transitioning")

@@ -9,6 +9,16 @@ module Api
       render :index
     end
 
+    def create
+      @track = current_user.tracks.new(track_params)
+
+      if @track.save
+        render :show
+      else
+        render json: @track.errors.full_messages, status: 422
+      end
+    end
+
     def show
       @track = Track.find(params[:id])
 
@@ -34,7 +44,7 @@ module Api
     private
 
     def track_params
-      params.require(:track).permit(:title, :description)
+      params.require(:track).permit(:title, :description, :track, :img)
     end
 
   end

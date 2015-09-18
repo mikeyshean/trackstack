@@ -24,7 +24,6 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    console.log("show")
     this.$el.html(this.template({ user: this.model }));
     this.$el.append(this.modalProfileTemplate({user: this.model }));
     this.$el.append(this.modalContentTemplate({user: this.model }));
@@ -87,7 +86,6 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   fileInputChange: function(e){
-    console.log(e.currentTarget.files[0]);
     var formType = $(e.currentTarget).data("form-type")
     var attribute = $(e.currentTarget).attr("name")
 
@@ -96,12 +94,13 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     var reader = new FileReader();
 
     reader.onloadend = function(){
-      that._updatePreview(reader.result);
-    }
+      that._updatePreview(reader.result, formType + "-preview");
+    };
 
     if (file) {
       reader.readAsDataURL(file);
       this.$el.append(this.modalBackgroundTemplate)
+
       setTimeout(function () {
         $(".modal-background").addClass("transitioning");
         $(formType).addClass("transitioning");
@@ -118,6 +117,11 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     var formType = $(e.currentTarget).data("form-type")
 
     $(formType).click();
+  },
+
+  _updatePreview: function(src, selector){
+    this.$el.find(selector).attr("src", src);
   }
+
 
 });
