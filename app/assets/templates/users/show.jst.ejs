@@ -12,14 +12,14 @@
         </div>
         <% if (user.get("current_user") === true) { %>
           <div class="profile-current-user banner-raise right">
+            <button class="button header-photo-button right" id="css-file-input">Upload header image</button>
+          </div>
+
             <form class="file-input-plugin">
               <div class="input-hider">
-                <input class="file-input" id="file-input-button submit" type="file" name="user[img]" value="gfg">
+                <input class="file-input" id="file-input-button" type="file" name="user[img]" value="gfg">
               </div>
-              <button class="button header-photo-button right" id="css-file-input">Upload header image</button>
-
             </form>
-          </div>
         <% }; %>
 
       </div>

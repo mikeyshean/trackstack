@@ -4,6 +4,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   events: {
     "click .follow-button": "toggleFollowState",
+    "click #css-file-input": "openFileBrowser",
     "submit form": "submit",
     "change #file-input-button": "fileInputChange"
   },
@@ -94,6 +95,12 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     } else {
       that._updatePreview("");
     }
+  },
+
+  openFileBrowser: function (e) {
+    e.preventDefault();
+    alert("")
+    $("#file-input-button").click();
   }
 
 });

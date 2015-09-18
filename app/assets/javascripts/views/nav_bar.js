@@ -23,8 +23,8 @@ Trackstack.Views.NavBar = Backbone.View.extend({
     var track = new Trackstack.Models.Track()
     this.$modalEl.html(this.uploadTemplate({ model: track }))
     setTimeout(function () {
-      this.$modalEl.find(".modal-background").addClass("transitioning")
-      this.$modalEl.find(".upload-modal").addClass("transitioning")
+      $(".modal-background").addClass("transitioning")
+      $(".upload-modal").addClass("transitioning")
     }.bind(this),0)
 
   },
