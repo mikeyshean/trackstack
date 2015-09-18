@@ -1,6 +1,8 @@
 Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   template: JST['users/show'],
+  modalContentTemplate: JST['modals/modal_content'],
+  modalBackgroundTemplate: JST['modals/modal_background'],
 
   events: {
     "click .follow-button": "toggleFollowState",
@@ -23,6 +25,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   render: function () {
     console.log("show")
     this.$el.html(this.template({ user: this.model }));
+    this.$el.append(this.modalContentTemplate);
     this.attachSubviews()
     return this;
   },
@@ -92,6 +95,12 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     if (file) {
       reader.readAsDataURL(file);
+      this.$el.append(this.modalBackgroundTemplate)
+      setTimeout(function () {
+        $(".modal-background").addClass("transitioning");
+        $("#cover-photo").addClass("transitioning");
+        this.$el.modal({view: this});
+      }.bind(this))
     } else {
       that._updatePreview("");
     }
@@ -99,7 +108,6 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   openFileBrowser: function (e) {
     e.preventDefault();
-    alert("")
     $("#file-input-button").click();
   }
 

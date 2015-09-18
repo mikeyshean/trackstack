@@ -1,7 +1,9 @@
 (function () {
-  $.Modals = function (el) {
+  $.Modals = function (el, options) {
     this.$el = $(el);
-
+    if (options) {
+      this.view = options.view  
+    }
     this.$el.on("click", ".modal-background", this.toggleModal.bind(this));
   };
 
@@ -9,15 +11,17 @@
     var $modal = this.$el.find(".upload-modal").removeClass("transitioning")
     var $background = this.$el.find(".modal-background").removeClass("transitioning")
 
-    $modal.one("transitionend", function () {
-      $(e.currentTarget).remove();
-    })
+    $background.one("transitionend", function (e) {
+      // $(".modal-raised").remove();
+      $background.remove();
+      this.view && this.view.render()
+    }.bind(this))
 
   };
 
-  $.fn.modal = function () {
+  $.fn.modal = function (options) {
     return this.each(function () {
-      new $.Modals(this);
+      new $.Modals(this, options);
     });
   };
 
