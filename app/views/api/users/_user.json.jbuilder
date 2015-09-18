@@ -6,3 +6,8 @@ json.followed current_user.following?(user)
 if img_badge
   json.img_badge asset_path(user.img.url(:badge))
 end
+
+if user == current_user
+  json.img_cover asset_path(user.img.url(:cover))
+  json.img_profile asset_path(user.img.url(:profile))
+end

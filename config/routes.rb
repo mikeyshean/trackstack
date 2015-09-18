@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resource :session, only: [:new, :create, :destroy]
 
   namespace :api, defaults: { format: :json } do
-    resources :users, only: [:index, :show] do
+    resources :users, only: [:index, :show, :update] do
       member do
         get "followers", to: "users#followers"
         post "followers", to: "followers#create"

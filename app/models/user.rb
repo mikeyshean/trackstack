@@ -7,13 +7,13 @@ class User < ActiveRecord::Base
   has_many :followees, through: :out_follows, source: :followee
   has_many :playlists, foreign_key: :author_id
   has_many :tracks, foreign_key: :author_id
-  has_attached_file :img, styles: { badge: "50x50", profile: "200x200", comment: "40x40", track_show: "120x120", comment_icon: "20x20"}
+  has_attached_file :img, styles: { cover: "1240x260", badge: "50x50", profile: "200x200", comment: "40x40", track_show: "120x120", comment_icon: "20x20"}
 
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
   validates :password, length: { minimum: 6, allow_nil: true }
   validates_attachment :img, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
-  
+
   after_initialize :ensure_session_token
 
 # User Authentication Start

@@ -3,7 +3,9 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   template: JST['users/show'],
 
   events: {
-    "click .follow-button": "toggleFollowState"
+    "click .follow-button": "toggleFollowState",
+    "submit form": "submit",
+    "change #input-image": "fileInputChange"
   },
 
   initialize: function (options) {
@@ -11,7 +13,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
 
-    // this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.followers, "sync remove", this.render);
     this.listenTo(this.feed, "add", this.addFeedSubview);
     this.listenTo(this.tracks, "reset", this.render);
@@ -57,7 +59,41 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
           this.model.set({ followed: beforeState })
         }.bind(this)
       })
-
     }
+  },
+
+  submit: function(event){
+    event.preventDefault();
+
+    var file = this.$("#input-image")[0].files[0];
+
+    var formData = new FormData();
+    formData.append("user[img]", file);
+
+    var that = this;
+    this.model.saveFormData(formData, {
+      success: function(){
+        Backbone.history.navigate("#/users/" + that.model.id, { trigger: true });
+      }
+    });
+  },
+
+  fileInputChange: function(event){
+    console.log(event.currentTarget.files[0]);
+    //
+    // var that = this;
+    // var file = event.currentTarget.files[0];
+    // var reader = new FileReader();
+    //
+    // reader.onloadend = function(){
+    //   that._updatePreview(reader.result);
+    // }
+    //
+    // if (file) {
+    //   reader.readAsDataURL(file);
+    // } else {
+    //   that._updatePreview("");
+    // }
   }
+
 });
