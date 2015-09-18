@@ -1,7 +1,7 @@
 Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   template: JST['users/show'],
-  modalContentTemplate: JST['modals/modal_content'],
+  modalCoverTemplate: JST['modals/modal_content'],
   modalProfileTemplate: JST['modals/modal_profile_photo'],
   modalBackgroundTemplate: JST['modals/modal_background'],
 
@@ -9,32 +9,51 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     "click .follow-button": "toggleFollowState",
     "click .css-file-input": "openFileBrowser",
     "submit form": "submit",
-    "change .file-input-button": "fileInputChange"
+    "change .file-input-button": "fileInputChange",
+    "click .feed-links": "swapFeedView"
   },
 
   initialize: function (options) {
     this.feed = options.feed
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
+    this.playlists = this.model.playlists();
 
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.followers, "sync remove", this.render);
-    this.listenTo(this.feed, "add", this.addFeedSubview);
     this.listenTo(this.tracks, "reset", this.render);
+
+    this.feedView = new Trackstack.Views.FeedComposite({collection: this.feed})
+    this.addSubview("#feed", this.feedView)
+
+    this.feedTypes = {
+      "Tracks": this.tracks,
+      "Playlists": this.playlists
+    }
   },
 
   render: function () {
     this.$el.html(this.template({ user: this.model }));
     this.$el.append(this.modalProfileTemplate({user: this.model }));
-    this.$el.append(this.modalContentTemplate({user: this.model }));
+    this.$el.append(this.modalCoverTemplate({user: this.model }));
     this.attachSubviews()
+    console.log("show")
     return this;
   },
 
-  addFeedSubview: function (model) {
-    var view = new Trackstack.Views.UserFeed({model: model})
-    this.addSubview("#feed", view);
+  swapFeedView: function (e) {
+    e.preventDefault();
+    alert()
+    this.feedView && this.feedView.remove();
+    var newFeedType = $(e.currentTarget).data("feed-type")
+    this.feedView = new Trackstack.Views.FeedComposite({ collection: this.feedTypes[newFeedType] })
+    this.addSubview("#feed", this.feedView)
   },
+
+  // addFeedSubview: function (model) {
+  //   var view = new Trackstack.Views.FeedComposite({collection: this.feed})
+  //   this.addSubview("#feed", view);
+  // },
 
   toggleFollowState: function (e) {
     var $followButton = $(e.currentTarget)

@@ -8,9 +8,8 @@ Trackstack.Collections.ProfileSounds = Backbone.Collection.extend({
 
   initialize: function(models, options) {
     this.user = options.user;
-    this.comparator = "updated_at";
   },
-
+  
   parse: function (response) {
     var user = this.user
     var that = this
@@ -27,27 +26,12 @@ Trackstack.Collections.ProfileSounds = Backbone.Collection.extend({
         }
         var feed = new Trackstack.SoundModel(model)
 
-        feed.sound().set(model.sound)
+        feed.sound = sound
         that.add(feed)
       })
       user.tracks().trigger("reset")
       delete response
     }
   }
-
-
-  //
-  //     this.user.tracks().set(response.tracks)
-  //   }
-  //
-  //   if (response.tracks) {
-  //     this.user.playlists().set(response.playlists)
-  //   }
-  //
-  //   this.add(this.user.playlists().models)
-  //   debugger
-  //   this.set(this.user.tracks().models, { remove: false, merge: false })
-  //   debugger
-  // }
 
 });

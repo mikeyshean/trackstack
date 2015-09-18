@@ -14,14 +14,6 @@ Trackstack.SoundModel = Backbone.Model.extend({
     return this._tracks;
   },
 
-  sound: function () {
-    if (!this._sound) {
-      this._sound = new Trackstack.SoundModel()
-    }
-
-    return this._sound;
-  },
-
   saveFormData: function(formData, options){
     var method = this.isNew() ? "POST" : "PUT";
     var model = this;
