@@ -18,7 +18,13 @@
 
     <section class="tab-content group">
       <article id="signin-content" class="active tab-content-item">
-        <a href="/auth/facebook">FACEBOOK!</a>
+
+        <div class="facebook-login">
+          <a href="/auth/facebook"><img src="<%= image_url('facebook_login.png') %>" width="165px"></a>
+          <i>or</i>
+        </div>
+
+
         <form action="/session" method="post">
           <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
           <label class="input-label">Your username</label><br>
