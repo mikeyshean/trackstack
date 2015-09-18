@@ -112,6 +112,21 @@
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
 
+.modal#profile-photo {
+  border-top: 1px solid #ccc;
+  position: fixed;
+  top: 0;
+  left: 50%;
+  top: -100%;
+  transition: top .8s cubic-bezier(.39,.73,.17,.77);
+  z-index: 11;
+}
+
+.modal#profile-photo.transitioning {
+  top: 20%;
+  transition: top .5s cubic-bezier(.14,.99,.52,1);
+}
+
 
 
 

@@ -2,7 +2,7 @@
   $.Modals = function (el, options) {
     this.$el = $(el);
     if (options) {
-      this.view = options.view  
+      this.view = options.view
     }
     this.$el.on("click", ".modal-background", this.toggleModal.bind(this));
   };
@@ -12,7 +12,6 @@
     var $background = this.$el.find(".modal-background").removeClass("transitioning")
 
     $background.one("transitionend", function (e) {
-      // $(".modal-raised").remove();
       $background.remove();
       this.view && this.view.render()
     }.bind(this))

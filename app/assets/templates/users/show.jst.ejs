@@ -12,14 +12,9 @@
         </div>
         <% if (user.get("current_user") === true) { %>
           <div class="profile-current-user banner-raise right">
-            <button class="button header-photo-button right" id="css-file-input">Upload header image</button>
+            <button class="button header-photo-button right css-file-input" data-form-type="#cover-file-input-button">Upload header image</button>
           </div>
 
-            <form class="file-input-plugin">
-              <div class="input-hider">
-                <input class="file-input" id="file-input-button" type="file" name="user[img]" value="gfg">
-              </div>
-            </form>
         <% }; %>
 
       </div>
@@ -33,7 +28,7 @@
       <div class="profile-header-avatar banner-raise left">
         <% if (user.get("current_user") === true) { %>
           <div class="profile-current-user avatar-button">
-            <button class="button header-avatar-button">Update image</button>
+            <button class="button header-avatar-button css-file-input" data-form-type="#profile-file-input-button">Update image</button>
           </div>
         <% }; %>
       </div>

@@ -2,13 +2,14 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   template: JST['users/show'],
   modalContentTemplate: JST['modals/modal_content'],
+  modalProfileTemplate: JST['modals/modal_profile_photo'],
   modalBackgroundTemplate: JST['modals/modal_background'],
 
   events: {
     "click .follow-button": "toggleFollowState",
-    "click #css-file-input": "openFileBrowser",
+    "click .css-file-input": "openFileBrowser",
     "submit form": "submit",
-    "change #file-input-button": "fileInputChange"
+    "change .file-input-button": "fileInputChange"
   },
 
   initialize: function (options) {
@@ -25,7 +26,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   render: function () {
     console.log("show")
     this.$el.html(this.template({ user: this.model }));
-    this.$el.append(this.modalContentTemplate);
+    this.$el.append(this.modalProfileTemplate({user: this.model }));
+    this.$el.append(this.modalContentTemplate({user: this.model }));
     this.attachSubviews()
     return this;
   },
@@ -66,10 +68,12 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     }
   },
 
-  submit: function(event){
+  submit: function(e){
     event.preventDefault();
+    // debugger
+    var $form = $(e.currentTarget)
 
-    var file = this.$("#file-input-button")[0].files[0];
+    var file = $form.find(".file-input-button")[0].files[0];
 
     var formData = new FormData();
     formData.append("user[img]", file);
@@ -82,11 +86,12 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     });
   },
 
-  fileInputChange: function(event){
-    console.log(event.currentTarget.files[0]);
-
+  fileInputChange: function(e){
+    console.log(e.currentTarget.files[0]);
+    var formType = $(e.currentTarget).data("form-type")
+    // debugger
     var that = this;
-    var file = event.currentTarget.files[0];
+    var file = e.currentTarget.files[0];
     var reader = new FileReader();
 
     reader.onloadend = function(){
@@ -98,7 +103,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
       this.$el.append(this.modalBackgroundTemplate)
       setTimeout(function () {
         $(".modal-background").addClass("transitioning");
-        $("#cover-photo").addClass("transitioning");
+        $(formType).addClass("transitioning");
         this.$el.modal({view: this});
       }.bind(this))
     } else {
@@ -108,7 +113,9 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   openFileBrowser: function (e) {
     e.preventDefault();
-    $("#file-input-button").click();
+    // debugger
+    var formType = $(e.currentTarget).data("form-type")
+    $(formType).click();
   }
 
 });
