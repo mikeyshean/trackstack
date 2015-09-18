@@ -2,6 +2,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
   routes: {
     "": "index",
+    "_=_": "index",
     "users/:id": "show"
   },
 

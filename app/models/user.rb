@@ -32,6 +32,28 @@ class User < ActiveRecord::Base
     user.is_password?(password) ? user : nil
   end
 
+  def self.find_or_create_by(omniauth_hash)
+    uid = omniauth_hash[:uid]
+    provider = omniauth_hash[:provider]
+
+    user = User.find_by(
+      uid: uid,
+      provider: provider
+    )
+
+    if user
+      return user
+    else
+      User.create!(
+        username: "User#{User.last.id + 1}",
+        password: SecureRandom::urlsafe_base64,
+        uid: uid,
+        provider: provider
+      )
+    end
+
+  end
+
   def password=(password)
     @password = password
     self.password_digest = BCrypt::Password.create(password)
