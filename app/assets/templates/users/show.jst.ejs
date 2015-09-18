@@ -1,35 +1,42 @@
 <div class="banner">
   <div class="profile-header">
+    <div class="profile-edit">
+      <div class="profile-user-info">
+        <div class="profile-user-details banner-raise left">
+          <h3 class="profile-user-text"><%= user.escape("username") %></h3><br>
+          <h4 class="profile-user-text">
+            <%= user.escape("fname") %>
+            <%= user.escape("lname") %>
+
+          </h4>
+        </div>
+        <% if (user.get("current_user") === true) { %>
+          <div class="profile-current-user banner-raise right">
+
+            <form class="">
+              <input class="file-input" id="input-image" type="file" name="user[img]" value="gfg">
+              <button class="button header-photo-button right submit">Upload header image</button>
+
+            </form>
+          </div>
+        <% }; %>
+
+      </div>
+    </div>
+
     <div class="profile-header-info group">
-      <div class="profile-header-avatar left">
+          <!-- <div class="profile-cover-photo"> -->
+            <div class="profile-cover-photo background-img" style="background-image: url(<%= user.escape('img_cover') %>);">
+            </div>
+          <!-- </div> -->
+      <div class="profile-header-avatar banner-raise left">
         <% if (user.get("current_user") === true) { %>
           <div class="profile-current-user avatar-button">
             <button class="button header-avatar-button">Update image</button>
           </div>
         <% }; %>
       </div>
-      <div class="profile-edit">
-        <div class="profile-user-info">
-          <div class="profile-user-details left">
-            <h3 class="profile-user-text"><%= user.escape("username") %></h3><br>
-            <h4 class="profile-user-text">
-              <%= user.escape("fname") %>
-              <%= user.escape("lname") %>
 
-            </h4>
-          </div>
-          <% if (user.get("current_user") === true) { %>
-            <div class="profile-current-user right">
-              <form class="">
-                <input class="file-input" id="input-image" type="file" name="user[img]" value="gfg">
-                <button class="button header-photo-button right submit">Upload header image</button>
-
-              </form>
-            </div>
-          <% }; %>
-
-        </div>
-      </div>
     </div>
   </div>
 </div>

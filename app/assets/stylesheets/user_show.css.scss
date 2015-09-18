@@ -2,15 +2,16 @@
   height: 260px;
   margin-left: -30px;
   margin-right: -30px;
-  background: #f50;
+  // background: #f50;
   padding: 30px;
   position: relative;
   color: #fff;
+
 }
 
 .profile-header .profile-header-info {
   position: relative;
-  background: #ccc;
+  // background: #ccc;
   height: 100%;
 }
 
@@ -18,14 +19,15 @@
   height: 200px;
   width: 200px;
   margin-right: 30px;
-  background: yellow;
+  // background: yellow;
 }
 
 .profile-header .profile-edit {
   padding: 30px;
-  left: 200px;
-  height: 200px;
+  left: 230px;
+  height: 260px;
   position: absolute;
+  top: 0;
   right: 0;
 }
 
@@ -43,10 +45,12 @@
 
 .profile-header h4 {
   font-size: 16px;
+  padding: 20px 0;
+  line-height: 1.5;
 }
 
 .profile-header .avatar-button {
-  background: blue;
+  // background: blue;
   height: 100%;
   padding-top: 160px;
 }
@@ -82,10 +86,6 @@
   display: block;
 }
 
-// .user-tabs-list a {
-//   display: block;
-// }
-
 .user-tabs-list > li {
   font-size: 18px;
   margin-right: 30px;
@@ -100,4 +100,36 @@
 
   border-bottom: 1px solid #f50;
   color: #f50;
+}
+
+.banner-raise {
+  position: relative;
+  z-index: 3;
+}
+
+.profile-cover-photo.background-img {
+  width: 1240px;
+  height: 260px;
+  background-size: auto 100%;
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  opacity: .8;
+
+}
+
+.header-photo-button {
+  background: rgba(255,255,255,.8);
+  border-color: rgba(0,0,0,.1);
+  transition: background .2s ease-in-out,border-color .2s ease-in-out;
+}
+
+.header-photo-button:hover {
+  background: rgba(255,255,255,1);
+  border-color: rgba(0,0,0,.3);
+}
+
+.header-avatar-button {
+  background: #fff;
+  border-color: rgba(0,0,0,.1);
 }
