@@ -7,3 +7,9 @@
   margin-top: 5px;
   width: 100%;
 }
+
+.input-hider {
+  width: 0;
+  height: 0;
+  /*overflow: hidden;*/
+}

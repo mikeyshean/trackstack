@@ -6,8 +6,12 @@
   };
 
   $.Modals.prototype.toggleModal = function (e) {
+    var $modal = this.$el.find(".upload-modal").removeClass("transitioning")
+    var $background = this.$el.find(".modal-background").removeClass("transitioning")
 
-    $(e.currentTarget).remove();
+    $modal.one("transitionend", function () {
+      $(e.currentTarget).remove();
+    })
 
   };
 

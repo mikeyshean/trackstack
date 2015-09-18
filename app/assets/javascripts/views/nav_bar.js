@@ -13,16 +13,20 @@ Trackstack.Views.NavBar = Backbone.View.extend({
   events: {
     "click #upload": "uploadModal",
     "click #username": "showDropdown"
-    // "click #content": "hideDropdown"
   },
 
   render: function () {
-    // this.$navBarDropdown.append(this.template({ currentUserId: this.currentUserId }));
+
   },
 
   uploadModal: function (e) {
     var track = new Trackstack.Models.Track()
     this.$modalEl.html(this.uploadTemplate({ model: track }))
+    setTimeout(function () {
+      this.$modalEl.find(".modal-background").addClass("transitioning")
+      this.$modalEl.find(".upload-modal").addClass("transitioning")
+    }.bind(this),0)
+
   },
 
   showDropdown: function (e) {

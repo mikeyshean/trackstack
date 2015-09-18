@@ -122,6 +122,7 @@
   background: rgba(255,255,255,.8);
   border-color: rgba(0,0,0,.1);
   transition: background .2s ease-in-out,border-color .2s ease-in-out;
+  cursor: pointer;
 }
 
 .header-photo-button:hover {
@@ -132,4 +133,10 @@
 .header-avatar-button {
   background: #fff;
   border-color: rgba(0,0,0,.1);
+}
+
+.header-photo-button input {
+  display: block;
+  opacity: 1;
+  cursor: pointer;
 }

@@ -5,7 +5,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   events: {
     "click .follow-button": "toggleFollowState",
     "submit form": "submit",
-    "change #input-image": "fileInputChange"
+    "change #file-input-button": "fileInputChange"
   },
 
   initialize: function (options) {
@@ -65,7 +65,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   submit: function(event){
     event.preventDefault();
 
-    var file = this.$("#input-image")[0].files[0];
+    var file = this.$("#file-input-button")[0].files[0];
 
     var formData = new FormData();
     formData.append("user[img]", file);
@@ -80,20 +80,20 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   fileInputChange: function(event){
     console.log(event.currentTarget.files[0]);
-    //
-    // var that = this;
-    // var file = event.currentTarget.files[0];
-    // var reader = new FileReader();
-    //
-    // reader.onloadend = function(){
-    //   that._updatePreview(reader.result);
-    // }
-    //
-    // if (file) {
-    //   reader.readAsDataURL(file);
-    // } else {
-    //   that._updatePreview("");
-    // }
+
+    var that = this;
+    var file = event.currentTarget.files[0];
+    var reader = new FileReader();
+
+    reader.onloadend = function(){
+      that._updatePreview(reader.result);
+    }
+
+    if (file) {
+      reader.readAsDataURL(file);
+    } else {
+      that._updatePreview("");
+    }
   }
 
 });

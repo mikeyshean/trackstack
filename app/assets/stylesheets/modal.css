@@ -7,7 +7,18 @@
   width: 100%;
   background: rgba(242,242,242,.9);
   /*background: rgba(0, 0, 0, 0.41);*/
-  z-index: 11
+  z-index: 11;
+  opacity: 0;
+  transition: opacity .3s ease-in-out
+}
+
+.modal-background.transitioning {
+  opacity: 1;
+  transition: opacity .3s ease-in-out
+}
+
+.modal-background.sign-in {
+  opacity: 1;
 }
 
 .modal-background .modal .modal-wrapper, .tab-content {
@@ -15,9 +26,8 @@
 
 }
 
-.modal {
+.modal-background .modal {
   border-radius: 5px;
-  overflow: hidden;
   border-top: 1px solid rgba(0, 0, 0, 0.14);
   box-shadow: -1.5px 1.5px rgba(0, 0, 0, 0.14),
               -2px 2px 4px rgba(0, 0, 0, 0.1),
@@ -40,7 +50,6 @@
   width: 500px;
   height: 350px;  /* use 500px when adding omniauth options */
   background: #fff;
-
 }
 
 
@@ -79,7 +88,17 @@
 
 .modal.upload-modal {
   border-top: 1px solid #ccc;
+  postion: absolute;
+  top: -100%;
+  transition: top .8s cubic-bezier(.39,.73,.17,.77);
 }
+
+.modal.upload-modal.transitioning {
+  top: 20%;
+  transition: top .5s cubic-bezier(.14,.99,.52,1);
+}
+
+
 
 
 /* Form */
