@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
   has_many :playlists, foreign_key: :author_id
   has_many :tracks, foreign_key: :author_id
   has_attached_file :img, styles: { badge: "50x50", profile: "200x200", comment: "40x40", track_show: "120x120", comment_icon: "20x20"},
-    :default_url => '/images/:attachment/default.jpg'
+    :default_url => ":attachment/default.jpg"
   has_attached_file :cover_img, styles: { cover: "1240x260" },
-    :default_url => '/images/:attachment/default.jpg'
+    :default_url => ":attachment/default.jpg"
 
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
@@ -68,4 +68,5 @@ class User < ActiveRecord::Base
 
     following.first.destroy
   end
+
 end
