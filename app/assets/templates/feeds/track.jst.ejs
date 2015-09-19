@@ -11,7 +11,7 @@
       data-id="<%= sound.id %>"
       data-sound-type="<%= sound_type %>">
     </button>
-    <h3>Likes: <%= sound.likers().length %></h3>
+    <h3>Likes: <strong id="like-count"><%= sound.likers().length %></strong></h3>
   </div>
   <% if (sound_type !== "Playlist") { %>
     <button

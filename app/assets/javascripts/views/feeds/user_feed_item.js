@@ -16,8 +16,11 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
     this.sound = this.model.sound || this.model;
 
     this.likers = this.sound.likers([], { sound: this.sound })
-    this.likers.fetch()
-    this.listenTo(this.likers, "sync remove add", this.render)
+    this.likers.fetch({reset: true})
+
+    this.listenTo(this.likers, "add", this.updateLikeCount.bind(this, 1));
+    this.listenTo(this.likers, "remove", this.updateLikeCount.bind(this, -1));
+    this.listenTo(this.likers, "reset", this.render);
   },
 
   render: function () {
@@ -52,12 +55,11 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
     e.preventDefault();
     var $button = $(e.currentTarget)
     $button.attr("disabled", true)
-    var beforeState = $button.data("like-state")
-
-    $button.attr("like-state", !beforeState)
     $button.toggleClass("button-orange-border").addClass("disabled")
 
-    if (beforeState) {
+    var beforeState = $button.attr("data-like-state")
+    if (beforeState === "true") {
+      $button.attr("data-like-state", "false")
       var liker = this.likers.findWhere({ id: Trackstack.currentUser.id })
 
       liker.destroy({
@@ -66,6 +68,7 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
         }
       })
     } else {
+      $button.attr("data-like-state", "true")
       this.likers.create({sound_type: this.sound_type, sound_id: this.sound_id}, {
         success: function () {
           $button.removeAttr("disabled");
@@ -86,6 +89,11 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
       $("#track-upload").addClass("transitioning")
     }.bind(this),0)
 
+  },
+
+  updateLikeCount: function (incr) {
+    var count = this.$("#like-count").text()
+    this.$("#like-count").text(+count + incr);
   }
 
 });
