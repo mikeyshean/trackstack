@@ -48,7 +48,7 @@ Trackstack.Models.User = Backbone.Model.extend({
 
   tracks: function () {
     if (!this._tracks) {
-      this._tracks = new Trackstack.Collections.Tracks([], { user_id: this })
+      this._tracks = new Trackstack.Collections.Tracks([], { user_id: this.id })
     }
 
     return this._tracks
@@ -56,10 +56,18 @@ Trackstack.Models.User = Backbone.Model.extend({
 
   playlists: function () {
     if (!this._playlists) {
-      this._playlists = new Trackstack.Collections.Playlists([], { user_id: this })
+      this._playlists = new Trackstack.Collections.Playlists([], { user_id: this.id })
     }
 
     return this._playlists
+  },
+
+  feed: function () {
+    if (!this._feed) {
+      this._feed = new Trackstack.Collections.ProfileFeed([], { user: this })
+    }
+
+    return this._feed
   },
 
   saveFormData: function(formData, options){

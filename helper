@@ -5,4 +5,6 @@ git remote add heroku heroku-git-url-here OR heroku git:remote -a heroku-app-nam
 
 
 -Modal Animation
--
+-track upload 2nd screen
+-login 2nd screen
+-profile edit

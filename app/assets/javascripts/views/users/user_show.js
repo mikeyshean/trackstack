@@ -17,13 +17,15 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.feed = options.feed;
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
+    this.tracks.fetch({ success: this.updateTrackCount.bind(this), silent: true});
     this.playlists = this.model.playlists();
 
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.followers, "sync remove", this.render);
-    this.listenTo(this.tracks, "reset", this.render);
+    // this.listenTo(this.tracks, "reset", this.render);
 
-    this.feedView = new Trackstack.Views.FeedComposite({collection: this.feed})
+
+    this.feedView = new Trackstack.Views.FeedComposite({collection: this.feed, feedType: "All"})
     this.addSubview("#feed", this.feedView)
 
     this.feedTypes = {
@@ -47,16 +49,14 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     var $currentTarget = $(e.currentTarget)
     this.$(".feed-links").removeClass("active")
     $currentTarget.addClass("active")
+
     this.feedView && this.feedView.remove();
     var newFeedType = $currentTarget.data("feed-type")
-    this.feedView = new Trackstack.Views.FeedComposite({ collection: this.feedTypes[newFeedType] })
+    var collection = this.feedTypes[newFeedType]
+    collection.fetch({reset: true});
+    this.feedView = new Trackstack.Views.FeedComposite({ collection: collection })
     this.addSubview("#feed", this.feedView)
   },
-
-  // addFeedSubview: function (model) {
-  //   var view = new Trackstack.Views.FeedComposite({collection: this.feed})
-  //   this.addSubview("#feed", view);
-  // },
 
   toggleFollowState: function (e) {
     var $followButton = $(e.currentTarget)
@@ -143,6 +143,12 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   _updatePreview: function(src, selector){
     this.$el.find(selector).attr("src", src);
+  },
+
+  updateTrackCount: function () {
+    var el = this.$("#track-count")
+    el.empty()
+    el.html("Tracks: " + this.tracks.length)
   }
 
 

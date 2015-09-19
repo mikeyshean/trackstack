@@ -1,4 +1,4 @@
-Trackstack.Collections.ProfileSounds = Backbone.Collection.extend({
+Trackstack.Collections.ProfileFeed = Backbone.Collection.extend({
 
   url: function () {
     return "api/users/" + this.user.id + "/feed"
@@ -9,7 +9,7 @@ Trackstack.Collections.ProfileSounds = Backbone.Collection.extend({
   initialize: function(models, options) {
     this.user = options.user;
   },
-  
+
   parse: function (response) {
     var user = this.user
     var that = this
@@ -19,17 +19,15 @@ Trackstack.Collections.ProfileSounds = Backbone.Collection.extend({
       response.forEach(function (model) {
         if (model.sound_type === "Track") {
           sound = new Trackstack.Models.Track(model.sound);
-          user.tracks().add(sound, {silent: true})
         } else if (model.sound_type === "Playlist") {
           sound = new Trackstack.Models.Playlist(model.sound);
-          user.playlists().add(sound, {silent: true})
         }
         var feed = new Trackstack.SoundModel(model)
 
         feed.sound = sound
-        that.add(feed)
+        that.add(feed, {silent: true})
       })
-      user.tracks().trigger("reset")
+
       delete response
     }
   }
