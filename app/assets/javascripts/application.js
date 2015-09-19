@@ -15,6 +15,7 @@
 
 //= require underscore
 //= require backbone
+//= require serialize_json
 //= require trackstack
 //= require_tree ./utils
 //= require_tree ./plugins

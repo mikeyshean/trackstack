@@ -1,0 +1,60 @@
+
+<div class="modal-background modal-raised sign-in">
+  <div class="sign-in-modal modal">
+    <div class="modal-wrapper group">
+      <div class="sign-in-header-text">
+        <div class="logo-wrapper">
+          <div class="logo">TrackStack</div>
+        </div>
+
+        <div class="tabs group">
+          <ul class="tab-options group" data-tab-content=".tab-content">
+            <li class="left"><a class="disabled" href="#create-account-content">Create account</a></li>
+            <li class="left"><a class="active" href="#signin-content">Sign in</a></li>
+          </ul>
+        </div>
+
+    </div>
+
+    <section class="tab-content group">
+      <article id="signin-content" class="active tab-content-item">
+
+        <div class="facebook-login">
+          <a href="/auth/facebook"><img id="facebook-icon" width="165px"></a>
+          <i>or</i>
+        </div>
+
+
+        <form action="/session" method="post">
+          <label class="input-label">Your username</label><br>
+            <input name="user[username]" type="text" class="form-field"><br>
+          <br>
+          <label class="input-label">Your password</label><br>
+          <input name="user[password]" type="password" class="form-field"><br>
+          <button class="button button-orange">Sign In</button><br>
+        </form>
+
+      </article>
+      <article id="create-account-content" class="tab-content-item" >
+        <form action="/users" method="post">
+
+          <label class="input-label">Enter a username</label><br>
+            <input name="user[username]" type="text" class="form-field"><br>
+            <br>
+          <label class="input-label">Password</label><br>
+            <input name="user[password]" type="password" class="form-field"><br>
+          <button class="button button-orange">Create Account</button><br>
+        </form>
+      </article>
+
+    </section>
+  </div>
+</div>
+
+<script>
+  $(function () {
+    $(".form-field").first().focus();
+    $(".tab-options").tabs();
+  });
+
+</script>

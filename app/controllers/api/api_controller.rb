@@ -1,6 +1,5 @@
 module Api
   class ApiController < ApplicationController
-    before_action :require_signed_in!
 
     def require_author!
       unless current_user

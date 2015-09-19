@@ -1,4 +1,4 @@
-<header>
+
   <nav id="nav" class="group">
     <div class="nav-left left">
       <div class="logo-left left">
@@ -18,20 +18,19 @@
       <ul class="nav-buttons-right group">
         <li class="left"><a href="#/tracks/new" id="upload">Upload</a></li>
 
-        <% if current_user %>
-          <li class="left nav-dropdown" id="user-nav-dropdown" data-id="<%= current_user.id %>"><a href="#" id="username"><%= current_user.username %></a><div class="nav-dropdown-wrapper"></div></li>
+        <% if (currentUser.isSignedIn()) { %>
+          <li class="left nav-dropdown" id="user-nav-dropdown" data-id="<%= currentUser.id %>"><a href="#" id="username"><%= currentUser.escape("username") %></a><div class="nav-dropdown-wrapper"></div></li>
           <li class="left">
 
 
-            <a href="#/session">Sign Out</a>
+            <a href="#" id="sign-out-link">Sign Out</a>
 
           </li>
-        <% else %>
+        <% } else { %>
           <li class="left">
             <a href="#">Sign In</a>
           </li>
-        <% end %>
+        <% }; %>
       </ul>
     </div>
   </nav>
-</header>

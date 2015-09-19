@@ -111,6 +111,10 @@
   font-weight: 400;
 }
 
+#facebook-icon {
+  content: image_url('facebook_login.png');
+}
+
 /* Track Upload */
 .modal .modal-header {
 

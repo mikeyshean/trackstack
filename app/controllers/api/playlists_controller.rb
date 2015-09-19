@@ -1,11 +1,11 @@
 module Api
   class PlaylistsController < ApiController
-    before_action :require_author!
+    # before_action :require_author!
 
     def index
       author = User.find(params[:id])
       @playlists = author.playlists.order("updated_at DESC")
-      
+
       render :index
     end
 

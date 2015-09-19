@@ -1,6 +1,6 @@
 module Api
   class TracksController < ApiController
-    before_action :require_author!
+    # before_action :require_author!
 
     def index
       author = User.find(params[:id])

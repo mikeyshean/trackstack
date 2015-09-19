@@ -4,16 +4,18 @@ window.Trackstack = {
   Views: {},
   Routers: {},
   initialize: function() {
-    var $el = $("#app");
-    var $navBarDropdown = $("#user-nav-dropdown");
-    var currentUserId = $navBarDropdown.data("id");
 
-    new Trackstack.Views.NavBar({
-      el: $el,
-      currentUserId: currentUserId,
-      $navBarDropdown: $navBarDropdown,
-      $modalEl: $("#modal")
-    }).render()
+    this.currentUser = new Trackstack.Models.CurrentUser();
+    this.currentUser.fetch();
+
+    this.header = new Trackstack.Views.Header({ el: $("#header"), $modalEl: $("#modal")})
+    // var $navBarDropdown = $("#user-nav-dropdown");
+
+    // new Trackstack.Views.Header({
+    //   el: $("app"),
+    //   currentUserId: currentUserId,
+    //   $modalEl: $("#modal")
+    // }).render()
 
     var collection =
       Trackstack.Collections.users = new Trackstack.Collections.Users()

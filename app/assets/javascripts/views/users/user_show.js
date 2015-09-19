@@ -22,8 +22,6 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.followers, "sync remove", this.render);
-    // this.listenTo(this.tracks, "reset", this.render);
-
 
     this.feedView = new Trackstack.Views.FeedComposite({collection: this.feed, feedType: "All"})
     this.addSubview("#feed", this.feedView)
