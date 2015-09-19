@@ -13,8 +13,16 @@ Rails.application.routes.draw do
         delete "followers/:current_user_id", to: "followers#destroy"
         get "feed", to: "feeds#index"
 
-        resources :tracks, param: :track_id, only: [:index, :create, :show ]
-        resources :playlists, param: :playlist_id
+        resources :tracks, param: :track_id, only: [:index, :create, :show ] do
+          member do
+            get "likes", to: "tracks#likes"
+          end
+        end
+        resources :playlists, param: :playlist_id do
+          member do
+            get "likes", to: "playlists#likes"
+          end
+        end
       end
     end
     resources :tracks, only: [:show, :create, :update, :destroy]

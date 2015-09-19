@@ -2,10 +2,12 @@ module Api
   class FollowersController < ApiController
 
     def create
-      if current_user.start_following(params[:id])
+      following = Following.new({follower_id: current_user.id, followee_id: params[:id]})
+
+      if following.save
         render :follower
       else
-        render json: current_user.errors.full_messages, status: 422
+        render json: following.errors.full_messages, status: 422
       end
     end
 

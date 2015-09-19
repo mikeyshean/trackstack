@@ -2,6 +2,8 @@ class Playlist < ActiveRecord::Base
   has_many :playlistings
   has_many :tracks, through: :playlistings
   has_many :feeds, as: :sound, dependent: :destroy
+  has_many :likings, as: :likable, dependent: :destroy
+  has_many :likers, through: :likings, source: :liker
   belongs_to :author, class_name: "User", foreign_key: :author_id
 
   validates :title, :author_id, presence: true

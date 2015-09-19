@@ -41,6 +41,11 @@ module Api
       @track.destroy
     end
 
+    def likes
+      @likers = Track.find(params[:track_id]).likers
+      render :likes
+    end
+
     private
 
     def track_params

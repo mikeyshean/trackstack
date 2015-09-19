@@ -1,6 +1,9 @@
 <div class="feed-sound-item">
   <h1><%= sound.escape("title") %> <%= sound_type %></h1>
-  <button class="button">Like</button>
+  <div class="likable">
+    <button class="button like-button" data-id="sound.id" data-sound-type="sound_type">Like</button>
+    <h3>Likes: <%= sound.likers.length %></h3>
+  </div>
   <button class="button" id="add-to-playlist-button">Add to Playlist</button>
   <button class="button">Repost</button>
 

@@ -41,6 +41,11 @@ module Api
       @playlist.destroy
     end
 
+    def likes
+      @likers = Playlist.find(params[:playlist_id]).likers
+      render :likes
+    end
+
     private
 
     def playlist_params

@@ -10,7 +10,7 @@
 
           </h4>
         </div>
-        <% if (user.get("current_user") === true) { %>
+        <% if (user === currentUser) { %>
           <div class="profile-current-user banner-raise right">
             <button class="button header-photo-button right css-file-input" data-form-type="#cover-file-input-button">Upload header image</button>
           </div>
@@ -28,7 +28,7 @@
       <div class="profile-header-avatar banner-raise left">
         <div class="profile-photo" style="background-image: url(<%= user.escape('img_profile') %>);">
         </div>
-        <% if (user.get("current_user") === true) { %>
+        <% if (user === currentUser)  { %>
           <div class="profile-current-user avatar-button">
             <button class="button header-avatar-button css-file-input" data-form-type="#profile-file-input-button">Update image</button>
           </div>
@@ -56,14 +56,14 @@
 <section class="content-wrapper">
   <div class="main">
 
-    <% if (user.get("current_user") === false) { %>
+    <% if (user.id !== currentUser.id) { %>
       <button
         class="button button-orange follow-button
-          <% if (user.get('followed')) { %>
+          <% if (user.followers().findWhere({id: currentUser.id}))  { %>
             <%= 'button-orange-border' %>
           <% } %>"
         data-user-id=<%= user.id %>
-        data-follow-state="<%= user.get('followed') %>">
+        data-follow-state="<%= !!user.followers().findWhere({id: currentUser.id}) %>">
       </button>
     <% } %>
 

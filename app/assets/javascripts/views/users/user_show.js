@@ -34,11 +34,11 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    this.$el.html(this.template({ user: this.model }));
+    this.$el.html(this.template({ user: this.model, currentUser: Trackstack.currentUser }));
     this.$el.append(this.modalProfileTemplate({user: this.model }));
     this.$el.append(this.modalCoverTemplate({user: this.model }));
     this.attachSubviews()
-    console.log("show")
+
     return this;
   },
 
@@ -61,28 +61,21 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     $followButton.attr("disabled", true)
     var beforeState = $followButton.data("follow-state")
 
-    this.model.set({ followed: !beforeState })
     $followButton.attr("data-follow-state", !beforeState)
 
-    if (beforeState === true) {
-      var current_user = this.followers.findWhere({ current_user: true })
+    if (beforeState) {
+      var follower = this.followers.findWhere({ id: Trackstack.currentUser.id })
 
-      current_user.destroy({
+      follower.destroy({
         success: function () {
           $followButton.removeAttr("disabled");
-        },
-        error: function () {
-          this.model.set({ followed: beforeState })
-        }.bind(this)
+        }
       })
     } else {
       this.followers.create({}, {
         success: function () {
           $followButton.removeAttr("disabled");
-        },
-        error: function (model) {
-          this.model.set({ followed: beforeState })
-        }.bind(this)
+        }
       })
     }
   },

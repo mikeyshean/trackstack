@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
     :default_url => ":attachment/default.jpg"
   has_attached_file :cover_img, styles: { cover: "1240x260" },
     :default_url => ":attachment/default.jpg"
+  has_many :likings
+  has_many :liked_sounds, through: :likings, source: :likable
 
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
@@ -80,15 +82,30 @@ class User < ActiveRecord::Base
     other_user.followers.include?(self)
   end
 
-  def start_following(followee_id)
-    Following.create({follower_id: self.id, followee_id: followee_id})
-  end
+
 
   def stop_following(followee_id)
     following = Following.where("follower_id = :current_user_id AND followee_id = :followee_id",
       { :current_user_id => self.id, :followee_id => followee_id })
 
     following.first.destroy
+  end
+
+  def stop_liking(likable_id, likable_type)
+    liking = Liking.where(liking_where, {
+          :current_user_id => self.id,
+          :likable_id => likable_id,
+          :likable_type => likable_type
+        })
+
+    following.first.destroy
+  end
+
+  private
+
+  def liking_where
+    "user_id = :current_user_id AND likable_id = :likable_id AND \
+    likable_type = :likable_type"
   end
 
 end
