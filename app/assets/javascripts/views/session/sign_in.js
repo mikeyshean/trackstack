@@ -26,7 +26,7 @@ Trackstack.Views.SignIn = Backbone.View.extend({
       username: formData.username,
       password: formData.password,
       error: function(){
-        alert("Wrong username/password combination. Please try again.");
+        alert("Invalid username or password combination.");
       }
     });
   },
