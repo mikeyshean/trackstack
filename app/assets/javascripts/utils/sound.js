@@ -18,7 +18,7 @@ Trackstack.SoundModel = Backbone.Model.extend({
   likers: function (models, options) {
     if (!this._likers) {
       this._likers =
-        new Trackstack.Collections.Likers([], { sound: options.sound })
+        new Trackstack.Collections.Likers([], options)
     }
 
     return this._likers;

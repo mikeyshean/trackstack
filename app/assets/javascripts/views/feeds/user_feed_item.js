@@ -14,7 +14,8 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
   initialize: function (options) {
     this.sound_type = this.model.get("sound_type");
     this.sound = this.model.sound || this.model;
-    this.likers = this.sound.likers([], { sound: this.sound })
+
+    this.likers = this.sound.likers([], { sound_id: this.sound.id, sound_type: this.sound_type })
     this.likers.fetch()
     this.listenTo(this.likers, "sync remove add", this.render)
   },
@@ -53,7 +54,7 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
         }
       })
     } else {
-      this.likers.create({}, {
+      this.likers.create({sound_type: this.sound_type, sound_id: this.sound_id}, {
         success: function () {
           $button.removeAttr("disabled");
         }
