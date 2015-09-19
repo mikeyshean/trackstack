@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 User.create({
-  username: "s0ngb055",
+  username: "MusiCTime",
   password_digest: BCrypt::Password.create("password"),
   session_token: "abc",
   fname: "Mikey",

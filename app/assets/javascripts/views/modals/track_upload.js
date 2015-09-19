@@ -23,8 +23,13 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
     var attribute = $(e.currentTarget).find(".file-input-button").attr("name")
     var file = $form.find(".file-input-button")[0].files[0];
 
+    var title = this.$("#track_title").val();
+    var desc = this.$("#track_description").val();
+
     var formData = new FormData();
     formData.append(attribute, file);
+    formData.append("track[title]", title);
+    formData.append("track[description]", desc);
 
     var that = this;
     this.model.saveFormData(formData, {
