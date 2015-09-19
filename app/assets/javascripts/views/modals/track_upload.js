@@ -37,6 +37,7 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
         Backbone.history.navigate("#/tracks/" + that.model.id, { trigger: true });
       },
       error: function (model, response) {
+        alert(response.responseJSON[0])
       }
     });
   },

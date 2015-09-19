@@ -17,7 +17,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.feed = options.feed;
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
-    this.tracks.fetch({ success: this.updateTrackCount.bind(this), silent: true});
+
+    this.tracks.fetch({ success: this._updateTrackCount.bind(this), silent: true});
     this.playlists = this.model.playlists();
 
     this.listenTo(this.model, "sync", this.render);
@@ -136,7 +137,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.$el.find(selector).attr("src", src);
   },
 
-  updateTrackCount: function () {
+  _updateTrackCount: function () {
     var el = this.$("#track-count")
     el.empty()
     el.html("Tracks: " + this.tracks.length)

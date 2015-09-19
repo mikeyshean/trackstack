@@ -51,3 +51,23 @@ button[data-like-state="true"]:after {
   content: "Liked";
 
 }
+
+button[data-added-state="false"]:after {
+  content: "Add to playlist";
+
+}
+
+button[data-added-state="false"]:hover {
+  border: 1px solid #ccc;
+
+}
+
+button[data-added-state="true"]:after {
+  content: "Added";
+  color: #f50;
+
+}
+
+button[data-added-state="true"]:hover {
+  border: 1px solid #f50;
+}

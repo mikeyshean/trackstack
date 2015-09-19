@@ -129,29 +129,31 @@
 
 }
 
-/* Modal Plugin Selectors */
+/* General Modal Plugin Selectors */
 
-.modal#track-upload {
+.modal.upload-modal {
   border-top: 1px solid #ccc;
   position: fixed;
   top: 0;
   left: 50%;
-  top: -100%;
+  top: -600px;
   transition: top .8s cubic-bezier(.39,.73,.17,.77);
   z-index: 11;
 }
 
-.modal#track-upload.transitioning {
+.modal.upload-modal.transitioning {
   top: 20%;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
+
+/* Persisted Modals w/ID */
 
 .modal#cover-photo {
   border-top: 1px solid #ccc;
   position: fixed;
   top: 0;
   left: 50%;
-  top: -100%;
+  top: -600px;
   transition: top .8s cubic-bezier(.39,.73,.17,.77);
   z-index: 11;
 }
@@ -166,7 +168,7 @@
   position: fixed;
   top: 0;
   left: 50%;
-  top: -100%;
+  top: -600px;
   transition: top .8s cubic-bezier(.39,.73,.17,.77);
   z-index: 11;
 }
@@ -175,6 +177,11 @@
   top: 20%;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
+
+
+
+
+
 
 .modal-raised.photo-modal {
   height: 600px;  /* remove this when increasing total modal size */

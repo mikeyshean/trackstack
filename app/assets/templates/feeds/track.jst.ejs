@@ -1,7 +1,8 @@
 <div class="feed-sound-item">
   <h1><%= sound.escape("title") %> <%= sound_type %></h1>
   <div class="likable">
-    <button class="button like-button
+    <button
+      class="button like-button
       <% if (!!sound.likers().findWhere({ id: currentUser.id})) { %>
         button-orange-border
       <% }; %>"
@@ -12,7 +13,13 @@
     </button>
     <h3>Likes: <%= sound.likers().length %></h3>
   </div>
-  <button class="button" id="add-to-playlist-button">Add to Playlist</button>
+  <% if (sound_type !== "Playlist") { %>
+    <button
+      class="button add-to-playlist-button"
+      data-id="<%= sound.id %>">
+        Add to Playlist
+    </button>
+  <% }; %>
   <button class="button">Repost</button>
 
   <input type="text" name="name" value="">

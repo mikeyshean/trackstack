@@ -7,7 +7,7 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
 
   events: {
     "click .like-button": "toggleLike",
-    "click #add-to-playlist-button": "triggerModal",
+    "click .add-to-playlist-button": "triggerModal",
     "click #repost-button": "toggleRepost",
   },
 
@@ -15,7 +15,7 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
     this.sound_type = this.model.get("sound_type");
     this.sound = this.model.sound || this.model;
 
-    this.likers = this.sound.likers([], { sound_id: this.sound.id, sound_type: this.sound_type })
+    this.likers = this.sound.likers([], { sound: this.sound })
     this.likers.fetch()
     this.listenTo(this.likers, "sync remove add", this.render)
   },
@@ -33,7 +33,19 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
 
   triggerModal: function (e) {
     e.preventDefault();
-    this.model.trigger("showPlaylistModal")
+
+    var trackId = $(e.currentTarget).data("id")
+    var playlists = Trackstack.currentUser.playlists()
+    playlists.fetch();
+    var view = new Trackstack.Views.PlaylistModal({
+      collection: playlists,
+      trackId: trackId
+    })
+    $("#modal").html(view.render().$el);
+    setTimeout(function () {
+      $(".modal-background").addClass("transitioning")
+      $("#playlist-modal").addClass("transitioning")
+    }.bind(this),0)
   },
 
   toggleLike: function (e) {

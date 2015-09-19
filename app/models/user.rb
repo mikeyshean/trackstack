@@ -7,6 +7,8 @@ class User < ActiveRecord::Base
   has_many :followees, through: :out_follows, source: :followee
   has_many :playlists, foreign_key: :author_id
   has_many :tracks, foreign_key: :author_id
+  has_many :playlistings, through: :playlists
+  has_many :playlist_tracks, through: :playlistings, source: :track
   has_attached_file :img, styles: { badge: "50x50", profile: "200x200", comment: "40x40", track_show: "120x120", comment_icon: "20x20"},
     :default_url => ":attachment/default.jpg"
   has_attached_file :cover_img, styles: { cover: "1240x260" },
@@ -81,8 +83,6 @@ class User < ActiveRecord::Base
   def following?(other_user)
     other_user.followers.include?(self)
   end
-
-
 
   def stop_following(followee_id)
     following = Following.where("follower_id = :current_user_id AND followee_id = :followee_id",
