@@ -4,8 +4,8 @@ module Api
 
     def index
       author = User.find(params[:id])
-      @playlists = author.playlists
-
+      @playlists = author.playlists.order("updated_at DESC")
+      
       render :index
     end
 

@@ -4,7 +4,7 @@ module Api
 
     def index
       author = User.find(params[:id])
-      @tracks = author.tracks
+      @tracks = author.tracks.order("updated_at DESC")
 
       render :index
     end
