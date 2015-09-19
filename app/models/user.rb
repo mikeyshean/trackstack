@@ -88,7 +88,7 @@ class User < ActiveRecord::Base
     following = Following.where("follower_id = :current_user_id AND followee_id = :followee_id",
       { :current_user_id => self.id, :followee_id => followee_id })
 
-    following.first.destroy
+    following.first.destroy!
   end
 
   def stop_liking(likable_id, likable_type)
@@ -98,7 +98,7 @@ class User < ActiveRecord::Base
           :likable_type => likable_type
         })
 
-    following.first.destroy
+    liking.first.destroy!
   end
 
   private

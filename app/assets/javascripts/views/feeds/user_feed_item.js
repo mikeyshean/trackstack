@@ -6,7 +6,7 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
   },
 
   events: {
-    "click #like-button": "toggleLike",
+    "click .like-button": "toggleLike",
     "click #add-to-playlist-button": "triggerModal",
     "click #repost-button": "toggleRepost",
   },
@@ -14,13 +14,18 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
   initialize: function (options) {
     this.sound_type = this.model.get("sound_type");
     this.sound = this.model.sound || this.model;
-    this.likers = this.sound.likers({ sound_type: this.sound_type, sound_id: this.sound.id })
+    this.likers = this.sound.likers([], { sound: this.sound })
     this.likers.fetch()
     this.listenTo(this.likers, "sync remove add", this.render)
   },
 
   render: function () {
-    this.$el.html(this.template[this.sound_type]({ sound: this.sound, sound_type: this.sound_type }))
+    this.$el.html(this.template[this.sound_type]({
+      sound: this.sound,
+      sound_type: this.sound_type,
+      currentUser: Trackstack.currentUser
+    }))
+
     console.log("item");
     return this;
   },
@@ -34,10 +39,10 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
     e.preventDefault();
     var $button = $(e.currentTarget)
     $button.attr("disabled", true)
-    var beforeState = button.data("like-state")
+    var beforeState = $button.data("like-state")
 
     $button.attr("like-state", !beforeState)
-    button.toggleClass("button-orange-border").addClass("disabled")
+    $button.toggleClass("button-orange-border").addClass("disabled")
 
     if (beforeState) {
       var liker = this.likers.findWhere({ id: Trackstack.currentUser.id })

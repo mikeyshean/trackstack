@@ -14,17 +14,31 @@ Rails.application.routes.draw do
         get "feed", to: "feeds#index"
 
         resources :tracks, param: :track_id, only: [:index, :create, :show ] do
-          member do
-            get "likes", to: "tracks#likes"
-          end
+          # member do
+          #   get "likes", to: "tracks#likes"
+          # end
         end
-        resources :playlists, param: :playlist_id do
-          member do
-            get "likes", to: "playlists#likes"
-          end
+        resources :playlists, param: :playlist_id, only: [:index, :show] do
+          # member do
+          #   get "likes", to: "playlists#likes"
+          # end
         end
       end
     end
-    resources :tracks, only: [:show, :create, :update, :destroy]
+    resources :tracks, only: [:create, :update, :destroy] do
+      member do
+        get "likes", to: "tracks#likes"
+        post "likes", to: "tracks#create_like"
+        delete "likes/:liker_id", to: "tracks#destroy_like"
+      end
+    end
+
+    resources :playlists, only: [:create, :update, :destroy] do
+      member do
+        get "likes", to: "playlists#likes"
+        post "likes", to: "playlists#create_like"
+        delete "likes/:liker_id", to: "playlists#destroy_like"
+      end
+    end
   end
 end

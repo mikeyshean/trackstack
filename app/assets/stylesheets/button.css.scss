@@ -43,3 +43,11 @@ button[data-follow-state="true"]:after {
   content: "Following";
 
 }
+button[data-like-state="false"]:after {
+  content: "Like";
+
+}
+button[data-like-state="true"]:after {
+  content: "Liked";
+
+}

@@ -42,9 +42,29 @@ module Api
     end
 
     def likes
-      @likers = Track.find(params[:track_id]).likers
+      @likers = Track.find(params[:id]).likers
       render :likes
     end
+
+    def create_like
+      liking = Liking.new({user_id: current_user.id,
+        likable_id: params[:id],
+        likable_type: "Track"
+        })
+
+      if liking.save
+        render json: { id: current_user.id }
+      else
+        render json: liking.errors.full_messages, status: 422
+      end
+    end
+
+    def destroy_like
+      current_user.stop_liking(params[:id], "Track")
+
+      render json: {}
+    end
+
 
     private
 
