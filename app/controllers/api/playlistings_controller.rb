@@ -13,11 +13,11 @@ module Api
       playlisting =
         playlist.playlistings.new({track_id: params[:track_id]})
       @track = playlisting.track
-      
+
       if playlisting.save
         render :show
       else
-        render json: @playlisting.errors.full_messages, status: 422
+        render json: playlisting.errors.full_messages, status: 422
       end
     end
 

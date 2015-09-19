@@ -33,14 +33,20 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
       playlistTrack.destroy({
         success: function () {
           $button.removeAttr("disabled");
-        }
+        },
+        error: function(model, response) {
+          // debugger
+        }.bind(this)
       })
     } else {
       this.playlistTracks.create({ track_id: this.trackId}, {
         success: function () {
           $button.removeAttr("disabled")
         },
-        wait: true
+        wait: true,
+        error: function(model, response) {
+          // debugger
+        }.bind(this)
       })
     }
   }

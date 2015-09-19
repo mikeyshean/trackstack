@@ -22,7 +22,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.playlists = this.model.playlists();
 
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.followers, "sync remove", this.render);
+    this.listenTo(this.followers, "add", this.updateFollowerCount.bind(this, 1));
+    this.listenTo(this.followers, "remove", this.updateFollowerCount.bind(this, -1));
 
     this.feedView = new Trackstack.Views.FeedComposite({collection: this.feed, feedType: "All"})
     this.addSubview("#feed", this.feedView)
@@ -38,6 +39,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.$el.html(this.template({ user: this.model, currentUser: Trackstack.currentUser }));
     this.$el.append(this.modalProfileTemplate({user: this.model }));
     this.$el.append(this.modalCoverTemplate({user: this.model }));
+
     this.attachSubviews()
 
     return this;
@@ -58,25 +60,37 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   toggleFollowState: function (e) {
+    e.preventDefault()
     var $followButton = $(e.currentTarget)
     $followButton.attr("disabled", true)
-    var beforeState = $followButton.data("follow-state")
+    var beforeState = $followButton.attr("data-follow-state")
+    $followButton.toggleClass("button-orange-border")
 
-    $followButton.attr("data-follow-state", !beforeState)
 
-    if (beforeState) {
+
+    if (beforeState === "true") {
+      $followButton.attr("data-follow-state", "false")
       var follower = this.followers.findWhere({ id: Trackstack.currentUser.id })
-
       follower.destroy({
-        success: function () {
+        success: function (model) {
           $followButton.removeAttr("disabled");
-        }
+
+        },
+        error: function (model, response) {
+          this.followers.add(follower)
+        }.bind(this)
       })
     } else {
-      this.followers.create({}, {
-        success: function () {
+      $followButton.attr("data-follow-state", "true")
+      this.followers.create({followee_id: Trackstack.currentUser.id }, {
+        success: function (model) {
           $followButton.removeAttr("disabled");
-        }
+
+        },
+        wait: true,
+        error: function (model, response) {
+          debugger
+        }.bind(this)
       })
     }
   },
@@ -131,6 +145,11 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     var formType = $(e.currentTarget).data("form-type")
 
     $(formType).click();
+  },
+
+  updateFollowerCount: function (incr) {
+    var count = this.$("#follower-count").text()
+    this.$("#follower-count").text(+count + incr);
   },
 
   _updatePreview: function(src, selector){

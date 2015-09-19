@@ -3,7 +3,7 @@ module Api
 
     def create
       following = Following.new({follower_id: current_user.id, followee_id: params[:id]})
-
+      
       if following.save
         render :follower
       else
