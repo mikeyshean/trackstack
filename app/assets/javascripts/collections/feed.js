@@ -1,13 +1,14 @@
-Trackstack.Collections.ProfileFeed = Backbone.Collection.extend({
+Trackstack.Collections.Feed = Backbone.Collection.extend({
 
   url: function () {
-    return "api/users/" + this.user.id + "/profilefeed"
+    return "api/users/" + this.user.id + "/" + this.feedType
   },
 
   model: Trackstack.SoundModel,
 
   initialize: function(models, options) {
     this.user = options.user;
+    this.feedType = options.feedType;
   },
 
   parse: function (response) {

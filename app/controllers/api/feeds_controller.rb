@@ -12,6 +12,11 @@ module Api
     def main_feed
       followee_ids = current_user.followees.pluck(:id)
       @feed = Feed.includes(:sound => :author).where(author_id: followee_ids).order("updated_at DESC").limit(LIMIT)
+
+      if @feed.empty?
+        @feed = Feed.includes(:sound => :author).order("updated_at DESC").limit(LIMIT)
+      end
+      
       render :feed
     end
   end

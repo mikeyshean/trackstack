@@ -1,3 +1,34 @@
-<% users.each(function (user) { %>
-  <a href="#/users/<%= user.id %>"><%= user.escape("username") %></a><br>
-<% }) %>
+
+
+<div class="horizontal-bar">
+  <div class="user-tabs-wrapper">
+    <div class="user-tabs-container group">
+      <ul class="user-tabs-list left">
+        <li class="left"><a class="active feed-links" href="#" data-feed-type="Stream">Steam</a></li>
+        <li class="left"><a class="feed-links" href="#" data-feed-type="Explore">Explore</a></li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<section class="content-wrapper">
+  <div class="content-wrapper-spacer">
+
+
+    <div class="main group">
+      <div id="feed">
+      </div>
+
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+      <div class="who-to-follow-badges">
+      </div>
+      <div class="likes-badges">
+      </div>
+  </div>
+
+</section>
