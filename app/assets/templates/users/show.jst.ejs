@@ -48,35 +48,78 @@
         <li class="left"><a class="feed-links" href="#" data-feed-type="Playlists">Playlists</a></li>
 
       </ul>
-
+      <% if (user.id !== currentUser.id) { %>
+        <button
+          class="right button button-orange follow-button
+            <% if (user.followers().findWhere({id: currentUser.id}))  { %>
+               button-orange-border
+            <% } %>"
+          data-user-id="<%= user.id %>"
+          data-follow-state="<%= !!user.followers().findWhere({id: currentUser.id}) %>">
+        </button>
+      <% } %>
     </div>
+
   </div>
 </div>
 
 <section class="content-wrapper">
-  <div class="main">
+  <div class="content-wrapper-spacer">
+
+
+    <div class="main group">
+      <div id="feed">
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="user-stats">
+      <table class="user-stats-table">
+        <tr>
+          <td>
+            <a href="#/users/" + user.id + "/followers">
+              <h3 class="info-stats-title">Followers</h3>
+              <p id="follower-count" class="info-stats-count"><%= user.followers().length %></p>
+            </a>
+          </td>
+          <td>
+            <a href="#/users/" + user.id + "/following">
+              <h3 class="info-stats-title">Following</h3>
+              <p id="following-count" class="info-stats-count"><%= user.followers().length %></p>
+            </a>
+          </td>
+          <td>
+            <a href="#/users/" + user.id + "/tracks">
+              <h3 class="info-stats-title">Tracks</h3>
+              <p id="track-count" class="info-stats-count"><%= user.tracks().length %></p>
+            </a>
+          </td>
+        </tr>
+      </table>
+      <div class="user-description">
+        <article class="user-description-text">
+          <%= user.escape("description") %>
+        </article>
+      </div>
+    </div>
+
 
     <% if (user.id !== currentUser.id) { %>
-      <button
-        class="button button-orange follow-button
-          <% if (user.followers().findWhere({id: currentUser.id}))  { %>
-             button-orange-border
-          <% } %>"
-        data-user-id="<%= user.id %>"
-        data-follow-state="<%= !!user.followers().findWhere({id: currentUser.id}) %>">
-      </button>
+      <div class="likes-badges">
+      </div>
+      <div class="following-badges">
+      </div>
+    <% } else { %>
+      <div class="following-badges">
+      </div>
     <% } %>
-
-  </div>
-  <div class="sidebar">
   </div>
 </section>
-<div class="user-stats">
-  <p>Followers: <strong id="follower-count"><%= user.followers().length %></strong></p>
-  <p id="track-count">Tracks: <%= user.tracks().length %></p>
-</div>
+
 
 <a href="#">Back to Index</a>
-
-<div id="feed">
-</div>
