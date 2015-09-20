@@ -13,6 +13,8 @@ class User < ActiveRecord::Base
     :default_url => ":attachment/default.jpg"
   has_attached_file :cover_img, styles: { cover: "1240x260" },
     :default_url => ":attachment/default.jpg"
+  validates_attachment_content_type :img, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :cover_img, content_type: /\Aimage\/.*\Z/
   has_many :likings
   has_many :liked_sounds, through: :likings, source: :likable
 

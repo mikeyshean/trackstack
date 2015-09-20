@@ -3,31 +3,53 @@
 
 <div class="modal-raised">
   <div class="modal upload-modal" id="track-upload">
-    <div class="modal-wrapper group">
+    <div class="modal-wrapper track-upload-wrapper">
       <div class="modal-header">
 
         <div class="modal-header-text"><h1>Upload to TrackStack</h1></div>
 
       </div>
 
-      <section class="tab-content group">
-        <article id="signin-content" class="active tab-content-item">
-          <form class="file-input-plugin">
-            <label class="input-label">Title</label>
-            <input class="form-field" type="text" name="track[title]" id="track_title">
-            <label class="input-label">Description</label>
-            <input class="form-field" type="text" name="track[description]" id="track_description">
+      <section id="form-one" class="tab-content track-upload-content">
+        <article id="signin-content" class="active upload-modal group tab-content-item">
+            <form class="file-input-plugin track-upload-form" id="track-file-form">
 
-            <div class="input-hider">
-              <input class="file-input file-input-button" data-form-type="#track-upload" id="track-file-input-button" type="file" name="track[track]">
+              <div class="input-hider">
+                <input class="file-input file-input-button" data-form-type="#track-upload" id="track-file-input-button" type="file" name="track[track]">
+
+              <button id="submit"></button>
+              </div>
+            </form>
+            <div class="track-upload-buttons">
+              <button class="button upload-button button-orange css-file-input">Choose file to upload</button>
+              <button class="button upload-button" id="coming-soon">Start New Recording</button>
             </div>
-            <button class="button button-orange submit upload-submit">Save</button>
-          <button class="button button orange css-file-input">Choose file to upload</button>
-          </form>
-
-
         </article>
       </section>
+
+        <article id="form-two" class="tab-content">
+              <div id="signin-content">
+                <div class="track-preview">
+                  <img src="" id="track-photo-preview" width="125" height="125">
+                  <button class="button css-file-input track-photo-button">
+                    Update image
+                  </button>
+                </div>
+                <form class="file-input-plugin">
+
+                    <label class="input-label">Title</label>
+                    <input class="form-field" type="text" name="track[title]" id="track_title" value="">
+
+                    <label class="input-label">Description</label>
+                    <input class="form-field" type="text" name="track[description]" id="track_description">
+
+                    <button>
+                    <button class="button button-orange">Save</button>
+
+                </form>
+              </div>
+        </article>
+
     </div>
   </div>
 </div>

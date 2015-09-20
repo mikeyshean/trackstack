@@ -4,7 +4,7 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
   events: {
     "click .css-file-input": "openFileBrowser",
     "submit form": "submit",
-    "change .file-input-button": "fileInputChange"
+    "change #track-file-input-button": "swapForm"
   },
 
   initialize: function (options) {
@@ -28,13 +28,14 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
 
     var formData = new FormData();
     formData.append(attribute, file);
-    formData.append("track[title]", title);
-    formData.append("track[description]", desc);
+    // formData.append("track[title]", title);
+    // formData.append("track[description]", desc);
 
     var that = this;
     this.model.saveFormData(formData, {
       success: function(){
-        Backbone.history.navigate("#/tracks/" + that.model.id, { trigger: true });
+        // Backbone.history.navigate("#/tracks/" + that.model.id, { trigger: true });
+        // notify completion
       },
       error: function (model, response) {
         alert(response.responseJSON[0])
@@ -58,9 +59,21 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
     }
   },
 
+  swapForm: function(e){
+    var file = e.currentTarget.files[0];
+
+    if (file) {
+      this.$("#track-file-form").submit();
+      this.$("#form-one").hide();
+      this.$("#form-two").show();
+    }
+
+  },
+
   openFileBrowser: function (e) {
     e.preventDefault();
     this.$("#track-file-input-button").click();
+
   },
 
   _updatePreview: function(src, selector){

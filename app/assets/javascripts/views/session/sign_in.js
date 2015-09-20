@@ -6,7 +6,7 @@ Trackstack.Views.SignIn = Backbone.View.extend({
   },
 
   events: {
-    "submit form": "submit"
+    "submit #signin-form": "submit"
   },
 
   template: JST['sign_in'],

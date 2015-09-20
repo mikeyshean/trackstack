@@ -25,11 +25,11 @@
         </div>
 
 
-        <form action="/session" method="post">
-          <label class="input-label">Your username</label><br>
+        <form action="/session" id="signin-form" method="post">
+          <label class="input-label">Your username:</label><br>
             <input name="user[username]" type="text" class="form-field"><br>
           <br>
-          <label class="input-label">Your password</label><br>
+          <label class="input-label">Your password:</label><br>
           <input name="user[password]" type="password" class="form-field"><br>
           <button class="button button-orange">Sign In</button><br>
         </form>
@@ -38,10 +38,10 @@
       <article id="create-account-content" class="tab-content-item" >
         <form action="/users" method="post">
 
-          <label class="input-label">Enter a username</label><br>
+          <label class="input-label">Enter a username:</label><br>
             <input name="user[username]" type="text" class="form-field"><br>
             <br>
-          <label class="input-label">Password</label><br>
+          <label class="input-label">Enter a Password:</label><br>
             <input name="user[password]" type="password" class="form-field"><br>
           <button class="button button-orange">Create Account</button><br>
         </form>

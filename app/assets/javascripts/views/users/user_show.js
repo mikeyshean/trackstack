@@ -29,7 +29,9 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     this.feedView = new Trackstack.Views.FeedComposite({collection: this.feed, feedType: "All"})
     this.addSubview("#feed", this.feedView)
-
+    // 
+    // this.sidebarView = new Trackstack.Views.SidebarComposite({model: this.user } )
+    // this.addSubview("#sidebar-composite", this.feedView)
 
     this.feedTypes = {
       "Tracks": this.tracks,

@@ -1,4 +1,5 @@
 
+
 .modal-background {
   position: fixed;
   top: 0;
@@ -6,7 +7,6 @@
   height: 100%;
   width: 100%;
   background: rgba(242,242,242,.9);
-  /*background: rgba(0, 0, 0, 0.41);*/
   z-index: 10;
   opacity: 0;
   transition: opacity .3s ease-in-out
@@ -32,7 +32,8 @@
   left: 50%;
   transform: translateX(-50%);
   width: 500px;
-  height: 450px;
+  // height: 450px;
+  height: auto;
   background: #fff;
   border-radius: 5px;
   border-top: 1px solid rgba(0, 0, 0, 0.14);
@@ -86,7 +87,7 @@
 
 .facebook-login {
   width: 100%;
-  padding: 20px 0;
+  padding-bottom: 30px;
   border-bottom: 1px solid #aaa;
   position: relative;
 }
@@ -104,6 +105,7 @@
 .facebook-login i {
   position: absolute;
   left: 50%;
+  bottom: 0;
   transform: translateX(-50%) translateY(50%);
   color: #aaa;
   padding: 0 3px;
@@ -117,16 +119,77 @@
 
 /* Track Upload */
 .modal .modal-header {
-
+  padding: 15px 0;
+  background: #333;
+}
+.modal-header .modal-header-text {
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  text-align: center;
+  font-size: 24px;
+  color: #eee;
 }
 
 .modal .tab-content .upload-submit {
   font-size: 16px;
   font-weight: 300;
   height: 30px;
+}
 
-  /*left: -200%;*/
+.modal .upload-modal .upload-button {
+  height: 40px;
+  padding: 10px 15px;
+  font-size: 16px;
+  margin: 0;
+}
+.track-upload-buttons {
+  padding: 0 60px;
+}
 
+.track-upload-buttons button:nth-child(2n+1) {
+  float: left;
+}
+.modal .track-upload-wrapper {
+  position: relative;
+}
+.track-upload-content.tab-content {
+  padding: 100px 0;
+}
+
+#coming-soon:before {
+  content: "Coming soon!";
+  font-style: italic;
+  position: absolute;
+  top: -65%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#coming-soon {
+  color: #ccc;
+}
+
+#form-two {
+  display: none;
+  margin-bottom: 50px;
+}
+
+.track-preview {
+  position: relative;
+}
+
+#track-photo-preview {
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.track-preview .track-photo-button {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 15%;
 }
 
 /* General Modal Plugin Selectors */
@@ -142,7 +205,7 @@
 }
 
 .modal.upload-modal.transitioning {
-  top: 20%;
+  top: 100px;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
 
@@ -159,7 +222,7 @@
 }
 
 .modal#cover-photo.transitioning {
-  top: 20%;
+  top: 100px;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
 
@@ -174,27 +237,14 @@
 }
 
 .modal#profile-photo.transitioning {
-  top: 20%;
+  top: 100px;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
-
-
-
-
-
-
-.modal-raised.photo-modal {
-  height: 600px;  /* remove this when increasing total modal size */
-  width: 600px;
-}
-
-
 
 
 /* Form */
 
 .tab-content {
-  /*border: 5px solid yellow;*/
   padding: 45px 50px;
   height: auto;
 }
@@ -202,7 +252,7 @@
 
 
 .tab-content .button {
-  margin-top: 50px;
+  margin-top: 35px;
   float: right;
 }
 

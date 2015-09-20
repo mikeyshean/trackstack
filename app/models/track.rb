@@ -6,6 +6,7 @@ class Track < ActiveRecord::Base
   has_many :likings, as: :likable, dependent: :destroy
   has_many :likers, through: :likings, source: :liker
   has_attached_file :img, styles: { badge: "50x50", track_show: "340x340", feed: "120x120" }
+  validates_attachment_content_type :img, content_type: /\Aimage\/.*\Z/
   has_attached_file :track
 
 
