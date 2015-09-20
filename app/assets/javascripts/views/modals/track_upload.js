@@ -24,7 +24,7 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
 
     var $form = $(e.currentTarget)
     var attribute = $(e.currentTarget).find(".file-input-button").attr("name")
-    var file = $form.find(".file-input-button")[0].files[0];
+    var file = $form.find("#track-file-input-button")[0].files[0];
 
     var title = this.$("#track_title").val();
     var desc = this.$("#track_description").val();
@@ -63,6 +63,7 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
   },
 
   swapForm: function(e){
+    e.preventDefault();
     var file = e.currentTarget.files[0];
 
     if (file) {
@@ -76,13 +77,27 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
   updateTrack: function (e) {
     e.preventDefault();
 
-    var formData = $(e.currentTarget).serializeJSON()
-    var trackId = $(e.currentTarget).attr("data-id")
+    // var formData = $(e.currentTarget).serializeJSON()
+    var trackId = $("#save-details-button").attr("data-id")
+    //
 
+    var $form = $(e.currentTarget)
+    var attribute = $(e.currentTarget).find(".file-input-button").attr("name")
+    var file = $form.find("#track-photo-input-button")[0].files[0];
+
+    var title = this.$("#track_title").val();
+    var description = this.$("#track_description").val();
+
+    var formData = new FormData();
+    formData.append(attribute, file)
     formData.append("track[id]", trackId)
+    formData.append("track[title]", title)
+    formData.append("track[description]", description)
+
     var track = new Trackstack.Models.Track()
-    track.save(formData.track, {
+    track.saveFormData(formData, {
       success: function (model) {
+        debugger
         Backbone.history.navigate("#/tracks/" + model.id)
       },
       error: function () {
