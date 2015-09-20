@@ -81,7 +81,7 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
 
     formdata.append("track[id]", trackId)
     var track = new Trackstack.Models.Track()
-    track.save(formdata.track, {
+    track.save(formData.track, {
       success: function (model) {
         Backbone.history.navigate("#/tracks/" + model.id)
       },
