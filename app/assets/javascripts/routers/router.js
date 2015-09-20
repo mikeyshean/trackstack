@@ -27,8 +27,9 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
     var user = this.collection.getOrFetch(id);
     var feed = new Trackstack.Collections.ProfileFeed([], { user: user });
-    feed.fetch();
+
     var view = new Trackstack.Views.UserShow({ model: user, feed: feed });
+    feed.fetch();
     this._swapView(view);
   },
 
