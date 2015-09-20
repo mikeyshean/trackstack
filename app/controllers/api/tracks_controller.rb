@@ -20,9 +20,9 @@ module Api
     end
 
     def show
-      @track = Track.find(params[:id])
+      @track = Track.includes(:likers).where(id: params[:id])
 
-      render :track
+      render :show
     end
 
     def update

@@ -2,9 +2,12 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
 
   template: JST['modals/track_upload_modal'],
   events: {
-    "click .css-file-input": "openFileBrowser",
-    "submit form": "submit",
-    "change #track-file-input-button": "swapForm"
+    "click .track-file-button": "openTrackBrowser",
+    "click .track-photo-button": "openPhotoBrowser",
+    "submit #track-file-form": "submit",
+    "submit #track-details-form": "updateTrack",
+    "change #track-file-input-button": "swapForm",
+    "change #track-photo-input-button": "fileInputChange"
   },
 
   initialize: function (options) {
@@ -28,28 +31,28 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
 
     var formData = new FormData();
     formData.append(attribute, file);
-    // formData.append("track[title]", title);
-    // formData.append("track[description]", desc);
 
     var that = this;
     this.model.saveFormData(formData, {
-      success: function(){
-        // Backbone.history.navigate("#/tracks/" + that.model.id, { trigger: true });
-        // notify completion
+      success: function(model, response, options){
+        $("#save-details-button").show().attr("data-id", model.id);
+        $("#loading-gif").remove();
       },
-      error: function (model, response) {
+      error: function (model, response, options) {
         alert(response.responseJSON[0])
+        $(".modal-background").click();
       }
     });
   },
 
   fileInputChange: function(e){
+    e.preventDefault()
     var that = this;
     var file = e.currentTarget.files[0];
     var reader = new FileReader();
 
     reader.onloadend = function(){
-      that._updatePreview(reader.result);
+      that._updatePreview(reader.result, "#track-photo-preview");
     };
 
     if (file) {
@@ -70,10 +73,33 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
 
   },
 
-  openFileBrowser: function (e) {
+  updateTrack: function (e) {
+    e.preventDefault();
+
+    var formData = $(e.currentTarget).serializeJSON()
+    var trackId = $(e.currentTarget).attr("data-id")
+
+    formdata.append("track[id]", trackId)
+    var track = new Trackstack.Models.Track()
+    track.save(formdata.track, {
+      success: function (model) {
+        Backbone.history.navigate("#/tracks/" + model.id)
+      },
+      error: function () {
+        debugger
+        alert("Looks like something went wrong.  Please try again.")
+      }
+    })
+  },
+
+  openTrackBrowser: function (e) {
     e.preventDefault();
     this.$("#track-file-input-button").click();
+  },
 
+  openPhotoBrowser: function (e) {
+    e.preventDefault();
+    this.$("#track-photo-input-button").click();
   },
 
   _updatePreview: function(src, selector){

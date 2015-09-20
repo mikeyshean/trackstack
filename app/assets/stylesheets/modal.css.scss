@@ -44,7 +44,7 @@
 
 }
 
-.modal input {
+.modal .form-field {
   border: 1px solid #aaa;
   border-radius: 5px;
   padding: 5px 10px;
@@ -190,6 +190,30 @@
   left: 50%;
   transform: translateX(-50%);
   bottom: 15%;
+  background: #fff
+}
+
+.track-photo-button:hover {
+  border-color: #999;
+}
+
+#loading-gif {
+  content: image-url('ajax-loader.gif');
+  width: 50%;
+  position: absolute;
+  bottom: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+#save-details-button {
+  display: none;
+  font-size: 18px;
+  position: absolute;
+  left: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  float: none;
 }
 
 /* General Modal Plugin Selectors */
@@ -248,8 +272,6 @@
   padding: 45px 50px;
   height: auto;
 }
-
-
 
 .tab-content .button {
   margin-top: 35px;

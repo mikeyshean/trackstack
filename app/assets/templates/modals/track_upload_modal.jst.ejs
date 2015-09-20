@@ -15,13 +15,13 @@
             <form class="file-input-plugin track-upload-form" id="track-file-form">
 
               <div class="input-hider">
-                <input class="file-input file-input-button" data-form-type="#track-upload" id="track-file-input-button" type="file" name="track[track]">
+                <input class="file-input file-input-button" id="track-file-input-button" type="file" name="track[track]">
 
-              <button id="submit"></button>
+
               </div>
             </form>
             <div class="track-upload-buttons">
-              <button class="button upload-button button-orange css-file-input">Choose file to upload</button>
+              <button class="button upload-button button-orange track-file-button">Choose file to upload</button>
               <button class="button upload-button" id="coming-soon">Start New Recording</button>
             </div>
         </article>
@@ -29,22 +29,25 @@
 
         <article id="form-two" class="tab-content">
               <div id="signin-content">
+                <img id="loading-gif">
                 <div class="track-preview">
                   <img src="" id="track-photo-preview" width="125" height="125">
-                  <button class="button css-file-input track-photo-button">
+                  <button class="button css-file-input track-photo-button active">
                     Update image
                   </button>
                 </div>
-                <form class="file-input-plugin">
+                <form class="file-input-plugin" id="track-details-form">
 
                     <label class="input-label">Title</label>
                     <input class="form-field" type="text" name="track[title]" id="track_title" value="">
 
                     <label class="input-label">Description</label>
-                    <input class="form-field" type="text" name="track[description]" id="track_description">
+                    <textarea class="form-field" type="text" name="track[description]" id="track_description" placeholder="Describe your track"></textarea>
+                    <div class="input-hider">
+                      <input class="file-input file-input-button" id="track-photo-input-button" type="file" name="track[img]">
+                    </div>
 
-                    <button>
-                    <button class="button button-orange">Save</button>
+                    <button class="button button-orange disabled" id="save-details-button">Save</button>
 
                 </form>
               </div>
