@@ -8,7 +8,6 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   initialize: function (options) {
-    this.collection = options.collection;
     this.$rootEl = options.$rootEl;
   },
 
@@ -26,11 +25,13 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     var callback = this.show.bind(this, id);
     if (!this._requireSignedIn(callback)) { return; }
 
-    var user = this.collection.getOrFetch(id);
-    var feed = new Trackstack.Collections.Feed([], {feedType: "profilefeed" });
+    var user = new Trackstack.Models.User({id: id});
 
+    var feed = new Trackstack.Collections.Feed([], { user: user, feedType: "profilefeed" });
     var view = new Trackstack.Views.UserShow({ model: user, feed: feed });
+    user.fetch();
     feed.fetch();
+
     this._swapView(view);
   },
 
@@ -42,15 +43,6 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     this._currentView = view
     this.$rootEl.html(view.render().$el)
   },
-
-  // _appendModal: function (view) {
-  //   if (this._currentModal) {
-  //     this._currentModal.remove();
-  //   }
-  //
-  //   this._currentModal = view
-  //   this.$modalEl.html(view.render().$el)
-  // },
 
     signIn: function(callback){
     if (!this._requireSignedOut(callback)) { return; }
