@@ -6,3 +6,5 @@ json.tracks do
     json.partial! "api/tracks/track", track: track
   end
 end
+
+json.author playlist.author.username

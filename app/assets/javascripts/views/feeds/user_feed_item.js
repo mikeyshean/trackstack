@@ -1,15 +1,15 @@
 Trackstack.Views.UserFeedItem = Backbone.View.extend({
 
-  template: {
-    "Track": JST['feeds/track'],
-    "Playlist": JST['feeds/playlist']
-  },
+  template: JST['feeds/sound-item'],
 
   events: {
     "click .like-button": "toggleLike",
     "click .add-to-playlist-button": "triggerModal",
     "click #repost-button": "toggleRepost",
   },
+
+  tagName: "li",
+  className: "sound-list-item group",
 
   initialize: function (options) {
     this.sound_type = this.model.get("sound_type");
@@ -24,9 +24,10 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.html(this.template[this.sound_type]({
+    this.$el.html(this.template({
       sound: this.sound,
       sound_type: this.sound_type,
+      img_url: this.sound.escape("feed_img") || this.sound.get("tracks")[0].feed_img,
       currentUser: Trackstack.currentUser
     }))
 

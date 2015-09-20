@@ -5,9 +5,10 @@ class Track < ActiveRecord::Base
   has_many :feeds, as: :sound, dependent: :destroy
   has_many :likings, as: :likable, dependent: :destroy
   has_many :likers, through: :likings, source: :liker
-  has_attached_file :img, styles: { badge: "50x50", track_show: "340x340", feed: "120x120" }
   has_attached_file :track
-
+  has_attached_file :img, styles: { badge: "50x50", track_show: "340x340", feed: "120x120" },
+    :convert_options => { badge: "-quality 75 -strip" },
+    :default_url => ":attachment/track_default.jpg"
 
   validates :author_id, presence: true
   validates_attachment :img, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }

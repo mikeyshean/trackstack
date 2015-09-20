@@ -1,3 +1,36 @@
-.feed-sound-item {
-  border: 5px solid #f50;
+.sound-list-item {
+  margin-bottom: 25px;
+  position: relative;
+}
+
+
+.sound-list-item .feed-sound-content {
+  padding-left: 136px;
+  position: relative;
+
+}
+
+.sound-list-item .feed-sound-header {
+  padding-top: 7px;
+  margin-bottom: 6px;
+
+}
+
+.sound-list-item .feed-sound-photo {
+  height: 120px;
+  width: 120px;
+  background-size: cover;
+}
+
+.sound-list-item .sound-player {
+  height: 60px;
+  border: 1px solid green;
+}
+
+.sound-list-item .feed-sound-footer {
+  margin-top: 10px;
+}
+
+.feed-sound-footer .feed-stats-list {
+  margin-top: 5px;
 }

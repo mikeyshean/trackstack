@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
   has_many :playlistings, through: :playlists
   has_many :playlist_tracks, through: :playlistings, source: :track
   has_attached_file :img, styles: { badge: "50x50", profile: "200x200", comment: "40x40", track_show: "120x120", comment_icon: "20x20"},
+    :convert_options => { thumb: "-quality 75 -strip", badge: "-quality 75 -strip", comment: "-quality 75 -strip" },
     :default_url => ":attachment/default.jpg"
   has_attached_file :cover_img, styles: { cover: "1240x260" },
     :default_url => ":attachment/default.jpg"
