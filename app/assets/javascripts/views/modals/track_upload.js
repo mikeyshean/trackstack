@@ -79,7 +79,7 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
     var formData = $(e.currentTarget).serializeJSON()
     var trackId = $(e.currentTarget).attr("data-id")
 
-    formdata.append("track[id]", trackId)
+    formData.append("track[id]", trackId)
     var track = new Trackstack.Models.Track()
     track.save(formData.track, {
       success: function (model) {
