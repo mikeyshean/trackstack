@@ -18,6 +18,7 @@ class User < ActiveRecord::Base
   has_many :likings
   has_many :liked_sounds, through: :likings, source: :likable
   has_many :feed_sounds, class_name: "Feed", foreign_key: :author_id
+  has_many :comments, foreign_key: :author_id
 
   validates :username, :password_digest, :session_token, presence: true
   validates :username, :session_token, uniqueness: true
