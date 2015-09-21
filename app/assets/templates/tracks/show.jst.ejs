@@ -1,0 +1,67 @@
+<div class="banner">
+  <div class="profile-header">
+    <div class="profile-edit">
+      <div class="profile-user-info">
+        <div class="profile-user-details banner-raise left">
+          <h3 class="profile-user-text"><%= track.escape("author") %></h3><br>
+          <h4 class="profile-user-text">
+            <%= track.escape("title") %>
+          </h4>
+        </div>
+      </div>
+    </div>
+
+    <div class="profile-header-info group">
+
+      <!-- insert background gradient here -->
+      </div>
+
+      <div class="profile-header-avatar banner-raise left">
+        <div class="profile-photo" style="background-image: url(<%= track.escape('track_show_img') %>);">
+        </div>
+        <% if (track.author_id === Trackstack.currentUser.id)  { %>
+          <div class="profile-current-user avatar-button">
+            <button class="button header-avatar-button css-file-input" data-form-type="#profile-file-input-button">Update image</button>
+          </div>
+        <% }; %>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<section class="content-wrapper">
+  <div class="content-wrapper-spacer">
+
+
+    <div class="main group">
+      <div id="feed">
+      </div>
+
+
+
+    </div>
+  </div>
+
+  <div class="sidebar">
+
+    <div class="user-stats">
+
+      <div class="user-description">
+
+      </div>
+    </div>
+
+
+
+      <div class="likes-badges">
+      </div>
+      <div class="following-badges">
+      </div>
+
+      <div class="following-badges">
+      </div>
+
+  </div>
+</section>

@@ -49,6 +49,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
       img_url: this.sound.escape("feed_img") || this.track.feed_img,
       currentUser: Trackstack.currentUser
     }))
+    this.delegateEvents();
     this.attachSubviews();
 
     console.log("item");
@@ -143,7 +144,10 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     formData["comment"]["submitted_at"] = this.$(".player")[0].currentTime
     this.sound.comments().create(formData.comment, {
       success: function (model, response) {
-        this.showCommentField();
+        debugger
+        this.$(".feed-comment-input")
+          .val("")
+          .attr("placeholder", "Write a comment...")
       }.bind(this),
       error: function (model, response) {
         alert("Oops!  Your comment didn't go through. Try again.")

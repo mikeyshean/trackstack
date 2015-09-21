@@ -68,6 +68,7 @@
   height: 20px;
   width: 100%;
   padding: 5px 5px 5px 30px;
+  background: #fff;
 }
 
 .sound-list-item .feed-comment-icon {
@@ -81,4 +82,7 @@
 
 .social-buttons .button:hover {
   border: 1px solid #ccc;
+}
+.social-buttons .button-orange-border:hover {
+  border: 1px solid #f50;
 }

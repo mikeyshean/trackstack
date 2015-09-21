@@ -4,7 +4,8 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     "": "index",
     "_=_": "index",
     "users/:id": "show",
-    "session/new": "signIn"
+    "session/new": "signIn",
+    "tracks/:id": "trackShow"
   },
 
   initialize: function (options) {
@@ -33,6 +34,13 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     feed.fetch();
 
     this._swapView(view);
+  },
+
+  trackShow: function (id) {
+    var track = new Trackstack.Models.Track({ id: id });
+    var view = new Trackstack.Views.TrackShow({ model: track });
+    track.fetch();
+    this._swapView(view)
   },
 
   _swapView: function (view) {

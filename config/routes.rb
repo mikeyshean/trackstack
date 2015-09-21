@@ -14,11 +14,11 @@ Rails.application.routes.draw do
         get "profilefeed", to: "feeds#profile_feed"
         get "mainfeed", to: "feeds#main_feed"
 
-        resources :tracks, param: :track_id, only: [:index, :show ]
+        resources :tracks, param: :track_id, only: [:index]
         resources :playlists, param: :playlist_id, only: [:index, :show]
       end
     end
-    resources :tracks, only: [:create, :update, :destroy] do
+    resources :tracks, only: [:create, :update, :show, :destroy] do
       member do
         get "likes", to: "tracks#likes"
         post "likes", to: "tracks#create_like"
