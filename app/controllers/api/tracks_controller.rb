@@ -20,7 +20,7 @@ module Api
     end
 
     def show
-      @track = Track.includes(:likers).where(id: params[:id])
+      @track = Track.includes(:likers).where(id: params[:track_id]).first
 
       render :show
     end

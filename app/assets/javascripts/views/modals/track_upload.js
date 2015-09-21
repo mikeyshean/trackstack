@@ -26,18 +26,16 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
     var attribute = $(e.currentTarget).find(".file-input-button").attr("name")
     var file = $form.find("#track-file-input-button")[0].files[0];
 
-    var title = this.$("#track_title").val();
-    var desc = this.$("#track_description").val();
-
     var formData = new FormData();
     formData.append(attribute, file);
 
     var that = this;
     this.model.saveFormData(formData, {
       success: function(model, response, options){
-        $("#save-details-button").show().attr("data-id", model.id);
+        this.model = model;
+        $("#save-details-button").show()
         $("#loading-gif").remove();
-      },
+      }.bind(this),
       error: function (model, response, options) {
         alert(response.responseJSON[0])
         $(".modal-background").click();
@@ -77,31 +75,22 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
   updateTrack: function (e) {
     e.preventDefault();
 
-    // var formData = $(e.currentTarget).serializeJSON()
-    var trackId = $("#save-details-button").attr("data-id")
-    //
-
-    var $form = $(e.currentTarget)
-    var attribute = $(e.currentTarget).find(".file-input-button").attr("name")
-    var file = $form.find("#track-photo-input-button")[0].files[0];
-
+    var $inputField = $(e.currentTarget).find("#track-photo-input-button")
+    var attribute = $inputField.attr("name")
+    var file = $inputField[0].files[0];
     var title = this.$("#track_title").val();
     var description = this.$("#track_description").val();
-
     var formData = new FormData();
+
     formData.append(attribute, file)
-    formData.append("track[id]", trackId)
     formData.append("track[title]", title)
     formData.append("track[description]", description)
 
-    var track = new Trackstack.Models.Track()
-    track.saveFormData(formData, {
+    this.model.saveFormData(formData, {
       success: function (model) {
-        debugger
         Backbone.history.navigate("#/tracks/" + model.id)
       },
       error: function () {
-        debugger
         alert("Looks like something went wrong.  Please try again.")
       }
     })
