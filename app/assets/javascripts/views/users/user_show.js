@@ -8,7 +8,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   events: {
     "click .follow-button": "toggleFollowState",
     "click .css-file-input": "openFileBrowser",
-    "submit form": "submit",
+    "submit .photo-form": "submit",
     "change .file-input-button": "fileInputChange",
     "click .feed-links": "swapFeedView"
   },
@@ -29,7 +29,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     this.feedView = new Trackstack.Views.FeedComposite({collection: this.feed, feedType: "All"})
     this.addSubview("#feed", this.feedView)
-    // 
+    //
     // this.sidebarView = new Trackstack.Views.SidebarComposite({model: this.user } )
     // this.addSubview("#sidebar-composite", this.feedView)
 

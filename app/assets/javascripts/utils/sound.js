@@ -4,6 +4,10 @@ Trackstack.SoundModel = Backbone.Model.extend({
     if (options && options.tracks) {
       this.playlistTracks().set(options.tracks, { silent: true })
     }
+
+    if (options && options.commenters) {
+      this.comments().set(options.commenters)
+    }
   },
 
   playlistTracks: function () {
@@ -42,6 +46,13 @@ Trackstack.SoundModel = Backbone.Model.extend({
         options.error && options.error(model, resp, options);
       }
     });
+  },
+
+  comments: function () {
+    if (!this._comments) {
+      this._comments = new Trackstack.Collections.Comments([], { track: this })
+    }
+    return this._comments
   }
 
 });

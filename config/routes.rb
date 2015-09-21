@@ -23,6 +23,7 @@ Rails.application.routes.draw do
         get "likes", to: "tracks#likes"
         post "likes", to: "tracks#create_like"
         delete "likes/:liker_id", to: "tracks#destroy_like"
+        resources :comments, param: :comment_id, only: [:create, :destroy]
       end
     end
 

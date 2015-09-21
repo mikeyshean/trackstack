@@ -1,11 +1,16 @@
 Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
   template: JST['feeds/sound-item'],
+  commentTemplate: JST['feeds/comment'],
 
   events: {
     "click .like-button": "toggleLike",
     "click .add-to-playlist-button": "triggerModal",
     "click #repost-button": "toggleRepost",
+    "mouseenter #audio-player": "showCommentField",
+    "click .feed-comment-input": "clearInput",
+    "submit .feed-comment-form": "submitComment"
+
   },
 
   tagName: "li",
@@ -87,7 +92,6 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     }
   },
 
-
   showPlaylistModal: function (model) {
 
     var playlists = this.model.getOrFetch()
@@ -104,6 +108,39 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   updateLikeCount: function (incr) {
     var count = this.$("#like-count").text()
     this.$("#like-count").text(+count + incr);
+  },
+
+  showCommentField: function (e) {
+    if (this.sound_type !== "Track") { return }
+
+    this.$("#comment").html(this.commentTemplate())
+    this.$el.off("mouseenter", "#audio-player")
+    this.$(".feed-comment-input").keypress(function (e) {
+      if (e.which == 13) {
+        e.preventDefault();
+        this.$(".feed-comment-form").submit();
+      }
+    }.bind(this))
+  },
+
+  submitComment: function (e) {
+    e.preventDefault();
+    var formData = $(e.currentTarget).serializeJSON()
+    formData["comment"]["track_id"] = this.sound.id
+    formData["comment"]["submitted_at"] = this.$(".player")[0].currentTime
+    debugger
+    this.sound.comments().create(formData.comment, {
+      success: function (model, response) {
+        debugger
+      },
+      error: function (model, response) {
+        debugger
+      }
+    })
+  },
+
+  clearInput: function (e) {
+    $(e.currentTarget).prop("placeholder", "")
   }
 
 });
