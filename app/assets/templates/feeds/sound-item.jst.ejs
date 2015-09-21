@@ -15,7 +15,7 @@
     <div class="feed-sound-footer group">
       <div class="social-buttons group left">
         <ul class="social-buttons-list right">
-          <li class="left"><button
+          <li><button
               class="button like-button
               <% if (!!sound.likers().findWhere({ id: currentUser.id})) { %>
                 button-orange-border
@@ -29,7 +29,7 @@
 
 
           <% if (sound_type !== "Playlist") { %>
-          <li class="left">
+          <li>
             <button
               class="button add-to-playlist-button"
               data-id="<%= sound.id %>">
@@ -37,7 +37,7 @@
             </button>
           </li>
           <% }; %>
-          <li class="left">
+          <li>
             <button class="button repost-button">Repost</button>
           </li>
         </ul>
@@ -47,14 +47,14 @@
       <div class="feed-sound-stats right">
         <ul class="feed-stats-list left">
           <li>
-            <a href="#">
-              <h3>Likes: <strong id="like-count"><%= sound.likers().length %></strong></h3>
+            <a href="#" class="feed-stats-link">
+              <h3 class="feed-stats"><i class="material-icons sound-feed-stats-icon">&#xE87D;</i><strong id="like-count"><%= sound.likers().length %></strong></h3>
             </a>
           </li>
           <% if (sound_type === "Track") { %>
             <li>
-              <a href="#">
-                <h3>Comments: <strong id="comment-count"><%= sound.comments().length %></strong></h3>
+              <a href="#" class="feed-stats-link">
+                <h3 class="feed-stats"><i class="material-icons sound-feed-stats-icon chat">&#xE0CA;</i><strong id="comment-count"><%= sound.comments().length %></strong></h3>
               </a>
             </li>
           <% }; %>

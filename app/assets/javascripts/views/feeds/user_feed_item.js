@@ -122,6 +122,10 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     if (this.sound_type !== "Track") { return }
 
     this.$("#comment").html(this.commentTemplate())
+    setTimeout(function () {
+      this.$(".feed-comment-container").addClass("active");
+    }.bind(this), 0)
+
     this.$el.off("mouseenter", "#audio-player")
     this.$(".feed-comment-input").keypress(function (e) {
       if (e.which == 13) {
@@ -141,7 +145,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
         this.showCommentField();
       }.bind(this),
       error: function (model, response) {
-        alert("Oops!  Your comment didn't go throguh. Try again.")
+        alert("Oops!  Your comment didn't go through. Try again.")
       }
     })
   },
