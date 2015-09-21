@@ -10,7 +10,7 @@
     </div>
 
       <div id="comment">
-  
+
       </div>
     <div class="feed-sound-footer group">
       <div class="social-buttons group left">
@@ -51,6 +51,13 @@
               <h3>Likes: <strong id="like-count"><%= sound.likers().length %></strong></h3>
             </a>
           </li>
+          <% if (sound_type === "Track") { %>
+            <li>
+              <a href="#">
+                <h3>Comments: <strong id="comment-count"><%= sound.comments().length %></strong></h3>
+              </a>
+            </li>
+          <% }; %>
       </div>
     </div>
   </div>
