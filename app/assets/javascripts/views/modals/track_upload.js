@@ -82,15 +82,18 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
     var description = this.$("#track_description").val();
     var formData = new FormData();
 
-    formData.append(attribute, file)
+    if (file) {
+      formData.append(attribute, file)
+    }
     formData.append("track[title]", title)
     formData.append("track[description]", description)
 
     this.model.saveFormData(formData, {
       success: function (model) {
+        $(".modal-background").click();
         Backbone.history.navigate("#/tracks/" + model.id)
       },
-      error: function () {
+      error: function (model, response) {
         alert("Looks like something went wrong.  Please try again.")
       }
     })

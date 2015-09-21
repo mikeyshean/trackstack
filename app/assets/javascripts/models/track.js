@@ -13,7 +13,6 @@ Trackstack.Models.Track = Trackstack.SoundModel.extend({
       contentType: false,
       success: function(resp){
         model.set(model.parse(resp));
-        debugger
         model.trigger('sync', model, resp, options);
         options.success && options.success(model, resp, options);
       },

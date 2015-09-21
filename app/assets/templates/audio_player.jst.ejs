@@ -1,8 +1,11 @@
 
 <div id="audio">
-  <audio src="<%= trackUrl %>" id="player"></audio>
-  <button class="button" id="play">Play</button>
-  <button class="button" id="pause">Pause</button>
+  <audio src="<%= trackUrl %>" class="player"></audio>
+  <button class="audio-button" id="play">
+    <i class="material-icons audio-icon play-icon">&#xE037;</i>
+    <i class="material-icons audio-icon pause-icon">&#xE034;</i>
+  </button>
+
   <div id="progress-bar" style="width:400px;">
     <span id="progress"></span>
   </div>
