@@ -20,7 +20,7 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
 
 
   submit: function(e){
-    event.preventDefault();
+    e.preventDefault();
 
     var $form = $(e.currentTarget)
     var attribute = $(e.currentTarget).find(".file-input-button").attr("name")

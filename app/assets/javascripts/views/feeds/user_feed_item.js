@@ -1,4 +1,4 @@
-Trackstack.Views.UserFeedItem = Backbone.View.extend({
+Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
   template: JST['feeds/sound-item'],
 
@@ -14,9 +14,17 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
   initialize: function (options) {
     this.sound_type = this.model.get("sound_type");
     this.sound = this.model.sound || this.model;
+    if (this.sound.get("tracks")) {
+      this.track = this.sound.get("tracks")[0]
+    } else {
+      this.track = this.sound
+    }
 
     this.likers = this.sound.likers([], { sound: this.sound })
     this.likers.fetch({reset: true})
+
+    var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.sound.escape("track_url") || this.track.track_url })
+    this.addSubview("#audio-player", audioPlayerView)
 
     this.listenTo(this.likers, "add", this.updateLikeCount.bind(this, 1));
     this.listenTo(this.likers, "remove", this.updateLikeCount.bind(this, -1));
@@ -27,9 +35,10 @@ Trackstack.Views.UserFeedItem = Backbone.View.extend({
     this.$el.html(this.template({
       sound: this.sound,
       sound_type: this.sound_type,
-      img_url: this.sound.escape("feed_img") || this.sound.get("tracks")[0].feed_img,
+      img_url: this.sound.escape("feed_img") || this.track.feed_img,
       currentUser: Trackstack.currentUser
     }))
+    this.attachSubviews();
 
     console.log("item");
     return this;

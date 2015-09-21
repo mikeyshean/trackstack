@@ -9,11 +9,8 @@ window.Trackstack = {
     this.currentUser.fetch();
 
     this.header = new Trackstack.Views.Header({ el: $("#header"), $modalEl: $("#modal")})
-    
-    var collection =
-      Trackstack.Collections.users = new Trackstack.Collections.Users()
 
-    new Trackstack.Routers.Router({ $rootEl: $("#content"), collection: collection })
+    new Trackstack.Routers.Router({ $rootEl: $("#content") })
     Backbone.history.start();
   }
 };
