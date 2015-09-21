@@ -1,26 +1,28 @@
 #audio {
-  border: 1px solid red;
+  margin-top: 20px;
 }
 
-#progress-Bar {
-   border:1px solid #aaa;
-   color:#fff;
-   width:295px;
-   height:20px;
+#progress-bar {
+   background: #f50;
+   opacity: .2;
+   height: 30px;
 }
 #progress {
-   background-color:#f50;
-   height:20px;
-   display:inline-block;
+   position: absolute;
+   background-color: #f50;
+   height: 30px;
+   transform: translateY(-100%);
+
 }
 
 .audio-button {
-  position: relative;
+  position: absolute;
   border-radius: 50%;
   background: #f50;
   height: 28px;
   width: 28px;
   cursor: pointer;
+  top: 10px;
 }
 
 .audio-icon {
