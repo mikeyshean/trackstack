@@ -26,6 +26,9 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
       this.comments = this.sound.comments();
     }
 
+    this.playlists = Trackstack.currentUser.playlists()
+    this.playlists.fetch();
+
     this.likers = this.sound.likers([], { sound: this.sound })
     this.likers.fetch({reset: true})
 
@@ -56,17 +59,15 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     e.preventDefault();
 
     var trackId = $(e.currentTarget).data("id")
-    var playlists = Trackstack.currentUser.playlists()
-    playlists.fetch();
     var view = new Trackstack.Views.PlaylistModal({
-      collection: playlists,
+      collection: this.playlists,
       trackId: trackId
     })
     $("#modal").html(view.render().$el);
     setTimeout(function () {
-      $(".modal-background").addClass("transitioning")
       $("#playlist-modal").addClass("transitioning")
-    }.bind(this),0)
+      $(".modal-background").addClass("transitioning")
+    },0)
   },
 
   toggleLike: function (e) {
@@ -128,7 +129,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
     this.$el.off("mouseenter", "#audio-player")
     this.$(".feed-comment-input").keypress(function (e) {
-      if (e.which == 13) {
+      if (e.which == 13 || e.which == 11) {
         e.preventDefault();
         this.$(".feed-comment-form").submit();
       }
