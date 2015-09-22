@@ -1,0 +1,26 @@
+.comment-wrapper {
+  height: 60px;
+  padding: 10px 0;
+  font-size: 12px;
+  letter-spacing: .4px;
+}
+
+.comment-wrapper .show-comment-image {
+  height: 40px;
+  width: 40px;
+  background-size: cover;
+  margin-right: 12px;
+}
+
+.comment-wrapper .comment-title {
+  color: #999;
+  margin: 2px 0;
+}
+.comment-wrapper .track-time {
+  color: #ccc;
+}
+
+.comment-wrapper .comment-content {
+  color: #333;
+
+}

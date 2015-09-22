@@ -1,10 +1,10 @@
 
-<div class="comment-content">
-  <div style="background: url(<%= comment.escape('img_comment') %>);"></div>
+<div class="comment-wrapper group">
+  <div class="show-comment-image left" style="background-image: url(<%= comment.escape('img_comment') %>);"></div>
   <div class="comment-title">
-    <span class="comment-author"><%= comment.escape("author") %></span>
-    <span class="track-time timeago" title="<%= comment.escape("submitted_at")%>"></span>
-    <abbr class="comment-time timeago" title="<%= comment.escape("created_at")%>"></abbr>
+    <h4 class="comment-author"><a href="#/users/<%= comment.escape("author_id") %>"><%= comment.escape("author") %></a> <span class="track-time timeago" title="<%= comment.escape("submitted_at")%>">says at </span>
+    <abbr class="comment-time timeago right" title="<%= comment.escape("created_at")%>"></abbr></h4>
+
   </div>
   <div class="comment-content">
     <%= comment.escape("text") %>
