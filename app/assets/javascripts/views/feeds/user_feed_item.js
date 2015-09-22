@@ -50,7 +50,6 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     this.delegateEvents();
     this.attachSubviews();
 
-    console.log("item");
     return this;
   },
 

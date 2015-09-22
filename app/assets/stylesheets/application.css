@@ -68,8 +68,8 @@ textarea {
 }
 
 #content {
-  width: 1240px;
-  min-height: 1500px;
+  max-width: 1240px;
+  min-height: 800px;
   padding: 0 30px;
   padding-top: 46px;
   margin: 0 auto;
