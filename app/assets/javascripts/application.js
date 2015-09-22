@@ -16,6 +16,7 @@
 //= require underscore
 //= require backbone
 //= require serialize_json
+//= require time_ago
 //= require trackstack
 //= require_tree ./utils
 //= require_tree ./plugins

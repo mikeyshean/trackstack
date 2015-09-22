@@ -1,4 +1,4 @@
-json.extract! comment, :id, :text, :submitted_at
+json.extract! comment, :id, :text, :submitted_at, :created_at
 
 if author
   author = comment.author

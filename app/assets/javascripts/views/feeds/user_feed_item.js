@@ -30,7 +30,6 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     }
 
     this.playlists = options.playlists
-
     this.likers = this.sound.likers()
 
     var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl })
