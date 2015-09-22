@@ -6,7 +6,8 @@ Trackstack.Views.SignIn = Backbone.View.extend({
   },
 
   events: {
-    "submit #signin-form": "submit"
+    "submit #signin-form": "submit",
+    "click #demo": "signInDemo"
   },
 
   template: JST['sign_in'],
@@ -37,6 +38,16 @@ Trackstack.Views.SignIn = Backbone.View.extend({
     } else {
       Backbone.history.navigate("", { trigger: true });
     }
+  },
+
+  signInDemo: function (e) {
+    Trackstack.currentUser.signIn({
+      username: "BeliEBEr",
+      password: "password",
+      error: function(){
+        alert("Invalid username or password combination.");
+      }
+    });
   }
 
 });
