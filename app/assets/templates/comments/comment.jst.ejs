@@ -1,0 +1,11 @@
+
+<div class="comment-content">
+  <div style="background: url(<%= comment.escape('img_comment')%>);"></div>
+  <div class="comment-title">
+    <span class="comment-author"><%= comment.escape("author") %></span>
+    <span class="comment-time"><% comment.escape("submitted_at")%></span>
+  </div>
+  <div class="comment-content">
+    <%= comment.escape("text") %>
+  </div>
+</div>

@@ -21,9 +21,11 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     this.sound = this.model;
 
     if (this.sound instanceof Trackstack.Models.Playlist) {
-      this.track = this.sound.get("tracks")[0]
+      this.trackUrl = this.sound.get("tracks")[0].track_url
+      this.feedUrl = this.sound.get("tracks")[0].feed_img
     } else {
-      this.track = this.sound
+      this.trackUrl = this.sound.escape("track_url")
+      this.feedUrl = this.sound.escape("feed_img")
       this.comments = this.sound.comments();
     }
 
@@ -31,7 +33,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
     this.likers = this.sound.likers()
 
-    var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.track.track_url })
+    var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl })
     this.addSubview("#audio-player", audioPlayerView)
 
     this.listenTo(this.likers, "add", this.updateLikeCount.bind(this, 1));
@@ -45,7 +47,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     this.$el.html(this.template({
       sound: this.sound,
       sound_type: this.sound_type,
-      img_url: this.sound.escape("feed_img") || this.track.feed_img,
+      img_url: this.feedUrl,
       currentUser: Trackstack.currentUser
     }))
     this.delegateEvents();

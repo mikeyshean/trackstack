@@ -2,10 +2,6 @@ Trackstack.Models.Track = Backbone.Model.extend({
   urlRoot: "/api/tracks",
 
   initialize: function(options) {
-    if (options && options.commenters) {
-      this.comments().set(options.commenters)
-    }
-
     if (options && options.likes) {
       this.likers().set(options.likes)
     }
@@ -47,4 +43,12 @@ Trackstack.Models.Track = Backbone.Model.extend({
 
     return this._likers;
   },
+
+  parse: function (resp){
+    if (resp && resp.commenters) {
+      this.comments().set(resp.commenters)
+      delete resp.commenters
+    }
+    return resp;
+  }
 });
