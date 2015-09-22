@@ -32,7 +32,7 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
   },
 
   isEmptyPlaylist: function(model) {
-    model instanceof Trackstack.Models.Playlist &&
+    return model instanceof Trackstack.Models.Playlist &&
       model.get("tracks").length === 0
   }
 

@@ -89,6 +89,28 @@ Trackstack.Models.User = Backbone.Model.extend({
         options.error && options.error(model, resp, options);
       }
     });
+  },
+
+  create: function(options){
+    var model = this;
+    var credentials = {
+      "user[username]": options.username,
+      "user[password]": options.password
+    };
+
+    $.ajax({
+      url: "/users",
+      type: "POST",
+      data: credentials,
+      dataType: "json",
+      success: function(data){
+        model.set(data);
+        options.success && options.success();
+      },
+      error: function(){
+        options.error && options.error();
+      }
+    });
   }
 
 });

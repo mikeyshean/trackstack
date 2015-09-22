@@ -7,6 +7,7 @@ Trackstack.Views.SignIn = Backbone.View.extend({
 
   events: {
     "submit #signin-form": "submit",
+    "submit #new-user-form": "create",
     "click #demo": "signInDemo"
   },
 
@@ -28,6 +29,21 @@ Trackstack.Views.SignIn = Backbone.View.extend({
       password: formData.password,
       error: function(){
         alert("Invalid username or password combination.");
+      }
+    });
+  },
+
+  create: function(event){
+    debugger
+    event.preventDefault();
+    var $form = $(event.currentTarget);
+    var formData = $form.serializeJSON().user;
+
+    Trackstack.currentUser.create({
+      username: formData.username,
+      password: formData.password,
+      error: function(){
+        alert("Invalid account details.");
       }
     });
   },
