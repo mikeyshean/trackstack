@@ -3,8 +3,8 @@
   </a>
   <div class="feed-sound-content group">
     <div class="feed-sound-header">
-      <h1><%= sound.escape("author") %> <%= sound_type %></h1>
-      <h3><%= sound.escape("title") %></h3>
+      <h4 class="feed-sound-author"><a class="feed-sound-author-link" href="#/users/<%= sound.escape('author_id') %>"><%= sound.escape("author") %></a></h4>
+      <h3 class="feed-sound-title"><a href="#/tracks/<%= sound.id %>"><%= sound.escape("title") %></a></h3>
     </div>
     <div id="audio-player">
     </div>

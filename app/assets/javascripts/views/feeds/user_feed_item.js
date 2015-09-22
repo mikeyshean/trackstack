@@ -19,6 +19,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.sound_type = this.model.get("sound_type");
     this.sound = this.model;
+
     if (this.sound instanceof Trackstack.Models.Playlist) {
       this.track = this.sound.get("tracks")[0]
     } else {
