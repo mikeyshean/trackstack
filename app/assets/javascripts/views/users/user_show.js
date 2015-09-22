@@ -101,7 +101,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   submit: function(e){
-    event.preventDefault();
+    e.preventDefault();
 
     var $form = $(e.currentTarget)
     var attribute = $(e.currentTarget).find(".file-input-button").attr("name")
@@ -119,6 +119,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   fileInputChange: function(e){
+    e.preventDefault();
+    
     var formType = $(e.currentTarget).data("form-type")
     var attribute = $(e.currentTarget).attr("name")
 
