@@ -9,7 +9,8 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
   },
 
   initialize: function (options) {
-    this.trackUrl = options.trackUrl;
+    this.trackUrl = options.trackUrl || this.model.escape("track_url");
+    this.listenTo(this.model, "sync", this.extractTrackUrl);
   },
 
   togglePlay: function () {
@@ -54,5 +55,10 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
       value = Math.floor((player.currentTime / player.duration) * 100)
     }
     this.$("#progress").css("width", value + "%")
+  },
+
+  extractTrackUrl: function (model) {
+    this.trackUrl = this.model.escape("track_url")
+    this.render();
   }
 })

@@ -41,3 +41,21 @@
   top: 2px;
   display: none;
 }
+
+
+#track-show-player .audio-button {
+  opacity: 0;
+  left: -9999px;
+}
+
+#track-show-player {
+  position: relative;
+  height: 100px;
+  max-width: 820px;
+  bottom: 120px;
+}
+
+#track-show-player #progress,
+#track-show-player #progress-bar {
+  height: 100px;
+}
