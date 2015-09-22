@@ -14,10 +14,10 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-    this.feed = options.feed;
+    this.totalFeed = options.feed
+    this.currentFeed = options.feed;
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
-
     this.tracks.fetch();
     this.playlists = this.model.playlists();
 
@@ -27,8 +27,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.listenTo(this.tracks, "add", this.updateTrackCount.bind(this, 1));
     this.listenTo(this.tracks, "remove", this.updateTrackCount.bind(this, -1));
 
-    this.feedView = new Trackstack.Views.FeedComposite({collection: this.feed, feedType: "All"})
-    this.addSubview("#feed", this.feedView)
+    this.renderMainFeed();
     //
     // this.sidebarView = new Trackstack.Views.SidebarComposite({model: this.user } )
     // this.addSubview("#sidebar-composite", this.feedView)
@@ -36,7 +35,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.feedTypes = {
       "Tracks": this.tracks,
       "Playlists": this.playlists,
-      "All": this.feed
+      "All": this.totalFeed
     }
   },
 
@@ -50,6 +49,12 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     return this;
   },
 
+  renderMainFeed: function () {
+    this.currentFeed.fetch({reset: true});
+    this.feedView = new Trackstack.Views.FeedComposite({ collection: this.currentFeed })
+    this.addSubview("#feed", this.feedView)
+  },
+
   swapFeedView: function (e) {
     e.preventDefault();
     var $currentTarget = $(e.currentTarget)
@@ -58,9 +63,9 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     this.feedView && this.feedView.remove();
     var newFeedType = $currentTarget.data("feed-type")
-    var collection = this.feedTypes[newFeedType]
-    collection.fetch({reset: true});
-    this.feedView = new Trackstack.Views.FeedComposite({ collection: collection })
+    this.currentFeed = this.feedTypes[newFeedType]
+    this.currentFeed.fetch({reset: true});
+    this.feedView = new Trackstack.Views.FeedComposite({ collection: this.currentFeed })
     this.addSubview("#feed", this.feedView)
   },
 
@@ -120,7 +125,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   fileInputChange: function(e){
     e.preventDefault();
-    
+
     var formType = $(e.currentTarget).data("form-type")
     var attribute = $(e.currentTarget).attr("name")
 

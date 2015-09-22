@@ -30,7 +30,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
     this.likers = this.sound.likers()
 
-    var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.track.escape("track_url") || this.track.track_url })
+    var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.track.track_url })
     this.addSubview("#audio-player", audioPlayerView)
 
     this.listenTo(this.likers, "add", this.updateLikeCount.bind(this, 1));
