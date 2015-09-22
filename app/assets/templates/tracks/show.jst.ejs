@@ -1,23 +1,9 @@
 <div class="banner">
-  <div class="profile-header">
-    <div class="profile-edit">
-      <div class="profile-user-info">
-        <div class="profile-user-details banner-raise left">
-          <h3 class="profile-user-text"><%= track.escape("author") %></h3><br>
-          <h4 class="profile-user-text">
-            <%= track.escape("title") %>
-          </h4>
-        </div>
-      </div>
-    </div>
+  <div class="profile-header track-show-header">
+    <div class="profile-edit track-edit">
 
-    <div class="profile-header-info group">
-
-      <!-- insert background gradient here -->
-      </div>
-
-      <div class="profile-header-avatar banner-raise left">
-        <div class="profile-photo" style="background-image: url(<%= track.escape('track_show_img') %>);">
+      <div class="profile-header-avatar track-header-art banner-raise right">
+        <div class="profile-photo track-show-photo" style="background-image: url(<%= track.escape('track_show_img') %>);">
         </div>
         <% if (track.author_id === Trackstack.currentUser.id)  { %>
           <div class="profile-current-user avatar-button">
@@ -26,19 +12,86 @@
         <% }; %>
       </div>
 
+      <div class="profile-user-info">
+        <div class="header-play-button banner-raise left">
+          <button class="audio-button track-show-button" id="play">
+            <i class="material-icons md-56 audio-icon play-icon">&#xE037;</i>
+            <i class="material-icons md-56 audio-icon pause-icon">&#xE034;</i>
+          </button>
+        </div>
+        <div class="profile-user-details banner-raise left">
+
+          <h3 class="profile-user-text track-header-author"><%= track.escape("author") %></h3><br>
+          <h4 class="profile-user-text track-header-title">
+            <%= track.escape("title") %>
+          </h4>
+        </div>
+      </div>
     </div>
+
+    <div class="profile-header-info group">
+      <div class="profile-cover-photo background-img track-show-background" style="background: linear-gradient(135deg, rgb(247, 247, 247) 0%, rgb(145, 144, 144) 100%);">
+      </div>
+      <!-- insert background gradient here -->
+    </div>
+
+
+
   </div>
 </div>
 
 
-<section class="content-wrapper">
-  <div class="content-wrapper-spacer">
 
+<section class="content-wrapper">
+  <div class="content-wrapper-spacer ">
+    <div class="comment-form-wrapper group track-show">
+      <div class="feed-comment-container show-comment-container">
+        <form class="feed-comment-form show-comment-form">
+          <div class="feed-comment-icon show-comment-icon" style="background-image: url(<%= Trackstack.currentUser.escape('img_comment_icon') %>);"></div>
+          <input class="feed-comment-input show-comment-input" type="text" class="form-field" name="comment[text]" placeholder="Write a comment...">
+        </form>
+      </div>
+
+      <div class="social-buttons group show-social-buttons left">
+        <ul class="social-buttons-list show-social-buttons-list right">
+          <li><button
+              class="button like-button
+              <% if (!!track.likers().findWhere({ id: Trackstack.currentUser.id})) { %>
+                button-orange-border
+              <% }; %>"
+
+              data-like-state="<%= !!track.likers().findWhere({ id: Trackstack.currentUser.id }) %>"
+              data-id="<%= track.id %>"
+              data-sound-type="Track">
+            </button>
+          </li>
+
+          <li>
+            <button
+              class="button add-to-playlist-button"
+              data-id="<%= track.id %>">
+                Add to Playlist
+            </button>
+          </li>
+
+          <li>
+            <button class="button repost-button">Repost</button>
+          </li>
+        </ul>
+      </div>
+    </div>
 
     <div class="main group">
-      <div id="comments">
-        
-      </div>
+      <section class="main-right">
+        <article class="about-track">
+          <div class="track-description">
+          </div>
+        </article>
+
+        <article id="comments">
+
+        </article>
+      </section>
 
 
 

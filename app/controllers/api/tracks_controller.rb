@@ -20,7 +20,7 @@ module Api
     def show
       @track = Track.includes(:likers, comments: :author).where(id: params[:id]).first
 
-      render :show
+      render partial: "track", locals: { track: @track }
     end
 
     def update

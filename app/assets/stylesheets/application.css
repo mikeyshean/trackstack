@@ -19,6 +19,8 @@
  *= require feed_item
  *= require audio_player
  *= require icons
+ *= require track_show
+ *= require comment
  */
 
 

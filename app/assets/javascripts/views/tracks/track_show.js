@@ -2,23 +2,16 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   template: JST['tracks/show'],
 
   initialize: function () {
-    this.comments = this.model.comments()
     this.listenTo(this.model, "sync", this.render)
-    this.listenTo(this.comments, "add", this.addCommentSubview)
-    this.listenTo(this.comments, "reset", this.addCommentSubviews)
+
+    this.attachCommentsComposite()
   },
 
-  addCommentSubview: function (comment) {
-    var view = new Trackstack.Views.CommentItem({ model: comment })
+  attachCommentsComposite: function () {
+    var collection = this.model.comments()
+    var view = new Trackstack.Views.CommentComposite({ collection: collection })
+
     this.addSubview("#comments", view)
-  },
-
-
-  addCommentSubviews: function (comments) {
-    comments.each(function (comment) {
-      var view = new Trackstack.Views.CommentItem({ model: comment })
-      this.addSubview("#comments", view)
-    })
   },
 
 
