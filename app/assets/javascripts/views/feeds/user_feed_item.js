@@ -18,19 +18,17 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
   initialize: function (options) {
     this.sound_type = this.model.get("sound_type");
-    this.sound = this.model.sound || this.model;
-    if (this.sound.get("tracks")) {
+    this.sound = this.model;
+    if (this.sound instanceof Trackstack.Models.Playlist) {
       this.track = this.sound.get("tracks")[0]
     } else {
       this.track = this.sound
       this.comments = this.sound.comments();
     }
 
-    this.playlists = Trackstack.currentUser.playlists()
-    this.playlists.fetch();
+    this.playlists = options.playlists
 
-    this.likers = this.sound.likers([], { sound: this.sound })
-    this.likers.fetch({reset: true})
+    this.likers = this.sound.likers()
 
     var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.sound.escape("track_url") || this.track.track_url })
     this.addSubview("#audio-player", audioPlayerView)
@@ -144,7 +142,6 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     formData["comment"]["submitted_at"] = this.$(".player")[0].currentTime
     this.sound.comments().create(formData.comment, {
       success: function (model, response) {
-        debugger
         this.$(".feed-comment-input")
           .val("")
           .attr("placeholder", "Write a comment...")

@@ -4,7 +4,7 @@ Trackstack.Collections.PlaylistTracks = Backbone.Collection.extend({
     return "api/playlists/" + this.playlist_id + "/tracks"
   },
 
-  model: Trackstack.SoundModel,
+  model: Trackstack.Models.PlaylistTrack,
 
   initialize: function(models, options) {
     this.playlist_id = options.playlist_id

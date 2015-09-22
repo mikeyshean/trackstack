@@ -1,8 +1,9 @@
 
 json.array! @feed.each do |feed|
-  json.extract! feed, :id, :sound_type, :sound_id, :updated_at
+  json.id feed.sound_id
+  json.feed_id feed.id
+  json.extract! feed, :sound_type, :updated_at
 
-  json.sound do
     sound = feed.sound
 
     if sound.class == Track
@@ -10,5 +11,4 @@ json.array! @feed.each do |feed|
     else
       json.partial! "api/playlists/playlist", playlist: sound
     end
-  end
 end

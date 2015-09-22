@@ -3,9 +3,7 @@ module Api
     # before_action :require_author!
 
     def index
-      author = User.find(params[:id])
-      @tracks = author.tracks.order("updated_at DESC")
-
+      @tracks = Track.includes(:likers, comments: :author).where(author_id: current_user.id).order("updated_at DESC")
       render :index
     end
 

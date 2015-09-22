@@ -8,3 +8,9 @@ json.tracks do
 end
 
 json.author playlist.author.username
+
+json.likes do
+  json.array! playlist.likers do |like|
+    json.extract! like, :id
+  end
+end

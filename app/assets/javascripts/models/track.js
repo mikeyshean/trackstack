@@ -1,5 +1,22 @@
-Trackstack.Models.Track = Trackstack.SoundModel.extend({
+Trackstack.Models.Track = Backbone.Model.extend({
   urlRoot: "/api/tracks",
+
+  initialize: function(options) {
+    if (options && options.commenters) {
+      this.comments().set(options.commenters)
+    }
+
+    if (options && options.likes) {
+      this.likers().set(options.likes)
+    }
+  },
+
+  comments: function () {
+    if (!this._comments) {
+      this._comments = new Trackstack.Collections.Comments([], { track: this })
+    }
+    return this._comments
+  },
 
   saveFormData: function(formData, options){
     var method = this.isNew() ? "POST" : "PUT";
@@ -20,5 +37,14 @@ Trackstack.Models.Track = Trackstack.SoundModel.extend({
         options.error && options.error(model, resp, options);
       }
     });
-  }
+  },
+
+  likers: function () {
+    if (!this._likers) {
+      this._likers =
+        new Trackstack.Collections.Likers([], { sound: this, sound_type: "Track" })
+    }
+
+    return this._likers;
+  },
 });

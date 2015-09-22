@@ -12,7 +12,7 @@ Trackstack.Collections.Likers = Backbone.Collection.extend({
 
   initialize: function(models, options) {
     this.sound = options.sound;
-    this.sound_type = this.sound.get("sound_type");
+    this.sound_type = this.sound.escape("sound_type");
   }
 
 });

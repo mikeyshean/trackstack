@@ -5,7 +5,8 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.listenTo(this.collection, "add remove", this.addSoundSubview)
     this.listenTo(this.collection, "reset", this.addSoundSubviews)
-
+    this.playlists = Trackstack.currentUser.playlists()
+    this.playlists.fetch();
   },
 
   render: function () {
@@ -21,7 +22,7 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
   },
 
   addSoundSubview: function (model) {
-    var view = new Trackstack.Views.UserFeedItem({model: model })
+    var view = new Trackstack.Views.UserFeedItem({model: model, playlists: this.playlists })
     this.addSubview(".feed-items", view);
 
   },

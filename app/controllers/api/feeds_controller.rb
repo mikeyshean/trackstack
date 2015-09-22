@@ -1,7 +1,7 @@
 module Api
   class FeedsController < ApplicationController
 
-    LIMIT = 4
+    LIMIT = 7
 
     def profile_feed
       @feed = Feed.includes(:sound => :author).where(author_id: params[:id]).order("updated_at DESC").limit(LIMIT)

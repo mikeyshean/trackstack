@@ -35,7 +35,7 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
           $button.removeAttr("disabled");
         },
         error: function(model, response) {
-          // debugger
+
         }.bind(this)
       })
     } else {
@@ -45,7 +45,7 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
         },
         wait: true,
         error: function(model, response) {
-          // debugger
+
         }.bind(this)
       })
     }
