@@ -91,3 +91,7 @@ h3 {
 .disabled {
   color: #999
 }
+
+.content-wrapper {
+  padding-bottom: 10px;
+}

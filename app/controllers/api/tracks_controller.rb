@@ -20,7 +20,11 @@ module Api
     def show
       @track = Track.includes([:likers, comments: { author: [:tracks, :followers] } ]).where(id: params[:id]).first
 
-      render :show
+      if @track
+        render :show
+      else
+        render json: {}, status: 422
+      end
     end
 
     def update

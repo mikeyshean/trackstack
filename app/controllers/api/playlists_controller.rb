@@ -12,7 +12,10 @@ module Api
     def create
       @playlist = current_user.playlists.new(playlist_params)
 
+
       if @playlist.save
+        @playlist.playlistings.create(track_id: params[:track_id]) if params[:track_id]
+        
         render :show
       else
         render json: @playlist.errors.full_messages, status: 422
@@ -20,7 +23,7 @@ module Api
     end
 
     def show
-      @playlist = Track.find(params[:id])
+      @playlist = Playlist.find(params[:id])
 
       render :playlist
     end

@@ -20,6 +20,7 @@
     this.$activeTab.removeClass("active");
     $newActiveTab.addClass("active");
     this.$activeTab = $newActiveTab
+    $(".form-field").first().focus();
   };
 
   $.fn.tabs = function () {

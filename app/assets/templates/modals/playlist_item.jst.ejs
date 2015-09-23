@@ -2,8 +2,8 @@
 
   <div class="playlist-image left" style="background-image: url(<%= playlistImg %>);"></div>
 
-  <div class="playlist-title left">
-    <h3><%= playlist.escape("title") %></h3> <p><%= playlist.playlistTracks().length %></p>
+  <div class="playlist-info left">
+    <h3 class="playlist-title"><%= playlist.escape("title") %></h3> <img class="playlist-track-count"><span class="playlist-tracks"><%= playlist.playlistTracks().length %></span>
 
   </div>
   <div class="playlist-add-wrapper right">

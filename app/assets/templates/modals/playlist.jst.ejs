@@ -7,14 +7,14 @@
 
       <div class="tabs playlist-tabs group">
         <ul class="tab-options playlist-tab-options group" data-tab-content=".tab-content">
-          <li class="left"><a class="active" href="#my-playlists">Add to playlist</a></li>
+          <li class="left"><a class="active" id="new-playlist-tab" href="#my-playlists">Add to playlist</a></li>
           <li class="left"><a class="disabled" href="#create-new-playlist">Create new</a></li>
         </ul>
       </div>
 
 
       <section class="playlist-list-wrapper">
-        <section class="tab-content group">
+        <section class="tab-content playlist-modal-content group">
           <ul id="my-playlists" class="active tab-content-item">
 
 
@@ -22,7 +22,7 @@
           <article id="create-new-playlist" class="tab-content-item" >
             <form id="new-playlist-form">
 
-              <label class="input-label">Title<span class="required-field">*</span></label><br>
+              <label class="input-label">Playlist title<span class="required-field">*</span></label><br>
                 <input name="playlist[title]" type="text" class="form-field"><br>
                 <br>
                 <div>
@@ -45,7 +45,6 @@
 
 <script>
   $(function () {
-    $(".form-field").first().focus();
     $(".tab-options").tabs();
   });
 
