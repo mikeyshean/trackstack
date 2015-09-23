@@ -8,7 +8,7 @@ Trackstack.Views.PlaylistModal = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-    this.trackId = options.trackId;
+    this.trackId = this.model.id;
     this.listenTo(this.collection, "add", this.addPlaylistSubview)
 
     this.addPlaylistSubviews();
@@ -20,13 +20,13 @@ Trackstack.Views.PlaylistModal = Backbone.CompositeView.extend({
     }.bind(this))
   },
 
-  addPlaylistSubview: function (model) {
-    var view = new Trackstack.Views.PlaylistModalItem({ model: model, trackId: this.trackId })
-    this.addSubview(".playlist-list-wrapper", view)
+  addPlaylistSubview: function (playlist) {
+    var view = new Trackstack.Views.PlaylistModalItem({ playlist: playlist, trackId: this.trackId })
+    this.addSubview("#my-playlists", view)
   },
 
   render: function () {
-    this.$el.html(this.template());
+    this.$el.html(this.template({ track: this.model }));
     this.attachSubviews();
     return this;
   }

@@ -58,10 +58,10 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   triggerModal: function (e) {
     e.preventDefault();
 
-    var trackId = $(e.currentTarget).data("id")
+    // var trackId = $(e.currentTarget).data("id")
     var view = new Trackstack.Views.PlaylistModal({
       collection: this.playlists,
-      trackId: trackId
+      model: this.sound
     })
     $("#modal").html(view.render().$el);
     setTimeout(function () {
@@ -95,19 +95,19 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
       })
     }
   },
-
-  showPlaylistModal: function (model) {
-
-    var playlists = this.model.getOrFetch()
-    var view = new Trackstack.Views.TrackUpload({ model: track })
-    this.$modalEl.html(view.render().$el)
-
-    setTimeout(function () {
-      $(".modal-background").addClass("transitioning")
-      $("#track-upload").addClass("transitioning")
-    }.bind(this),0)
-
-  },
+  //
+  // showPlaylistModal: function (model) {
+  //
+  //   var playlists = this.model.getOrFetch()
+  //   var view = new Trackstack.Views.TrackUpload({ model: track })
+  //   this.$modalEl.html(view.render().$el)
+  //
+  //   setTimeout(function () {
+  //     $(".modal-background").addClass("transitioning")
+  //     $("#track-upload").addClass("transitioning")
+  //   }.bind(this),0)
+  //
+  // },
 
   updateLikeCount: function (incr) {
     var count = this.$("#like-count").text()

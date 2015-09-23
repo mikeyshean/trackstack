@@ -4,17 +4,25 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
   events: {
     "click .playlist-add-button": "toggleAdd",
   },
+  tagName: "li",
+  className: "group playlist-item",
 
   initialize: function (options) {
-    this.playlistTracks = this.model.playlistTracks()
+    this.playlist = options.playlist
+    this.playlistTracks = this.playlist.playlistTracks()
     this.trackId = options.trackId
     this.listenTo(this.playlistTracks, "add remove", this.render)
+
 
   },
 
   render: function () {
     var addedState = !!this.playlistTracks.findWhere({ id: this.trackId })
-    this.$el.html(this.template({playlist: this.model, addedState: addedState}));
+    if (this.playlistTracks && this.playlistTracks.first()) {
+      this.playlistImg = this.playlistTracks.first().escape("badge_img")
+    }
+    this.$el.html(this.template({playlist: this.playlist, playlistImg: this.playlistImg, addedState: addedState}));
+
     return this;
   },
 

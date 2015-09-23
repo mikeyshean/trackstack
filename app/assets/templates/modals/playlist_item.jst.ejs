@@ -1,11 +1,12 @@
-<div class="playlist-item">
-  <div class="playlist-image">
-    <div class="playlist-title">
-      <h3><%= playlist.escape("title") %></h3>
-    </div>
+
+
+  <div class="playlist-image left" style="background-image: url(<%= playlistImg %>);"></div>
+
+  <div class="playlist-title left">
+    <h3><%= playlist.escape("title") %></h3> <p><%= playlist.playlistTracks().length %></p>
+
   </div>
-  <div class="playlist-add-wrapper">
+  <div class="playlist-add-wrapper right">
     <button class="button playlist-add-button" data-added-state="<%= addedState %>"></button>
 
   </div>
-</div>

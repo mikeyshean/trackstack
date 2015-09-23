@@ -44,12 +44,6 @@
 
 }
 
-// .modal .form-field {
-//   border: 1px solid #aaa;
-//   border-radius: 5px;
-//   padding: 5px 10px;
-// }
-
 /* Header Tabs */
 
 .sign-in-modal .sign-in-header-text {
@@ -128,7 +122,7 @@
   margin: 10px 0;
   text-align: center;
   font-size: 24px;
-  color: #eee;
+  color: #fff;
 }
 
 .modal .tab-content .upload-submit {
@@ -265,6 +259,52 @@
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
 
+
+/* Playlist Modal */
+
+.playlist-list-wrapper {
+  min-height: 400px;
+}
+
+.playlist-tabs {
+  margin: 0 25px;
+}
+
+.playlist-tab-options {
+  border-bottom: 1px solid #ccc;
+}
+
+.playlist-tab-options li {
+  margin-bottom: -1px;
+}
+
+.playlist-tab-options a {
+  font-size: 24px;
+  color: #000;
+  display: block;
+  margin: 20px 30px 0 0;
+  padding: 0 0 13px 0;
+  border-bottom: 1px solid transparent;
+}
+
+.playlist-tab-options a.active {
+  color: #f50;
+  border-radius: 0;
+  border-bottom: 1px solid #f50;
+}
+
+.playlist-item {
+  border: 1px solid #f50;
+}
+
+.playlist-item .playlist-image {
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+}
+.playlist-item .playlist-add-wrapper .playlist-add-button {
+  margin: 0;
+}
 
 /* Form */
 
