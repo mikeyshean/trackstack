@@ -2,7 +2,7 @@
 <div class="comment-wrapper group">
   <div class="show-comment-image left" style="background-image: url(<%= comment.escape('img_comment') %>);"></div>
   <div class="comment-title">
-    <h4 class="comment-author"><a href="#/users/<%= comment.escape("author_id") %>"><%= comment.escape("author") %></a> <span class="track-time timeago" title="<%= comment.escape("submitted_at")%>">says at </span>
+    <h4 class="comment-author"><a href="#/users/<%= comment.escape("author_id") %>"><%= comment.escape("author") %></a> says at <%= comment.convertedTime() %></span>
     <abbr class="comment-time timeago right" title="<%= comment.escape("created_at")%>"></abbr></h4>
 
   </div>
