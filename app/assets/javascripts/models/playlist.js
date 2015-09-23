@@ -8,6 +8,7 @@ Trackstack.Models.Playlist = Backbone.Model.extend({
 
     if (options && options.tracks) {
       this.playlistTracks().set(options.tracks)
+      delete this.tracks
     }
   },
 
