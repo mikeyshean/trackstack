@@ -38,7 +38,7 @@ Trackstack.Views.Header = Backbone.View.extend({
 
   showDropdown: function (e) {
     e.preventDefault();
-    // debugger
+
     var $currentTarget = $(e.currentTarget).addClass("active")
     var $dropdown = this.$(".nav-dropdown-wrapper")
 

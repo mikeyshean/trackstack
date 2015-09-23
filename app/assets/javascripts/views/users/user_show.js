@@ -99,7 +99,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
         },
         wait: true,
         error: function (model, response) {
-          debugger
+
         }.bind(this)
       })
     }

@@ -18,7 +18,6 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
 
   render: function () {
     var addedState = !!this.playlistTracks.findWhere({ id: this.trackId })
-    debugger
     if (this.playlistTracks && this.playlistTracks.first()) {
       this.playlistImg = this.playlistTracks.first().escape("badge_img")
     }

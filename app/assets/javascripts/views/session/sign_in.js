@@ -34,7 +34,6 @@ Trackstack.Views.SignIn = Backbone.View.extend({
   },
 
   create: function(event){
-    debugger
     event.preventDefault();
     var $form = $(event.currentTarget);
     var formData = $form.serializeJSON().user;

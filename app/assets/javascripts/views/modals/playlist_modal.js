@@ -43,7 +43,7 @@ Trackstack.Views.PlaylistModal = Backbone.CompositeView.extend({
         this.$("#new-playlist-tab").click();
       }.bind(this),
       error: function (model, response) {
-        debugger
+
       },
       wait: true
     });
