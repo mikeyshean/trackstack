@@ -30,7 +30,7 @@ Trackstack.Views.CommentComposite = Backbone.CompositeView.extend({
     comments.each(function (comment) {
       var view = new Trackstack.Views.CommentItem({ model: comment })
       this.addSubview("#comments-list", view, true)
-    })
+    }.bind(this))
   },
 
 
