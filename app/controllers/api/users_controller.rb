@@ -23,6 +23,11 @@ module Api
       end
     end
 
+    def author
+      @author = User.includes(:followers, :tracks).where(id: params[:id]).first
+      render :author
+    end
+
     private
 
     def user_params

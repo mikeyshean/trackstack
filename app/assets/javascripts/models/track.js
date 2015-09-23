@@ -43,12 +43,34 @@ Trackstack.Models.Track = Backbone.Model.extend({
 
     return this._likers;
   },
+  //
+  // author: function() {
+  //   if (!this._author) {
+  //     this._author =
+  //   }
+  //
+  //   return this._author;
+  // },
+
+  authorFollowers: function () {
+    if (!this._followers) {
+      this._followers = new Trackstack.Collections.Followers([], { user_id: this.escape("author_id") })
+    }
+
+    return this._followers
+  },
 
   parse: function (resp){
     if (resp && resp.commenters) {
       this.comments().set(resp.commenters)
       delete resp.commenters
     }
+
+    if (resp && resp.author_followers) {
+      this.authorFollowers().set(resp.author_followers)
+      delete resp.author_followers
+    }
+
     return resp;
   }
 });

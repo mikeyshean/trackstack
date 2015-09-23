@@ -173,3 +173,13 @@ Trackstack.Models.CurrentUser = Trackstack.Models.User.extend({
   }
 
 });
+
+
+Trackstack.Models.TrackAuthor = Trackstack.Models.User.extend({
+  initialize: function (attrs) {
+    if (attrs && attrs.followers) {
+      this.followers().set(attrs.followers)
+      this.trigger("set")
+    }
+  }
+})

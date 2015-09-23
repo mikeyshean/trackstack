@@ -18,7 +18,7 @@ module Api
     end
 
     def show
-      @track = Track.includes(:likers, comments: :author).where(id: params[:id]).first
+      @track = Track.includes([:likers, comments: { author: [:tracks, :followers] } ]).where(id: params[:id]).first
 
       render :show
     end

@@ -16,8 +16,16 @@ json.track_show_img asset_path(@track.img.url(:track_show))
 json.track_url asset_path(@track.track.url)
 json.sound_type "Track"
 
-json.author @track.author.username
-json.author_id @track.author.id
+
+author = @track.author
+json.author_id  author.id
+json.author author.username
+json.author_track_show_img asset_path(author.img.url(:track_show))
+json.author_tracks author.tracks.count
+json.author_followers do
+  json.array! author.followers, :id
+end
+
 
 json.commenters do
   json.array! @track.comments do |comment|
