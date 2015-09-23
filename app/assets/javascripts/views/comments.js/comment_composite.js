@@ -18,7 +18,7 @@ Trackstack.Views.CommentComposite = Backbone.CompositeView.extend({
 
   addCommentSubview: function (model) {
     var view = new Trackstack.Views.CommentItem({ model: model })
-    this.addSubview("#comments-list", view)
+    this.addSubview("#comments-list", view, true)
   },
 
   removeCommentSubview: function (model) {
@@ -29,7 +29,9 @@ Trackstack.Views.CommentComposite = Backbone.CompositeView.extend({
   addCommentSubviews: function (comments) {
     comments.each(function (comment) {
       var view = new Trackstack.Views.CommentItem({ model: comment })
-      this.addSubview("#comments-list", view)
+      this.addSubview("#comments-list", view, true)
     })
   },
+
+
 });

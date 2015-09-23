@@ -29,7 +29,8 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
       }.bind(this),
       error: function (model, response) {
         alert("Oops!  Your comment didn't go through. Try again.")
-      }
+      },
+      wait: true
     })
   },
 

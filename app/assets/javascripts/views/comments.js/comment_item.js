@@ -3,7 +3,6 @@ Trackstack.Views.CommentItem = Backbone.CompositeView.extend({
   tagName: "li",
 
   render: function () {
-
     this.$el.html(this.template({ comment: this.model }))
     return this;
   }
