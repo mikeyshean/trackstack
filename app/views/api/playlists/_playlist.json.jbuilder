@@ -7,6 +7,7 @@ json.tracks do
   end
 end
 
+json.author_id playlist.author.id
 json.author playlist.author.username
 
 json.likes do

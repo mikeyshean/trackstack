@@ -1,10 +1,17 @@
-  <a href="<%= "#/tracks/" + sound.id %>" class="left">
+  <a href="#/tracks/<%= sound.id %>" class="left">
     <div class="feed-sound-photo" style="background-image: url(<%= img_url %>);"></div>
   </a>
   <div class="feed-sound-content group">
     <div class="feed-sound-header">
       <h4 class="feed-sound-author"><a class="feed-sound-author-link" href="#/users/<%= sound.escape('author_id') %>"><%= sound.escape("author") %></a></h4>
-      <h3 class="feed-sound-title"><a href="#/tracks/<%= sound.id %>"><%= sound.escape("title") %></a></h3>
+      <h3 class="feed-sound-title">
+        <% if (sound_type === "Playlist") { %>
+          <a href="#/playlists/<%= sound.id %>">
+        <% } else { %>
+          <a href="#/tracks/<%= sound.id %>">
+        <% }; %>
+          <%= sound.escape("title") %>
+        </a></h3>
     </div>
     <div id="audio-player">
     </div>
