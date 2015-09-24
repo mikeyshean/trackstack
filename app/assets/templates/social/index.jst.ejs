@@ -9,12 +9,20 @@
             active
           <% }; %>
             feed-links"
-            id="followers" href="#/users/<%= user.id %>/followers">Followers</a></li>
+            id="followers" href="#/users/<%= user.id %>/followers">Followers</a>
+          </li>
         <li class="left">
           <a class="<% if (type === 'Following') { %>
             active
           <% }; %>
-          feed-links" id="following" href="#/users/<%= user.id %>/following">Following</a></li>
+          feed-links" id="following" href="#/users/<%= user.id %>/following">Following</a>
+        </li>
+        <li class="left">
+          <a class="<% if (type === 'Likes') { %>
+            active
+          <% }; %>
+          feed-links" id="following" href="#/users/<%= user.id %>/likes">Likes</a>
+        </li>
       </ul>
     </div>
 
@@ -27,6 +35,8 @@
 
     <div class="main group">
       <ul id="social-list">
+      </ul>
+      <ul id="feed">
       </ul>
 
     </div>

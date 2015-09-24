@@ -6,7 +6,7 @@ module Api
     end
 
     def show
-      @user = User.includes(:followers, :followees, :tracks).where(id: params[:id]).first
+      @user = User.includes(:followers, :followees, :tracks, likings: :likable).where(id: params[:id]).first
     end
 
     def followers

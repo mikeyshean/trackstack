@@ -22,6 +22,11 @@ Trackstack.Models.User = Backbone.Model.extend({
       delete response.playlists;
     }
 
+    if (response.likes) {
+      this.likes().set(response.likes);
+      delete response.likes;
+    }
+
     return response;
   },
 
@@ -60,6 +65,14 @@ Trackstack.Models.User = Backbone.Model.extend({
     }
 
     return this._playlists
+  },
+
+  likes: function () {
+    if (!this._likes) {
+      this._likes = new Trackstack.Collections.Likes([], { user_id: this.id })
+    }
+
+    return this._likes
   },
 
   feed: function () {

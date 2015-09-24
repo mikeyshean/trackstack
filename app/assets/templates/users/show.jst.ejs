@@ -81,13 +81,13 @@
       <table class="user-stats-table">
         <tr>
           <td>
-            <a href="#/users/" + user.id + "/followers">
+            <a href="#/users/<%= user.id %>/followers">
               <h3 class="info-stats-title">Followers</h3>
               <p id="follower-count" class="info-stats-count"><%= user.followers().length %></p>
             </a>
           </td>
           <td>
-            <a href="#/users/" + user.id + "/following">
+            <a href="#/users/<%= user.id %>/following">
               <h3 class="info-stats-title">Following</h3>
               <p id="following-count" class="info-stats-count"><%= user.followees().length %></p>
             </a>
