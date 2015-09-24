@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :users, only: [:index, :show, :create, :update] do
       member do
         get "followers", to: "users#followers"
+        get "following", to: "users#following"
         post "followers", to: "followers#create"
         delete "followers/:current_user_id", to: "followers#destroy"
         get "profilefeed", to: "feeds#profile_feed"

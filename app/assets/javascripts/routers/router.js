@@ -3,6 +3,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   routes: {
     "": "index",
     "_=_": "index",
+    "users/:id/followers": "followersIndex",
     "users/:id": "show",
     "session/new": "signIn",
     "tracks/:id": "trackShow"
@@ -46,6 +47,17 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     });
 
 
+  },
+
+  followersIndex: function (id) {
+    var user = new Trackstack.Models.User({ id: id });
+
+    user.fetch({
+      success: function (model, response) {
+        var view = new Trackstack.Views.FollowersIndex({ model: model });
+        this._swapView(view)
+      }.bind(this)
+    });
   },
 
   _swapView: function (view) {

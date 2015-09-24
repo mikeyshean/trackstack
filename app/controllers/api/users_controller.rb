@@ -10,7 +10,13 @@ module Api
     end
 
     def followers
-      @follows = User.find(params[:id]).followers
+      @users = User.find(params[:id]).followers.includes(:followers)
+      render :followers
+    end
+
+    def following
+      @users = User.find(params[:id]).followees.includes(:followers)
+      render :followers
     end
 
     def update

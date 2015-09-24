@@ -4,14 +4,14 @@ json.partial! "user", user: @user, img_badge: false
 
 json.followees do
   json.array! @user.followees do |followee|
-    json.partial! "user", user: followee, img_badge: true
+    json.partial! "follower", follower: followee
   end
 end
 
 
 json.followers do
   json.array! @user.followers do |follower|
-    json.partial! "user", user: follower, img_badge: false
+    json.partial! "follower", follower: follower
   end
 end
 

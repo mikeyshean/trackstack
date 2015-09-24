@@ -8,6 +8,7 @@ json.sound_type "Track"
 
 json.author track.author.username
 json.author_id track.author.id
+
 json.commenters do
   json.array! track.comments do |comment|
     json.partial! "api/comments/comment", { comment: comment, author: false }
