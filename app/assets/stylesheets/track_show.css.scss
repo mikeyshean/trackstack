@@ -79,6 +79,7 @@
 }
 
 .main .main-right {
+  margin-top: 20px;
   padding-left: 150px;
 }
 
@@ -140,4 +141,26 @@
 
 .track-show.follow-button {
   top: 40px;
+}
+
+.track-description {
+
+  font-family: "Interstate Light";
+}
+
+.track-description-text {
+  padding-bottom: 20px;
+  background: #fff;
+  position: relative;
+  z-index: 1;
+}
+
+.track-comments-stats {
+  color: #999;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+  font-family: "Interstate Light";
+  background: #fff;
+  position: relative;
+  z-index: 1;
 }

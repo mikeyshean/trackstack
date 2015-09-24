@@ -6,6 +6,8 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render)
     this.listenTo(this.model.authorFollowers(), "add", this.updateFollowerCount.bind(this, 1))
     this.listenTo(this.model.authorFollowers(), "remove", this.updateFollowerCount.bind(this, -1))
+    this.listenTo(this.model.comments(), "add", this.updateCommentCount.bind(this, 1))
+    this.listenTo(this.model.comments(), "remove", this.updateCommentCount.bind(this, -1))
 
 
     this.attachAudioPlayer();
@@ -101,5 +103,10 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   updateFollowerCount: function (incr) {
     var count = this.$("#follower-count").text()
     this.$("#follower-count").text(+count + incr);
+  },
+
+  updateCommentCount: function (incr) {
+    var count = this.$("#comment-count").text()
+    this.$("#comment-count").text(+count + incr);
   },
 });

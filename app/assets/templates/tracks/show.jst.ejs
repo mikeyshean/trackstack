@@ -110,8 +110,18 @@
           </div>
         </article>
 
-        <article id="comments">
+        <article class="track-comments-wrapper">
+          <div>
 
+          </div>
+          <h3 class="track-comments-stats">
+            <i class="material-icons md-18 track-show-comments-icon chat">&#xE0CA;</i>
+            <strong id="comment-count"><%= track.comments().length %>
+            </strong> comments
+          </h3>
+          <ul id="comments">
+
+          </ul>
         </article>
       </section>
 
