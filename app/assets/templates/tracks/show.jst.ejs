@@ -86,10 +86,20 @@
         <div class="track-show-author-photo" style="background-image: url(<%= track.escape('author_track_show_img') %>);"></div>
 
         <div class="track-author"><%= track.escape("author") %></div>
-        <ul class="track-author-stats">
-          <li>Followers: <%= track.authorFollowers().length %></li>
-          <li>Tracks: <%= track.escape("author_tracks") %></li>
+        <ul class="track-author-stats group">
+          <li><a href="#/users/<%= track.get('author_id') %>/followers" class="track-stats-link"><i class="material-icons md-18 follower-count">&#xE7EF;</i><%= track.authorFollowers().length %></a></li>
+          <li><a href="#/users/<%= track.get('author_id') %>/tracks" class="track-stats-link"><span class="track-count"></span><%= track.escape("author_tracks") %></li>
         </ul>
+        <% if (track.get("author_id") !== Trackstack.currentUser.id) { %>
+          <button
+            class="right button button-orange follow-button
+              <% if (track.authorFollowers().findWhere({id: Trackstack.currentUser.id}))  { %>
+                 button-orange-border
+              <% } %>"
+            data-user-id="<%= track.get('author_id') %>"
+            data-follow-state="<%= !!track.authorFollowers().findWhere({id: Trackstack.currentUser.id}) %>">
+          </button>
+        <% } %>
       </section>
 
       <section class="main-right">

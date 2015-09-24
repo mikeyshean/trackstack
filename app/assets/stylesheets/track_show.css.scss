@@ -96,15 +96,41 @@
 }
 
 .track-author-info .track-author {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .track-author-info .track-author-stats {
   font-size: 12px;
   color: #999;
+  font-family: "Interstate Light"
 }
 
-.track-author-stats .track-count {
+.track-author-stats > li {
+  float: left;
+  position: relative;
+}
+
+.track-author-stats > li:first-child {
+  margin-right: 10px;
+  position: relative;
+  bottom: 2px;
+}
+
+.track-author-stats .track-count,
+.track-author-stats .follower-count {
+  position :relative;
+  top: 4px;
+  margin-right: 3px;
+}
+
+.track-author-stats .track-stats-link {
+  position :relative;
+  top: 4px;
+  margin-right: 3px;
+}
+
+.track-author-stats .track-count,
+.track-author-info .track-count {
   content: image-url('tracks_icon.svg');
   height: 16px;
   width: 16px;
