@@ -32,3 +32,10 @@ json.commenters do
     json.partial! "api/comments/comment", { comment: comment, author: true }
   end
 end
+
+json.likers do
+  json.array! @track.likers do |liker|
+    json.extract! liker, :id
+    json.sound_type "Track"
+  end
+end

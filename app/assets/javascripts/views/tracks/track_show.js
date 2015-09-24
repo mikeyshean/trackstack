@@ -9,7 +9,7 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     this.listenTo(this.model.comments(), "add", this.updateCommentCount.bind(this, 1))
     this.listenTo(this.model.comments(), "remove", this.updateCommentCount.bind(this, -1))
 
-
+    this.likers = this.model.likers();
     this.attachAudioPlayer();
     this.comments = this.model.comments()
     this.attachCommentsComposite()
@@ -110,6 +110,7 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     var beforeState = $button.attr("data-like-state")
     if (beforeState === "true") {
       $button.attr("data-like-state", "false")
+
       var liker = this.likers.findWhere({ id: Trackstack.currentUser.id })
 
       liker.destroy({

@@ -43,7 +43,7 @@ Trackstack.Models.Track = Backbone.Model.extend({
 
     return this._likers;
   },
-  
+
   authorFollowers: function (author_id) {
     if (!this._followers) {
       this._followers = new Trackstack.Collections.Followers([], { user_id: author_id })
@@ -60,6 +60,10 @@ Trackstack.Models.Track = Backbone.Model.extend({
     if (resp && resp.author_followers) {
       this.authorFollowers(resp.author_id).set(resp.author_followers)
       delete resp.author_followers
+    }
+
+    if (resp && resp.likers) {
+      this.likers().set(resp.likers)
     }
 
     return resp;
