@@ -2,18 +2,21 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   template: JST['tracks/show'],
 
   initialize: function () {
+
     this.listenTo(this.model, "sync", this.render)
+    this.listenTo(this.model.authorFollowers(), "add", this.updateFollowerCount.bind(this, 1))
+    this.listenTo(this.model.authorFollowers(), "remove", this.updateFollowerCount.bind(this, -1))
 
-    var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.model.escape("track_url"), model: this.model })
-    this.addSubview("#track-show-player", audioPlayerView)
 
+    this.attachAudioPlayer();
     this.comments = this.model.comments()
     this.attachCommentsComposite()
   },
 
   events: {
     "submit .feed-comment-form": "submitComment",
-    "click #track-play": "togglePlay"
+    "click #track-play": "togglePlay",
+    "click .follow-button": "toggleFollowState"
   },
 
   submitComment: function (e) {
@@ -38,7 +41,14 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     var view = new Trackstack.Views.CommentComposite({ collection: this.comments })
     this.addSubview("#comments", view)
   },
-
+  attachAudioPlayer: function () {
+    var audioPlayerView =
+      new Trackstack.Views.AudioPlayer({
+        trackUrl: this.model.escape("track_url"),
+        model: this.model
+      })
+    this.addSubview("#track-show-player", audioPlayerView)
+  },
 
   render: function () {
     this.$el.html(this.template({ track: this.model }))
@@ -49,5 +59,47 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   togglePlay: function () {
     this.$("#play").click();
     this.$(".track-show-button i").toggle();
-  }
+  },
+
+  toggleFollowState: function (e) {
+    e.preventDefault()
+
+    var $followButton = $(e.currentTarget)
+    $followButton.attr("disabled", true)
+    var beforeState = $followButton.attr("data-follow-state")
+    $followButton.toggleClass("button-orange-border")
+
+    if (beforeState === "true") {
+      $followButton.attr("data-follow-state", "false")
+      var follower = this.model.authorFollowers().findWhere({ id: Trackstack.currentUser.id })
+      follower.destroy({
+        success: function (model) {
+          $followButton.removeAttr("disabled");
+
+        },
+        error: function (model, response) {
+
+
+        }.bind(this)
+      })
+    } else {
+      $followButton.attr("data-follow-state", "true")
+      this.model.authorFollowers().create({followee_id: this.model.get("author_id") }, {
+        success: function (model) {
+          $followButton.removeAttr("disabled");
+
+
+        },
+        wait: true,
+        error: function (model, response) {
+
+        }.bind(this)
+      })
+    }
+  },
+
+  updateFollowerCount: function (incr) {
+    var count = this.$("#follower-count").text()
+    this.$("#follower-count").text(+count + incr);
+  },
 });

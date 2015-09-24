@@ -2,8 +2,8 @@ module Api
   class FollowersController < ApiController
 
     def create
-      following = Following.new({follower_id: current_user.id, followee_id: params[:id]})
-      
+      following = Following.new({follower_id: current_user.id, followee_id: params[:followee_id]})
+
       if following.save
         render :follower
       else

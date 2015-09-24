@@ -37,9 +37,15 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
   trackShow: function (id) {
     var track = new Trackstack.Models.Track({ id: id });
-    var view = new Trackstack.Views.TrackShow({ model: track });
-    track.fetch();
-    this._swapView(view)
+
+    track.fetch({
+      success: function (model, response) {
+        var view = new Trackstack.Views.TrackShow({ model: model });
+        this._swapView(view)
+      }.bind(this)
+    });
+
+
   },
 
   _swapView: function (view) {

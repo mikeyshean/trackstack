@@ -92,7 +92,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
       })
     } else {
       $followButton.attr("data-follow-state", "true")
-      this.followers.create({followee_id: Trackstack.currentUser.id }, {
+      this.followers.create({followee_id: this.model.id }, {
         success: function (model) {
           $followButton.removeAttr("disabled");
 
