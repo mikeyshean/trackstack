@@ -4,8 +4,6 @@ Trackstack.Views.SocialIndex = Backbone.CompositeView.extend({
 
   initialize: function (options) {
     this.collectionType = options.type
-    this.listenTo(this.collection, "reset", this.addSoundSubviews)
-
     this.addSocialSubviews();
   },
 
@@ -18,7 +16,7 @@ Trackstack.Views.SocialIndex = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    this.$el.html(this.template());
+    this.$el.html(this.template({ user: this.model, type: this.collectionType }));
     this.attachSubviews();
     return this;
   }

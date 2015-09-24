@@ -4,8 +4,17 @@
   <div class="user-tabs-wrapper">
     <div class="user-tabs-container group">
       <ul class="user-tabs-list left">
-        <li class="left"><a class="active feed-links" id="followers" href="#">Followers</a></li>
-        <li class="left"><a class="feed-links" id="following" href="#">Following</a></li>
+        <li class="left">
+          <a class="<% if (type === 'Followers') { %>
+            active
+          <% }; %>
+            feed-links"
+            id="followers" href="#/users/<%= user.id %>/followers">Followers</a></li>
+        <li class="left">
+          <a class="<% if (type === 'Following') { %>
+            active
+          <% }; %>
+          feed-links" id="following" href="#/users/<%= user.id %>/following">Following</a></li>
       </ul>
     </div>
 

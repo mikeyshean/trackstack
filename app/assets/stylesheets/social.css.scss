@@ -8,16 +8,39 @@
 .social-item-wrapper {
   margin: 0 10px 10px 0;
   height: 180px;
+  position: relative;
+}
 
+#social-list .social-info {
+  position: absolute;
+  z-index: 1;
+  color: #fff;
+  top: 5px;
+  left: 10px;
+  font-size: 14px;
+}
+
+.social-info > * {
+  background: #000;
+  display: inline-block;
+  float: left;
+  padding: 0 2px 3px 3px;
+}
+
+.social-info .social-info-username {
+  padding-top: 3px;
 }
 
 .social-item-pic {
   height: 100%;
   background-size: cover;
+  top: 0;
+
 }
 
-.follower-count-icon {
-
+#social-list .follower-count-icon {
+  position: relative;
+  top: 3px;
 }
 
 .follower-count-text {
