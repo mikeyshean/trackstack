@@ -34,7 +34,6 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
       this.comments = this.sound.comments();
     }
 
-    this.playlists = options.playlists
     this.likers = this.sound.likers()
 
     var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl })
@@ -66,7 +65,6 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     e.preventDefault();
 
     var view = new Trackstack.Views.PlaylistModal({
-      collection: this.playlists,
       model: this.sound
     })
     $("#modal").html(view.render().$el);

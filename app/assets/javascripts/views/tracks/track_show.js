@@ -20,6 +20,7 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     "click #track-play": "togglePlay",
     "click .follow-button": "toggleFollowState",
     "click .like-button": "toggleLike",
+    "click .add-to-playlist-button": "triggerModal"
   },
 
   submitComment: function (e) {
@@ -127,6 +128,19 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
         }.bind(this)
       })
     }
+  },
+
+  triggerModal: function (e) {
+    e.preventDefault();
+    var view = new Trackstack.Views.PlaylistModal({
+      collection: Trackstack.currentUser.playlists(),
+      model: this.model
+    })
+    $("#modal").html(view.render().$el);
+    setTimeout(function () {
+      $("#playlist-modal").addClass("transitioning")
+      $(".modal-background").addClass("transitioning")
+    },0)
   },
 
   updateFollowerCount: function (incr) {

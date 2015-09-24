@@ -8,9 +8,9 @@ Trackstack.Views.PlaylistModal = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.trackId = this.model.id;
     this.collection = Trackstack.currentUser.playlists()
+    this.collection.fetch({reset: true})
     this.listenTo(this.collection, "add", this.addPlaylistSubview)
-
-    this.addPlaylistSubviews();
+    this.listenTo(this.collection, "reset", this.addPlaylistSubviews)
   },
 
   addPlaylistSubviews: function () {
