@@ -54,13 +54,13 @@
       <div class="feed-sound-stats right">
         <ul class="feed-stats-list left">
           <li>
-            <a href="#" class="feed-stats-link">
+            <a href="#/users/<%= sound.escape('author_id') %>/likes" class="feed-stats-link">
               <h3 class="feed-stats"><i class="material-icons sound-feed-stats-icon">&#xE87D;</i><strong id="like-count"><%= sound.likers().length %></strong></h3>
             </a>
           </li>
           <% if (sound_type === "Track") { %>
             <li>
-              <a href="#" class="feed-stats-link">
+              <a href="#/tracks/<%= sound.id %>/likes" class="feed-stats-link">
                 <h3 class="feed-stats"><i class="material-icons sound-feed-stats-icon chat">&#xE0CA;</i><strong id="comment-count"><%= sound.comments().length %></strong></h3>
               </a>
             </li>

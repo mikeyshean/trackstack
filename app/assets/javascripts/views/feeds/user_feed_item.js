@@ -11,7 +11,8 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     "mouseenter #audio-player": "showCommentField",
     "click .feed-comment-input": "clearInput",
     "submit .feed-comment-form": "submitComment",
-    "blur .feed-comment-input": "addPlaceholder"
+    "blur .feed-comment-input": "addPlaceholder",
+    "click a": "navigate"
 
   },
 
@@ -170,6 +171,13 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
        })
      },10000)
     }, 0)
+  },
+
+  navigate: function (e) {
+    e.preventDefault();
+    var url = $(e.currentTarget).attr("href");
+
+    Backbone.history.navigate(url, { trigger: true })
   }
 
 
