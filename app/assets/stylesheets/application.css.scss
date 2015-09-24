@@ -23,6 +23,19 @@
  *= require comment
  */
 
+@font-face {
+    font-family: 'Interstate Light';
+    src: font-url('Interstate-Light.otf') format('opentype');
+}
+@font-face {
+    font-family: 'Interstate';
+    src: font-url('Interstate-Regular.otf') format('opentype');
+}
+/*
+@font-face {
+    font-family: "Interstate";
+    src: font-url("Interstate-Regular.ttf");
+}*/
 
 html, body, header, nav, section, div, ul, li, a, h1, h2, h3, h4, button, form, input, strong, textarea {
   border: 0;
@@ -52,7 +65,7 @@ body {
   overflow-y: scroll;
   padding-bottom: 75px;
   letter-spacing: .3px;
-  font-family: "Interstate", "Roboto", "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
+  font-family: "Interstate", "Interstate Light", "Roboto", "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif;
 }
 
 ul {

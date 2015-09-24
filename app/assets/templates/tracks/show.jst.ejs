@@ -82,18 +82,22 @@
     </div>
 
     <div class="main group">
-      <section class="main-left">
-        <div class="track-show-author-photo" style="background-image: url(<%= track.escape('author_track_show_img') %>);">
-          <ul>
-            <li><%= track.escape("author") %></li>
-            <li>Followers: <%= track.authorFollowers().length %></li>
-            <li>Tracks: <%= track.escape("author_tracks") %></li>
-          </ul>
+      <section class="main-left track-author-info">
+        <div class="track-show-author-photo" style="background-image: url(<%= track.escape('author_track_show_img') %>);"></div>
+
+        <div class="track-author"><%= track.escape("author") %></div>
+        <ul class="track-author-stats">
+          <li>Followers: <%= track.authorFollowers().length %></li>
+          <li>Tracks: <%= track.escape("author_tracks") %></li>
+        </ul>
       </section>
 
       <section class="main-right">
         <article class="about-track">
           <div class="track-description">
+            <div class="track-description-text">
+              <%= track.escape("description") %>
+            </div>
           </div>
         </article>
 

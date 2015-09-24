@@ -23,7 +23,6 @@
   height: 380px;
 }
 
-
 .audio-button.track-show-button {
   position: relative;
   height: 60px;
@@ -84,6 +83,29 @@
 
 .main-left .track-show-author-photo {
   background-size: cover;
+  background-repeat: no-repeat;
+  display: block;
   height: 120px;
   width: 120px;
+  margin-bottom: 5px;
+}
+
+.track-author-info {
+  font-size: 16px;
+  float: left;
+}
+
+.track-author-info .track-author {
+  margin-bottom: 10px;
+}
+
+.track-author-info .track-author-stats {
+  font-size: 12px;
+  color: #999;
+}
+
+.track-author-stats .track-count {
+  content: image-url('tracks_icon.svg');
+  height: 16px;
+  width: 16px;
 }

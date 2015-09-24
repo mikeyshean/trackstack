@@ -48,5 +48,6 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
 
   togglePlay: function () {
     this.$("#play").click();
+    this.$(".track-show-button i").toggle();
   }
 });

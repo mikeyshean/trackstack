@@ -63,6 +63,7 @@
 
 .sign-in-modal .tabs {
   float: right;
+  font-family: 'Interstate Light'
 }
 
 .tab-options a {
@@ -72,6 +73,7 @@
 .tab-options a.active {
   background: #fff;
   border-radius: 10px 10px 0 0;
+  border-bottom: 1px solid #fff;
   color: #333;
 }
 

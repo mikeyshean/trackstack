@@ -2,7 +2,8 @@
   height: 60px;
   padding: 10px 0;
   font-size: 12px;
-  letter-spacing: .4px;
+  // letter-spacing: .4px;
+  font-family: "Lucida Grande","Lucida Sans Unicode","Lucida Sans",Garuda,Verdana,Tahoma,sans-serif
 }
 
 .comment-wrapper .show-comment-image {
@@ -13,19 +14,22 @@
 }
 
 .comment-wrapper .comment-title {
-  color: #999;
-  margin: 2px 0;
+  color: #ccc;
+  margin: 1px 0 3px 0;
 }
 
-.comment-wrapper .comment-author-link:hover {
-  color: #333;
-}
-
-.comment-wrapper .track-time {
+.comment-wrapper .comment-author,
+.comment-wrapper .track-time  {
   color: #ccc;
 }
 
+.comment-wrapper .comment-author-link,
+.comment-wrapper .comment-time  {
+  color: #999;
+}
+
+
+.comment-wrapper .comment-author-link:hover,
 .comment-wrapper .comment-content {
   color: #333;
-
 }
