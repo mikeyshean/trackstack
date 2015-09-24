@@ -116,8 +116,10 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     formData.append(attribute, file);
 
     var that = this;
+    
     this.model.saveFormData(formData, {
-      success: function(){
+      success: function(model, response){
+        Trackstack.currentUser.set(response)
         Backbone.history.navigate("#/users/" + that.model.id, { trigger: true });
       }
     });
