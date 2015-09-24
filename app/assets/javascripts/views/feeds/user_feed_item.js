@@ -9,7 +9,8 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     "click #repost-button": "toggleRepost",
     "mouseenter #audio-player": "showCommentField",
     "click .feed-comment-input": "clearInput",
-    "submit .feed-comment-form": "submitComment"
+    "submit .feed-comment-form": "submitComment",
+    "blur .feed-comment-input": "addPlaceholder"
 
   },
 
@@ -58,7 +59,6 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   triggerModal: function (e) {
     e.preventDefault();
 
-    // var trackId = $(e.currentTarget).data("id")
     var view = new Trackstack.Views.PlaylistModal({
       collection: this.playlists,
       model: this.sound
@@ -95,19 +95,6 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
       })
     }
   },
-  //
-  // showPlaylistModal: function (model) {
-  //
-  //   var playlists = this.model.getOrFetch()
-  //   var view = new Trackstack.Views.TrackUpload({ model: track })
-  //   this.$modalEl.html(view.render().$el)
-  //
-  //   setTimeout(function () {
-  //     $(".modal-background").addClass("transitioning")
-  //     $("#track-upload").addClass("transitioning")
-  //   }.bind(this),0)
-  //
-  // },
 
   updateLikeCount: function (incr) {
     var count = this.$("#like-count").text()
@@ -156,6 +143,11 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   clearInput: function (e) {
     $(e.currentTarget).prop("placeholder", "")
   },
+
+  addPlaceholder: function (e) {
+   if ($(e.currentTarget).text().length) { return; }
+   $(e.currentTarget).attr("placeholder", "Write a comment...")
+  }
 
 
 });
