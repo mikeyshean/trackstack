@@ -30,7 +30,6 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     if (!this._requireSignedIn(callback)) { return; }
 
     var user = new Trackstack.Models.User({id: id});
-
     var feed = new Trackstack.Collections.Feed([], { user: user, feedType: "profilefeed" });
     var view = new Trackstack.Views.UserShow({ model: user, feed: feed });
     user.fetch();
@@ -98,6 +97,8 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
     this._currentView = view
     this.$rootEl.html(view.render().$el)
+
+    window.scroll(0,0)
   },
 
     signIn: function(callback){

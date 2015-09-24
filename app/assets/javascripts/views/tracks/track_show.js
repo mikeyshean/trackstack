@@ -18,7 +18,8 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   events: {
     "submit .feed-comment-form": "submitComment",
     "click #track-play": "togglePlay",
-    "click .follow-button": "toggleFollowState"
+    "click .follow-button": "toggleFollowState",
+    "click .like-button": "toggleLike",
   },
 
   submitComment: function (e) {
@@ -95,6 +96,33 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
         wait: true,
         error: function (model, response) {
 
+        }.bind(this)
+      })
+    }
+  },
+
+  toggleLike: function (e) {
+    e.preventDefault();
+    var $button = $(e.currentTarget)
+    $button.attr("disabled", true)
+    $button.toggleClass("button-orange-border").addClass("disabled")
+
+    var beforeState = $button.attr("data-like-state")
+    if (beforeState === "true") {
+      $button.attr("data-like-state", "false")
+      var liker = this.likers.findWhere({ id: Trackstack.currentUser.id })
+
+      liker.destroy({
+        success: function () {
+          $button.removeAttr("disabled");
+        }
+      })
+    } else {
+      $button.attr("data-like-state", "true")
+      this.likers.create({sound_type: this.sound_type, sound_id: this.sound_id}, {
+        success: function (model) {
+          this.likers.trigger("notify");
+          $button.removeAttr("disabled");
         }.bind(this)
       })
     }
