@@ -81,9 +81,10 @@
 
     <div class="main group">
       <section class="main-left track-author-info">
-        <div class="track-show-author-photo" style="background-image: url(<%= track.escape('author_track_show_img') %>);"></div>
-
-        <div class="track-author"><%= track.escape("author") %></div>
+        <a href="#/users/<%= track.escape('author_id') %>">
+          <div class="track-show-author-photo" style="background-image: url(<%= track.escape('author_track_show_img') %>);"></div>
+          <div class="track-author"><%= track.escape("author") %></div>
+        </a>
         <ul class="track-author-stats group">
           <li><a href="#/users/<%= track.get('author_id') %>/followers" class="track-stats-link"><i class="material-icons md-18 follower-count">&#xE7EF;</i><span id="follower-count"><%= track.authorFollowers().length %></span></a></li>
           <li><a href="#/users/<%= track.get('author_id') %>/tracks" class="track-stats-link"><span class="track-count"></span><%= track.escape("author_tracks") %></a></li>

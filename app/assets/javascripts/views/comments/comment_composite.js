@@ -5,8 +5,6 @@ Trackstack.Views.CommentComposite = Backbone.CompositeView.extend({
 
     this.listenTo(this.collection, "add", this.addCommentSubview)
     this.listenTo(this.collection, "remove", this.removeCommentSubview)
-    // this.listenTo(this.collection, "reset", this.addCommentSubviews)
-
     this.addCommentSubviews(this.collection)
   },
 
