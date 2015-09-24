@@ -2,6 +2,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
   template: JST['feeds/sound-item'],
   commentTemplate: JST['feeds/comment'],
+  notifyTemplate: JST['shared/notification'],
 
   events: {
     "click .like-button": "toggleLike",
@@ -23,9 +24,11 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
     if (this.sound instanceof Trackstack.Models.Playlist) {
       this.trackUrl = this.sound.get("tracks")[0].track_url
+      this.badgeUrl = this.sound.get("tracks")[0].badge_img
       this.feedUrl = this.sound.get("tracks")[0].feed_img
     } else {
       this.trackUrl = this.sound.escape("track_url")
+      this.badgeUrl = this.sound.escape("badge_img")
       this.feedUrl = this.sound.escape("feed_img")
       this.comments = this.sound.comments();
     }
@@ -35,9 +38,11 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
     var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl })
     this.addSubview("#audio-player", audioPlayerView)
+    this.isNotifying = false;
 
     this.listenTo(this.likers, "add", this.updateLikeCount.bind(this, 1));
     this.listenTo(this.likers, "remove", this.updateLikeCount.bind(this, -1));
+    this.listenTo(this.likers, "notify", this.showNotification);
     this.listenTo(this.comments, "add", this.updateCommentCount.bind(this, 1));
     this.listenTo(this.comments, "remove", this.updateCommentCount.bind(this, -1));
     this.listenTo(this.likers, "reset", this.render);
@@ -89,9 +94,10 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     } else {
       $button.attr("data-like-state", "true")
       this.likers.create({sound_type: this.sound_type, sound_id: this.sound_id}, {
-        success: function () {
+        success: function (model) {
+          this.likers.trigger("notify");
           $button.removeAttr("disabled");
-        }
+        }.bind(this)
       })
     }
   },
@@ -147,7 +153,25 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   addPlaceholder: function (e) {
    if ($(e.currentTarget).text().length) { return; }
    $(e.currentTarget).attr("placeholder", "Write a comment...")
+ },
+
+ showNotification: function () {
+   var notify = $("#notification")
+   var view = new Trackstack.Views.Notify({ sound: this.sound, badgeImg: this.badgeUrl })
+
+   notify.append(view.render().$el)
+   var alert = view.$(".sound-notification")
+   setTimeout(function () {
+     alert.addClass("active")
+     setTimeout(function () {
+       alert.removeClass("active")
+       alert.on("transitionend",function () {
+         view.remove()
+       })
+     },10000)
+    }, 0)
   }
+
 
 
 });

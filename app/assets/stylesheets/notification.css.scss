@@ -1,0 +1,52 @@
+#notification {
+  position: fixed;
+  top: 60px;
+  right: 25px;
+  width: 300px;
+  z-index: 30;
+  font-size: 12px;
+  font-family: "Interstate Light"
+}
+
+.sound-notification {
+  height: 45px;
+  width: 300px;
+  position: relative;
+  display: block;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: -1px -1px 2px #ccc, 1px 1px 1px #ccc, ;
+  background: #fff;
+  opacity: 0;
+  transition: opacity .6s ease-in, top .5s ease-in;
+  margin-bottom: 5px;
+  overflow: hidden;
+  top: -45px;
+}
+
+.sound-notification.active {
+  opacity: 1;
+  top: 0;
+  transition: opacity .3s ease-in, top .3s ease-in;
+}
+.notify-image {
+  float: left;
+  height: 43px;
+  width: 43px;
+  background-size: cover;
+}
+
+.notify-title {
+  font-family: "Interstate";
+  font-size: 14px;
+}
+
+.notify-text {
+  position: relative;
+  top: 9px;
+  left: 7px;
+}
+
+.blue-link {
+  color: #38d;
+}
