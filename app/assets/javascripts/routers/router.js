@@ -54,7 +54,24 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
     user.fetch({
       success: function (model, response) {
-        var view = new Trackstack.Views.FollowersIndex({ model: model });
+        var view = new Trackstack.Views.SocialIndex({
+          model: model,
+          collection: model.followers(),
+          type: "Followers" });
+        this._swapView(view)
+      }.bind(this)
+    });
+  },
+
+  followingIndex: function (id) {
+    var user = new Trackstack.Models.User({ id: id });
+
+    user.fetch({
+      success: function (model, response) {
+        var view = new Trackstack.Views.SocialIndex({
+          model: model,
+          collection: model.followees(),
+          type: "Following" });
         this._swapView(view)
       }.bind(this)
     });
