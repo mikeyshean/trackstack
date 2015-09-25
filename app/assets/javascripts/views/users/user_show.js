@@ -28,10 +28,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.listenTo(this.tracks, "remove", this.updateTrackCount.bind(this, -1));
 
     this.renderMainFeed();
-    //
-    // this.sidebarView = new Trackstack.Views.SidebarComposite({model: this.user } )
-    // this.addSubview("#sidebar-composite", this.feedView)
-
+    
     this.feedTypes = {
       "Tracks": this.tracks,
       "Playlists": this.playlists,
@@ -116,7 +113,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     formData.append(attribute, file);
 
     var that = this;
-    
+
     this.model.saveFormData(formData, {
       success: function(model, response){
         Trackstack.currentUser.set(response)

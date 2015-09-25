@@ -1,22 +1,24 @@
 <div class="modal-raised">
   <div class="modal upload-modal" id="cover-photo">
     <div class="modal-wrapper group">
-      <div class="sign-in-header-text">
-        <div class="logo-wrapper">
-          <h4><%= user.escape("username") %></h4>
+      <div class="modal-header">
+        <div class="modal-header-text">
+          <h4>Preview</h4>
         </div>
       </div>
 
       <section class="tab-content group">
         <article id="signin-content" class="active tab-content-item">
-
-            <label class="input-label">Image Preview COVER PHOTO</label>
-            <img id="cover-photo-preview" src="" id="preview-post-image" width="400">
+            <div class="image-preview-wrapper">
+              <img id="cover-photo-preview" src="" id="preview-post-image" width="500px">
+            </div>
             <form class="file-input-plugin photo-form">
               <div class="input-hider">
                 <input class="file-input file-input-button photo-form" data-form-type="#cover-photo" id="cover-file-input-button" type="file" name="user[cover_img]">
               </div>
-              <button class="button button-orange submit">Save</button>
+              <div class="modal-buttons right">
+                <a href="#" class="cancel">Cancel</a> <button class="button button-orange submit">Save</button>
+              </div>
             </form>
         </article>
       </section>

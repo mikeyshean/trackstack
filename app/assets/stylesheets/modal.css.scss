@@ -225,7 +225,7 @@
 }
 
 .modal.upload-modal.transitioning {
-  top: 100px;
+  top: 50px;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
 
@@ -239,15 +239,38 @@
   top: -600px;
   transition: top .8s cubic-bezier(.39,.73,.17,.77);
   z-index: 11;
+  width: 600px;
 }
 
 .modal#cover-photo.transitioning {
-  top: 100px;
+  top: 50px;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
+}
+
+#cover-photo .image-preview-wrapper {
+  width: 500px;
+  height: 140px;
+  overflow: hidden;
+}
+
+#cover-photo .button,
+#profile-photo .button {
+  margin: 0;
+  float: none;
+}
+.modal-buttons {
+  margin-top: 10px;
+}
+#profile-photo .modal-buttons {
+  margin-top: 20px;
+}
+.modal-buttons > a {
+  margin: 5px 10px 0 0;
 }
 
 .modal#profile-photo {
   border-top: 1px solid #ccc;
+  width: 400px;
   position: fixed;
   top: 0;
   left: 50%;
@@ -257,9 +280,17 @@
 }
 
 .modal#profile-photo.transitioning {
-  top: 100px;
+  top: 50px;
   transition: top .5s cubic-bezier(.14,.99,.52,1);
 }
+
+#profile-photo .image-preview-wrapper {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
 
 
 /* Playlist Modal */
