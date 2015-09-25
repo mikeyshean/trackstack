@@ -90,7 +90,7 @@
         </ul>
         <% if (track.get("author_id") !== Trackstack.currentUser.id) { %>
           <button
-            class="right button button-orange follow-button track-show
+            class="right button button-orange follow-button track-show  small
               <% if (track.authorFollowers().findWhere({id: Trackstack.currentUser.id}))  { %>
                  button-orange-border
               <% } %>"
