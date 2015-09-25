@@ -53,12 +53,21 @@
   text-size: 18px;
 }
 
+
 .sign-in-modal .logo-wrapper {
   float: left;
 }
 
 .sign-in-modal .logo {
   color: #fff;
+  margin-left: 20px;
+  position: relative;
+}
+
+.sign-in-modal .material-icons {
+  position: absolute;
+  left: -30px;
+  top: -5px;
 }
 
 .sign-in-modal .tabs {
