@@ -71,6 +71,40 @@
   font-family: "Interstate Light"
 }
 
+#comment {
+  position: relative;
+}
+.submitted-comment {
+  position: absolute;
+  top: -31px;
+  font-size: 14px;
+}
+
+.submitted-comment {
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+}
+
+.submitted-comment.transitioning {
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+}
+.submitted-comment-author {
+  font-family: "Interstate";
+  margin: 0 10px;
+  color: #f50;
+}
+.submitted-comment-text {
+  font-family: "Interstate Light";
+}
+
+.comment-tool-tip {
+  content: "";
+  display: inline-block;
+  height: 25px;
+  border-left: 1px solid #f50;
+}
+
 /* Comment form for Track Show page */
 .track-show .feed-comment-container {
   border: 1px solid #ccc;

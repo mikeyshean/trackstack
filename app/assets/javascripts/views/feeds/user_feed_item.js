@@ -3,6 +3,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   template: JST['feeds/sound-item'],
   commentTemplate: JST['feeds/comment'],
   notifyTemplate: JST['shared/notification'],
+  submittedCommentTemplate: JST['feeds/submitted_comment'],
 
   events: {
     "click .like-button": "toggleLike",
@@ -131,10 +132,15 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   submitComment: function (e) {
     e.preventDefault();
     var formData = $(e.currentTarget).serializeJSON()
+    var player = this.$(".player")[0]
+    var currentTime = player.currentTime
+    var duration = player.duration
+
     formData["comment"]["track_id"] = this.sound.id
-    formData["comment"]["submitted_at"] = this.$(".player")[0].currentTime
+    formData["comment"]["submitted_at"] = currentTime
     this.sound.comments().create(formData.comment, {
       success: function (model, response) {
+        this.renderComment(model, duration);
         this.$(".feed-comment-input")
           .val("")
           .attr("placeholder", "Write a comment...")
@@ -143,6 +149,22 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
         alert("Oops!  Your comment didn't go through. Try again.")
       }
     })
+  },
+
+  renderComment: function (comment, duration) {
+    if (duration) {
+      var delta = comment.get("submitted_at") / duration
+    }
+    // debugger
+    var el = this.$(".submitted-comment")
+
+    el.html(this.submittedCommentTemplate({ comment: comment }))
+    el.css("left", (delta * 100) + "%" )
+    el.addClass("transitioning")
+    setTimeout(function () {
+      el.removeClass("transitioning")
+    }, 5000)
+
   },
 
   clearInput: function (e) {
