@@ -1,16 +1,16 @@
 Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   template: JST['tracks/show'],
   submittedCommentTemplate: JST['feeds/submitted_comment'],
-
   initialize: function () {
+    this.likers = this.model.likers();
 
     this.listenTo(this.model, "sync", this.render)
     this.listenTo(this.model.authorFollowers(), "add", this.updateFollowerCount.bind(this, 1))
     this.listenTo(this.model.authorFollowers(), "remove", this.updateFollowerCount.bind(this, -1))
     this.listenTo(this.model.comments(), "add", this.updateCommentCount.bind(this, 1))
     this.listenTo(this.model.comments(), "remove", this.updateCommentCount.bind(this, -1))
+    this.listenTo(this.likers, "notify", this.showNotification);
 
-    this.likers = this.model.likers();
     this.attachAudioPlayer();
     this.comments = this.model.comments()
     this.attachCommentsComposite()
@@ -185,4 +185,22 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
    if ($(e.currentTarget).text().length) { return; }
    $(e.currentTarget).attr("placeholder", "Write a comment...")
  },
+
+
+  showNotification: function () {
+    var notify = $("#notification")
+    var view = new Trackstack.Views.Notify({ sound: this.model, badgeImg: this.model.escape("badge_img"), type: "Like" })
+
+    notify.append(view.render().$el)
+    var alert = view.$(".sound-notification")
+    setTimeout(function () {
+      alert.addClass("active")
+      setTimeout(function () {
+        alert.removeClass("active")
+        alert.on("transitionend",function () {
+          view.remove()
+        })
+      },10000)
+     }, 0)
+   },
 });

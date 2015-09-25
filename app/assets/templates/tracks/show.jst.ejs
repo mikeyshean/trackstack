@@ -5,11 +5,6 @@
       <div class="profile-header-avatar track-header-art banner-raise right">
         <div class="profile-photo track-show-photo" style="background-image: url(<%= track.escape('track_show_img') %>);">
         </div>
-        <% if (track.author_id === Trackstack.currentUser.id)  { %>
-          <div class="profile-current-user avatar-button">
-            <button class="button header-avatar-button css-file-input" data-form-type="#profile-file-input-button">Update image</button>
-          </div>
-        <% }; %>
       </div>
 
       <div class="profile-user-info">

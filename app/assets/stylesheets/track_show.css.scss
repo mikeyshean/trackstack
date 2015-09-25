@@ -36,23 +36,22 @@
   margin-right: 10px;
 }
 
-.track-edit .track-header-author {
+.track-edit .track-header-author,
+.track-edit .track-header-title {
   font-size: 16px;
   margin-bottom: 3px;
-  padding: 2px 4px;
+  padding: 3px 4px;
   line-height: normal;
-}
-
-
-.track-edit .track-show {
-  height: 340px;
-  width: 340px;
 }
 
 .track-edit .track-header-title {
   font-size: 28px;
-  line-height: normal;
-  padding: 2px 5px;
+  padding: 4px 5px;
+}
+
+.track-edit .track-show {
+  height: 340px;
+  width: 340px;
 }
 
 .content-wrapper .comment-form-wrapper {
@@ -65,9 +64,6 @@
   background: green;
 }
 
-.track-show .show-social-buttons-left {
-
-}
 .track-show .show-comment-container {
   margin-bottom: 12px;
   position: relative;
@@ -89,16 +85,12 @@
   display: block;
   height: 120px;
   width: 120px;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .track-author-info {
   font-size: 16px;
   float: left;
-}
-
-.track-author-info .track-author {
-  margin-bottom: 5px;
 }
 
 .track-author-info .track-author-stats {

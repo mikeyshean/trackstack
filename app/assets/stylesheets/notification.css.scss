@@ -15,7 +15,8 @@
   display: block;
   border: 1px solid #ccc;
   border-radius: 5px;
-  box-shadow: -1px -1px 2px #ccc, 1px 1px 1px #ccc, ;
+  // box-shadow: -1px -1px 2px #ccc, 1px 1px 1px #ccc, ;
+  // box-shadow: -1px -1px #ccc, 1px 1px #ccc, ;
   background: #fff;
   opacity: 0;
   transition: opacity .6s ease-in, top .5s ease-in;
@@ -39,6 +40,9 @@
 .notify-title {
   font-family: "Interstate";
   font-size: 14px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .notify-text {

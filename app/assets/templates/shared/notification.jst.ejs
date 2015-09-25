@@ -4,6 +4,10 @@
     <span class="notify-title">
       <%= sound.escape('title') %>
     </span><br>
+    <% if (type === "Playlist") { %>
+      was added to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>"><%= playlistTitle %></a>.
+    <% } else { %>
       was saved to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>/likes">your Collection</a>.
+    <% }; %>
   </div>
 </li>

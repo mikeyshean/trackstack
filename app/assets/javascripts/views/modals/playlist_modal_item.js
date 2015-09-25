@@ -10,14 +10,15 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
   initialize: function (options) {
     this.playlist = options.playlist
     this.playlistTracks = this.playlist.playlistTracks()
-    this.trackId = options.trackId
+    this.track = options.track
     this.listenTo(this.playlistTracks, "add remove", this.render)
+    this.listenTo(this.playlistTracks, "notify", this.showNotification)
 
 
   },
 
   render: function () {
-    var addedState = !!this.playlistTracks.findWhere({ id: this.trackId })
+    var addedState = !!this.playlistTracks.findWhere({ id: this.track.id })
     if (this.playlistTracks && this.playlistTracks.first()) {
       this.playlistImg = this.playlistTracks.first().escape("badge_img")
     }
@@ -36,7 +37,7 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
     $button.attr("added-state", !beforeState)
 
     if (beforeState) {
-      var playlistTrack = this.playlistTracks.findWhere({ id: this.trackId })
+      var playlistTrack = this.playlistTracks.findWhere({ id: this.track.id })
 
       playlistTrack.destroy({
         success: function () {
@@ -47,8 +48,9 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
         }.bind(this)
       })
     } else {
-      this.playlistTracks.create({ track_id: this.trackId}, {
-        success: function () {
+      this.playlistTracks.create({ track_id: this.track.id}, {
+        success: function (model) {
+          model.trigger("notify");
           $button.removeAttr("disabled")
         },
         wait: true,
@@ -57,6 +59,28 @@ Trackstack.Views.PlaylistModalItem = Backbone.View.extend({
         }.bind(this)
       })
     }
-  }
+  },
+
+  showNotification: function (track) {
+    var notify = $("#notification")
+    var view = new Trackstack.Views.Notify({
+      sound: this.track,
+      badgeImg: this.track.escape("badge_img"),
+      type: "Playlist",
+      playlistTitle: this.playlist.escape("title")
+    })
+
+    notify.append(view.render().$el)
+    var alert = view.$(".sound-notification")
+    setTimeout(function () {
+      alert.addClass("active")
+      setTimeout(function () {
+        alert.removeClass("active")
+        alert.on("transitionend",function () {
+          view.remove()
+        })
+      },10000)
+     }, 0)
+   },
 
 })
