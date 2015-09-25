@@ -26,10 +26,12 @@
                 <input name="playlist[title]" type="text" class="form-field"><br>
                 <br>
                 <div>
-                  <div class="new-playlist-track">
-                    <div style="background-img=<%= track.escape('badge_img')%>;"></div>
-                    <span class=""><%= track.escape("author") %></span>
-                    <span class=""><%= track.escape("title") %></span>
+                  <div class="new-playlist-track group">
+                    <div class="track-image left" style="background-image: url(<%= track.escape('badge_img')%>);"></div>
+                    <div class="playlist-track-info" >
+                      <span class="track-author"><%= track.escape("author") %></span><br>
+                      <span class="track-title"><%= track.escape("title") %></span>
+                    </div>
                   </div>
                 </div>
               <button class="button button-orange">Save</button><br>

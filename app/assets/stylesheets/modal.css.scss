@@ -335,18 +335,22 @@
   border-bottom: 0;
 }
 
-.playlist-item .playlist-image {
+.playlist-item .playlist-image,
+.new-playlist-track .track-image {
   height: 50px;
   width: 50px;
   background-size: cover;
   margin-right: 10px;
 }
 
-.playlist-item .playlist-add-wrapper .playlist-add-button {
+.playlist-item .playlist-add-wrapper .playlist-add-button,
+.new-playlist-track .remove-button {
   margin: 0;
   margin-top: 10px;
 }
-.playlist-info .playlist-title {
+
+.playlist-info .playlist-title,
+.new-playlist-track .track-title {
   margin-bottom: 5px;
 }
 
@@ -362,6 +366,20 @@
   content: image-url('tracks_icon.svg');
   height: 16px;
   width: 16px;
+}
+
+.playlist-track-info {
+  position: relative;
+  top: 7px;
+}
+
+.playlist-track-info .track-title {
+  font-family: "Interstate Light";
+  font-size: 14px;
+}
+
+.new-playlist-track {
+  border: 1px solid #aaa;
 }
 
 /* Form */

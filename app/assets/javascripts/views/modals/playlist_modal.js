@@ -22,7 +22,7 @@ Trackstack.Views.PlaylistModal = Backbone.CompositeView.extend({
   addPlaylistSubview: function (playlist) {
     if (!playlist.playlistTracks().length) { playlist.playlistTracks().set(playlist.get("tracks"))}
     var view = new Trackstack.Views.PlaylistModalItem({ playlist: playlist, trackId: this.trackId })
-    this.addSubview("#my-playlists", view)
+    this.addSubview("#my-playlists", view, true)
   },
 
   render: function () {
