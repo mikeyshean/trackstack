@@ -98,12 +98,12 @@
 .profile-cover-photo.background-img {
   width: 1240px;
   height: 260px;
-  background-size: auto 100%;
   position: absolute;
   top: -30px;
   left: -30px;
   opacity: .9;
-  background-size: contain;
+  background-position: center;
+  background-size: cover;
 }
 
 .profile-photo {
@@ -112,6 +112,7 @@
   background-size: auto 100%;
   position: absolute;
   background-size: cover;
+  background-position: center;
 
 }
 
