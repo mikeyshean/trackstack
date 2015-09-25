@@ -7,12 +7,12 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
   User.create({
-    username: "BeliEBEr123",
+    username: "MusicManiac123",
     password_digest: BCrypt::Password.create("password"),
     session_token: "abc",
-    fname: "JdAwg",
-    lname: "beebz",
-    description: Faker::Lorem.paragraph
+    fname: "Track",
+    lname: "Stack",
+    description: "Listen to my playlists! They are theee besstttt!!"
     })
 
   # Users!
@@ -55,8 +55,9 @@
   end
 
   User.first.playlists.create!({title: "Work Out Music", description: "FEEL DA BASS"})
-  User.first.playlists.create!({title: "Chill Songs", description: "ZZZzzZZzz"})
-  User.first.playlists.create!({title: "Gan$ta RaP", description: "Mom's Spaghetti"})
+  User.first.playlists.create!({title: "Straight Chillin'", description: "ZZZzzZZzz"})
+  User.first.playlists.create!({title: "Rap", description: "Mom's Spaghetti"})
+  User.first.playlists.create!({title: "Indie", description: "??"})
   #
   # Playlistings!
   #
