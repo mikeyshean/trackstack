@@ -141,6 +141,16 @@
 }
 .track-upload-buttons {
   padding: 0 60px;
+  position: relative;
+}
+.track-upload-buttons .material-icons {
+  color: #f50;
+  position: absolute;
+  top: -70px;
+  left: 62px;
+}
+.track-upload-buttons #coming-soon .material-icons {
+  color: #ccc;
 }
 
 .track-upload-buttons button:nth-child(2n+1) {
@@ -157,7 +167,7 @@
   content: "Coming soon!";
   font-style: italic;
   position: absolute;
-  top: -65%;
+  top: 120%;
   left: 50%;
   transform: translateX(-50%);
 }

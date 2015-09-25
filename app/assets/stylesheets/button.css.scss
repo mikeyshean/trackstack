@@ -34,6 +34,15 @@
   color: #f50;
 }
 
+.social-buttons-list .button {
+  padding-left: 33px;
+}
+
+.button .icon {
+  position: absolute;
+  left: 10px;
+}
+
 button[data-follow-state="false"]:after {
   content: "Follow";
 

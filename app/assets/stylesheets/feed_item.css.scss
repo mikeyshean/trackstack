@@ -76,7 +76,7 @@
 }
 .submitted-comment {
   position: absolute;
-  top: -31px;
+  top: -65px;
   font-size: 14px;
 }
 
@@ -101,7 +101,7 @@
 .comment-tool-tip {
   content: "";
   display: inline-block;
-  height: 25px;
+  height: 60px;
   border-left: 1px solid #f50;
 }
 
@@ -111,6 +111,16 @@
   background: #f2f2f2;
   padding: 5px;
   margin-left: 40px;
+}
+
+.submitted-comment.track-show {
+  position: absolute;
+  top: -155px;
+  font-size: 14px;
+}
+
+.track-show .comment-tool-tip {
+  height: 122px;
 }
 /* ------------------------------   */
 

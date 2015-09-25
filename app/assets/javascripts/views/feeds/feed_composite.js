@@ -15,9 +15,9 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
 
   addSoundSubviews: function (collection) {
     this.collection.each(function (sound) {
-      if (!this.isEmptyPlaylist(sound)) {
+      // if (!this.isEmptyPlaylist(sound)) {
         this.addSoundSubview(sound)
-      }
+      // }
     }.bind(this))
   },
 

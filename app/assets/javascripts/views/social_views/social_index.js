@@ -27,20 +27,28 @@ Trackstack.Views.SocialIndex = Backbone.CompositeView.extend({
 
   addSoundSubviews: function () {
     this.collection.each(function (model) {
-      var view = new Trackstack.Views.UserFeedItem({ model: model })
-      this.addSubview("#feed", view)
+      this.addSoundSubview(model);
     }.bind(this))
   },
 
   addSoundSubview: function (model) {
-    var view = new Trackstack.Views.UserFeedItem({ model: model })
-    this.addSubview("#feed", view)
+    if (!this.isEmptyPlaylist(model)) {
+      var view = new Trackstack.Views.UserFeedItem({ model: model })
+      this.addSubview("#feed", view)
+    }
   },
 
   render: function () {
     this.$el.html(this.template({ user: this.model, type: this.collectionType }));
     this.attachSubviews();
     return this;
+  },
+
+
+  isEmptyPlaylist: function(model) {
+    return model instanceof Trackstack.Models.Playlist &&
+      model.get("tracks").length === 0
   }
+
 
 });

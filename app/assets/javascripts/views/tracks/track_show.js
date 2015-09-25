@@ -1,5 +1,6 @@
 Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   template: JST['tracks/show'],
+  submittedCommentTemplate: JST['feeds/submitted_comment'],
 
   initialize: function () {
 
@@ -20,16 +21,22 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     "click #track-play": "togglePlay",
     "click .follow-button": "toggleFollowState",
     "click .like-button": "toggleLike",
-    "click .add-to-playlist-button": "triggerModal"
+    "click .add-to-playlist-button": "triggerModal",
+    "click .feed-comment-input": "clearInput",
+    "blur .feed-comment-input": "addPlaceholder",
   },
 
   submitComment: function (e) {
     e.preventDefault();
     var formData = $(e.currentTarget).serializeJSON()
+    var player = this.$(".player")[0]
+    var currentTime = player.currentTime
+
     formData["comment"]["track_id"] = this.model.id
-    formData["comment"]["submitted_at"] = this.$(".player")[0].currentTime
+    formData["comment"]["submitted_at"] = currentTime
     this.comments.create(formData.comment, {
       success: function (model, response) {
+        this.renderComment(model, player);
         this.$(".feed-comment-input")
           .val("")
           .attr("placeholder", "Write a comment...")
@@ -39,6 +46,23 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
       },
       wait: true
     })
+  },
+
+  renderComment: function (comment, player) {
+    var value = 0;
+    if (player.currentTime > 0) {
+      value = Math.floor((player.currentTime / player.duration) * 100)
+    }
+    var el = this.$(".submitted-comment")
+
+    el.html(this.submittedCommentTemplate({ comment: comment }))
+    el.addClass("track-show")
+    el.css("left", value + "%" )
+    el.addClass("transitioning")
+    setTimeout(function () {
+      el.removeClass("transitioning")
+    }, 5000)
+
   },
 
   attachCommentsComposite: function () {
@@ -130,6 +154,10 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     }
   },
 
+  clearInput: function (e) {
+    $(e.currentTarget).prop("placeholder", "")
+  },
+
   triggerModal: function (e) {
     e.preventDefault();
     var view = new Trackstack.Views.PlaylistModal({
@@ -152,4 +180,9 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     var count = this.$("#comment-count").text()
     this.$("#comment-count").text(+count + incr);
   },
+
+  addPlaceholder: function (e) {
+   if ($(e.currentTarget).text().length) { return; }
+   $(e.currentTarget).attr("placeholder", "Write a comment...")
+ },
 });

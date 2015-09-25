@@ -1,5 +1,6 @@
 #audio {
   margin-top: 15px;
+  position: relative;
 }
 
 #progress-bar {
@@ -22,7 +23,7 @@
   height: 28px;
   width: 28px;
   cursor: pointer;
-  top: 7px;
+  top: -47px;
 }
 
 .audio-icon {

@@ -60,12 +60,40 @@ nav a:hover, nav button:hover  {
 }
 
 .nav-dropdown-list a {
-  padding: 10px 20px;
+  padding: 10px 40px;
+  // padding: 8px 10px 8px 33px;
+  // padding-left: 40px;
   text-align: left;
   font-size: 12px;
   letter-spacing: .5px;
+  position: relative;
+}
+.nav-dropdown-list .material-icons {
+  position: absolute;
+  left: 10px;
+  top: 6px;
 }
 
 #user-nav-dropdown li:hover {
   background: #333;
+}
+
+#username {
+  padding-left: 46px;
+  padding-right: 20px;
+  position: relative;
+}
+
+#username .nav-arrow {
+  position: absolute;
+  top: 15px;
+  right: 0;
+}
+#nav .nav-user-photo {
+  width: 26px;
+  height: 26px;
+  background-size: cover;
+  position: absolute;
+  left: 10px;
+  top: 10px;
 }

@@ -31,6 +31,7 @@
               data-like-state="<%= !!sound.likers().findWhere({ id: currentUser.id}) %>"
               data-id="<%= sound.id %>"
               data-sound-type="<%= sound_type %>">
+              <i class="material-icons md-18 icon">&#xE87D;</i>
             </button>
           </li>
 
@@ -40,7 +41,7 @@
             <button
               class="button add-to-playlist-button"
               data-id="<%= sound.id %>">
-                Add to Playlist
+                <i class="material-icons md-18 icon">&#xE03B;</i>Add to Playlist
             </button>
           </li>
           <% }; %>
@@ -60,7 +61,7 @@
           </li>
           <% if (sound_type === "Track") { %>
             <li>
-              <a href="#/tracks/<%= sound.id %>/likes" class="feed-stats-link">
+              <a href="#/tracks/<%= sound.id %>" class="feed-stats-link">
                 <h3 class="feed-stats"><i class="material-icons sound-feed-stats-icon chat">&#xE0CA;</i><strong id="comment-count"><%= sound.comments().length %></strong></h3>
               </a>
             </li>

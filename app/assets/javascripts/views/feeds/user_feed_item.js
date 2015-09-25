@@ -134,13 +134,12 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     var formData = $(e.currentTarget).serializeJSON()
     var player = this.$(".player")[0]
     var currentTime = player.currentTime
-    var duration = player.duration
 
     formData["comment"]["track_id"] = this.sound.id
     formData["comment"]["submitted_at"] = currentTime
     this.sound.comments().create(formData.comment, {
       success: function (model, response) {
-        this.renderComment(model, duration);
+        this.renderComment(model, player);
         this.$(".feed-comment-input")
           .val("")
           .attr("placeholder", "Write a comment...")
@@ -151,15 +150,15 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     })
   },
 
-  renderComment: function (comment, duration) {
-    if (duration) {
-      var delta = comment.get("submitted_at") / duration
+  renderComment: function (comment, player) {
+    var value = 0;
+    if (player.currentTime > 0) {
+      value = Math.floor((player.currentTime / player.duration) * 100)
     }
-    // debugger
     var el = this.$(".submitted-comment")
 
     el.html(this.submittedCommentTemplate({ comment: comment }))
-    el.css("left", (delta * 100) + "%" )
+    el.css("left", value + "%" )
     el.addClass("transitioning")
     setTimeout(function () {
       el.removeClass("transitioning")

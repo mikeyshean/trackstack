@@ -19,7 +19,7 @@
         <li class="left"><a href="#/tracks/new" id="upload">Upload</a></li>
 
         <% if (currentUser.isSignedIn()) { %>
-          <li class="left nav-dropdown" id="user-nav-dropdown" data-id="<%= currentUser.id %>"><a href="#" id="username"><%= currentUser.escape("username") %></a><div class="nav-dropdown-wrapper"></div></li>
+          <li class="left nav-dropdown" id="user-nav-dropdown" data-id="<%= currentUser.id %>"><a href="#" id="username"><div class="nav-user-photo" style="background-image: url(<%= Trackstack.currentUser.escape('img_comment') %>)"></div><%= currentUser.escape("username") %><i class="material-icons md-18 nav-arrow">&#xE313;</i></a><div class="nav-dropdown-wrapper"></div></li>
           <li class="left">
 
 

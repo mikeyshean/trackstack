@@ -43,6 +43,9 @@
 <section class="content-wrapper">
   <div class="content-wrapper-spacer ">
     <div class="comment-form-wrapper group track-show">
+      <div class="submitted-comment">
+
+      </div>
       <div class="feed-comment-container show-comment-container">
         <form class="feed-comment-form show-comment-form">
           <div class="feed-comment-icon show-comment-icon" style="background-image: url(<%= Trackstack.currentUser.escape('img_comment_icon') %>);"></div>
@@ -61,6 +64,7 @@
               data-like-state="<%= !!track.likers().findWhere({ id: Trackstack.currentUser.id }) %>"
               data-id="<%= track.id %>"
               data-sound-type="Track">
+              <i class="material-icons md-18 icon">&#xE87D;</i>
             </button>
           </li>
 
@@ -68,13 +72,13 @@
             <button
               class="button add-to-playlist-button"
               data-id="<%= track.id %>">
-                Add to Playlist
+                <i class="material-icons md-18 icon">&#xE03B;</i>Add to Playlist
             </button>
           </li>
 
-          <li>
+          <!-- <li>
             <button class="button repost-button">Repost</button>
-          </li>
+          </li> -->
         </ul>
       </div>
     </div>
