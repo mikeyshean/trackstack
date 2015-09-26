@@ -26,12 +26,14 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
     if (this.sound instanceof Trackstack.Models.Playlist) {
       this.trackUrl = this.sound.get("tracks")[0].track_url
+      this.trackId = this.sound.get("tracks")[0].id
       this.badgeUrl = this.sound.get("tracks")[0].badge_img
-      this.feedUrl = this.sound.get("tracks")[0].feed_img
+      this.feedImg = this.sound.get("tracks")[0].feed_img
     } else {
       this.trackUrl = this.sound.escape("track_url")
       this.badgeUrl = this.sound.escape("badge_img")
-      this.feedUrl = this.sound.escape("feed_img")
+      this.feedImg = this.sound.escape("feed_img")
+      this.trackId = this.sound.id
       this.comments = this.sound.comments();
     }
 
@@ -53,8 +55,9 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     this.$el.html(this.template({
       sound: this.sound,
       sound_type: this.sound_type,
-      img_url: this.feedUrl,
-      currentUser: Trackstack.currentUser
+      img_url: this.feedImg,
+      currentUser: Trackstack.currentUser,
+      trackId: this.trackId
     }))
     this.delegateEvents();
     this.attachSubviews();

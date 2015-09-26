@@ -3,6 +3,11 @@
   position: relative;
 }
 
+.sound-list-item .feed-photo {
+  position: relative;
+  z-index: 1;
+}
+
 
 .sound-list-item .feed-sound-content {
   padding-left: 136px;
