@@ -7,8 +7,8 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     this.listenTo(this.model, "sync", this.render)
     this.listenTo(this.model.authorFollowers(), "add", this.updateFollowerCount.bind(this, 1))
     this.listenTo(this.model.authorFollowers(), "remove", this.updateFollowerCount.bind(this, -1))
-    this.listenTo(this.model.comments(), "add", this.updateCommentCount.bind(this, 1))
-    this.listenTo(this.model.comments(), "remove", this.updateCommentCount.bind(this, -1))
+    this.listenTo(this.comments, "add", this.updateCommentCount.bind(this, 1))
+    this.listenTo(this.comments, "remove", this.updateCommentCount.bind(this, -1))
     this.listenTo(this.likers, "notify", this.showNotification);
 
     this.attachAudioPlayer();

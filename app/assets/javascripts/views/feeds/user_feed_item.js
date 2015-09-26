@@ -34,7 +34,9 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
       this.badgeUrl = this.sound.escape("badge_img")
       this.feedImg = this.sound.escape("feed_img")
       this.trackId = this.sound.id
+      // debugger
       this.comments = this.sound.comments();
+      // debugger
     }
 
     this.likers = this.sound.likers()

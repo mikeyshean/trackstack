@@ -1,8 +1,8 @@
 # TrackStack
 
-[Heroku link][heroku]
+[Live Demo][heroku]
 
-[heroku]: http://trackstack.herokuapp.com
+[heroku]: http://trackstack.audio
 
 ## Minimum Viable Product
 TrackStack is a clone of SoundCloud built on Rails and Backbone. Users can:
@@ -12,12 +12,12 @@ TrackStack is a clone of SoundCloud built on Rails and Backbone. Users can:
 - [x] Create accounts
 - [x] Create sessions (log in)
 - [x] Follow other users
-- [ ] Upload Tracks
-- [ ] Play Tracks
-- [ ] Create Playlists
-- [ ] Like Tracks/Playlists
-- [ ] View a feed of Tracks/Playlists/Reposts from Followees
-- [ ] Comment on Tracks
+- [x] Upload Tracks
+- [x] Play Tracks
+- [x] Create Playlists
+- [x] Like Tracks/Playlists
+- [x] View a feed of Tracks/Playlists from Followees
+- [x] Comment on Tracks
 
 ## Design Docs
 * [View Wireframes][views]
@@ -78,10 +78,10 @@ Finally, I will use native HTML5 audio for track playback and add CSS to best re
 - [ ] Search by title/tags/genre
 - [ ] Infinite scroll
 - [ ] Reposting
-- [ ] Notifications (likes, followings, reposts)
-- [ ] Reblogging
+- [x] Notifications (likes, playlist adds)
+- [ ] Notifications (followings)
 - [ ] Private Messages
-- [ ] Facebook Authentication
+- [x] Facebook Authentication
 
 [phase-one]: ./docs/phases/phase1.md
 [phase-two]: ./docs/phases/phase2.md

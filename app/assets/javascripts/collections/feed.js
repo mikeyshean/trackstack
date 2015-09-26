@@ -11,9 +11,9 @@ Trackstack.Collections.Feed = Backbone.Collection.extend({
 
   model: function (attrs, options) {
     var type = attrs.sound_type
-    var model = Trackstack.Models[type]
+    var model = new Trackstack.Models[type]
 
-    return new Trackstack.Models[type](model.prototype.parse(attrs.sound))
+    return model.set(model.parse.call(model, attrs.sound))
   },
 
   modelId: function (attrs) {
