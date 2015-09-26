@@ -32,7 +32,6 @@
   left: 50%;
   transform: translateX(-50%);
   width: 500px;
-  // height: 450px;
   height: auto;
   background: #fff;
   border-radius: 5px;
@@ -371,6 +370,10 @@
 .playlist-info .playlist-title,
 .new-playlist-track .track-title {
   margin-bottom: 5px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  max-width: 250px;
 }
 
 .playlist-info .playlist-tracks {

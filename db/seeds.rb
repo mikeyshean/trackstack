@@ -13,7 +13,7 @@
     fname: "Track",
     lname: "Stack",
     description: "Listen to my playlists! They are theee besstttt!!"
-    })
+  })
 
   # Users!
 

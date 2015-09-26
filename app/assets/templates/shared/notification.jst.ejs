@@ -1,13 +1,13 @@
 <li class="sound-notification group">
   <div class="notify-image" style="background-image: url(<%= badgeImg %>)"></div>
   <span class="notify-text">
-    <span class="notify-title">
+    <p class="notify-title">
       <%= sound.escape('title') %>
-    </span><br>
+    </p>
     <% if (type === "Playlist") { %>
-      was added to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>"><%= playlistTitle %></a>.
+      <p>was added to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>"><%= playlistTitle %></a>.</p>
     <% } else { %>
-      was saved to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>/likes">your Collection</a>.
+      <p>was saved to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>/likes">your Collection</a>.</p>
     <% }; %>
   </div>
 </li>
