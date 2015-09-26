@@ -70,8 +70,15 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     })
     $("#modal").html(view.render().$el);
     setTimeout(function () {
+      var background = $(".modal-background")
       $("#playlist-modal").addClass("transitioning")
-      $(".modal-background").addClass("transitioning")
+      background.addClass("transitioning")
+      background.on("click", function () {
+        background.one("transitionend", function () {
+          view.remove();
+        })
+      })
+
     },0)
   },
 
@@ -173,9 +180,9 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   addPlaceholder: function (e) {
    if ($(e.currentTarget).text().length) { return; }
    $(e.currentTarget).attr("placeholder", "Write a comment...")
- },
+  },
 
- showNotification: function () {
+  showNotification: function () {
    var notify = $("#notification")
    var view = new Trackstack.Views.Notify({ sound: this.sound, badgeImg: this.badgeUrl })
 
