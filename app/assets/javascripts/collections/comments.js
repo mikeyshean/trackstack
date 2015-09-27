@@ -1,13 +1,13 @@
 Trackstack.Collections.Comments = Backbone.Collection.extend({
 
   url: function () {
-    return "api/tracks/" + this.track.id + "/comments"
+    return "api/tracks/" + this.trackId + "/comments"
   },
 
   model: Trackstack.Models.Comment,
 
   initialize: function(models, options) {
-    this.track = options.track
+    this.trackId = options.trackId
   }
 
 });

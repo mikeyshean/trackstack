@@ -25,18 +25,18 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     this.sound = this.model;
 
     if (this.sound instanceof Trackstack.Models.Playlist) {
-      this.trackUrl = this.sound.get("tracks")[0].track_url
-      this.trackId = this.sound.get("tracks")[0].id
-      this.badgeUrl = this.sound.get("tracks")[0].badge_img
-      this.feedImg = this.sound.get("tracks")[0].feed_img
+      var firstTrack = this.sound.playlistTracks().first()
+      this.trackUrl = firstTrack.escape("track_url")
+      this.badgeUrl = firstTrack.escape("badge_img")
+      this.feedImg = firstTrack.escape("feed_img")
+      this.trackId = firstTrack.id
     } else {
       this.trackUrl = this.sound.escape("track_url")
       this.badgeUrl = this.sound.escape("badge_img")
       this.feedImg = this.sound.escape("feed_img")
       this.trackId = this.sound.id
-      // debugger
-      this.comments = this.sound.comments();
-      // debugger
+
+      this.comments = this.sound.comments()
     }
 
     this.likers = this.sound.likers()
@@ -50,7 +50,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     this.listenTo(this.likers, "notify", this.showNotification);
     this.listenTo(this.comments, "add", this.updateCommentCount.bind(this, 1));
     this.listenTo(this.comments, "remove", this.updateCommentCount.bind(this, -1));
-    this.listenTo(this.likers, "reset", this.render);
+
   },
 
   render: function () {
@@ -105,7 +105,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
       })
     } else {
       $button.attr("data-like-state", "true")
-      this.likers.create({sound_type: this.sound_type, sound_id: this.sound_id}, {
+      this.likers.create({sound_type: this.sound_type, sound_id: this.sound.id}, {
         success: function (model) {
           this.likers.trigger("notify");
           $button.removeAttr("disabled");
@@ -145,10 +145,10 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     e.preventDefault();
     var formData = $(e.currentTarget).serializeJSON()
     var player = this.$(".player")[0]
-    var currentTime = player.currentTime
 
     formData["comment"]["track_id"] = this.sound.id
-    formData["comment"]["submitted_at"] = currentTime
+    formData["comment"]["submitted_at"] = player.currentTime
+
     this.sound.comments().create(formData.comment, {
       success: function (model, response) {
         this.renderComment(model, player);

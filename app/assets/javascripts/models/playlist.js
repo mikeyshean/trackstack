@@ -1,31 +1,36 @@
 Trackstack.Models.Playlist = Backbone.Model.extend({
   urlRoot: "api/playlists",
 
-  initialize: function (options) {
-    if (options && options.likes) {
-      this.likers().set(options.likes)
-    }
+  parse: function (resp) {
+    if (resp && resp.likers) {
+      this.likers(resp.id).set(resp.likers)
 
-    if (options && options.tracks) {
-      this.playlistTracks().set(options.tracks)
-      delete this.tracks
+      delete resp.likers
     }
+    if (resp && resp.tracks) {
+      this.playlistTracks(resp.id).set(resp.tracks)
+
+      delete resp.tracks
+    }
+    return resp
   },
 
 
-  likers: function () {
+  likers: function (playlistId) {
     if (!this._likers) {
-      this._likers =
-        new Trackstack.Collections.Likers([], { sound: this, sound_type: "Playlist" })
+      this._likers = new Trackstack.Collections.Likers([], {
+        soundId: playlistId,
+        soundType: "Playlist"
+      })
     }
 
     return this._likers;
   },
 
-  playlistTracks: function () {
+  playlistTracks: function (playlistId) {
     if (!this._playlistTracks) {
       this._playlistTracks =
-        new Trackstack.Collections.PlaylistTracks([], { playlist_id: this.id })
+        new Trackstack.Collections.PlaylistTracks([], { playlistId: playlistId })
     }
 
     return this._playlistTracks;

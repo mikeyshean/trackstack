@@ -1,13 +1,13 @@
 Trackstack.Collections.Tracks = Backbone.Collection.extend({
 
   url: function () {
-    return "api/users/" + this.user_id + "/tracks"
+    return "api/users/" + this.userId + "/tracks"
   },
 
   model: Trackstack.Models.Track,
 
   initialize: function(models, options) {
-    this.user_id = options.user_id
-  }
+    this.userId = options.user_id
+  },
 
 });

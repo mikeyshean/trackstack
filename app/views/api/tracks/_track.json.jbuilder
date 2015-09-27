@@ -11,11 +11,11 @@ json.author_id track.author.id
 
 json.commenters do
   json.array! track.comments do |comment|
-    json.partial! "api/comments/comment", { comment: comment, author: false }
+    json.extract! comment, :id
   end
 end
 
-json.likes do
+json.likers do
   json.array! track.likers do |like|
     json.extract! like, :id
   end

@@ -10,7 +10,7 @@ end
 json.author_id playlist.author.id
 json.author playlist.author.username
 
-json.likes do
+json.likers do
   json.array! playlist.likers do |like|
     json.extract! like, :id
   end

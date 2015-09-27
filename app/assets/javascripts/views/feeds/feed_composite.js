@@ -8,16 +8,15 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
   },
 
   render: function () {
+
     this.$el.html(this.template());
     this.attachSubviews();
     return this;
   },
 
-  addSoundSubviews: function (collection) {
+  addSoundSubviews: function () {
     this.collection.each(function (sound) {
-      // if (!this.isEmptyPlaylist(sound)) {
-        this.addSoundSubview(sound)
-      // }
+      this.addSoundSubview(sound)
     }.bind(this))
   },
 
@@ -31,7 +30,7 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
 
   isEmptyPlaylist: function(model) {
     return model instanceof Trackstack.Models.Playlist &&
-      model.get("tracks").length === 0
+      model.playlistTracks().length === 0
   }
 
 });

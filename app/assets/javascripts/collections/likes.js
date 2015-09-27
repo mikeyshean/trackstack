@@ -12,8 +12,7 @@ Trackstack.Collections.Likes = Backbone.Collection.extend({
   model: function (attrs, options) {
     var type = attrs.sound_type
     var model = Trackstack.Models[type]
-
-    return new Trackstack.Models[type](model.prototype.parse(attrs.sound))
+    return new model(attrs, options)
   },
 
   modelId: function (attrs) {

@@ -1,6 +1,9 @@
 Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
+  
   template: JST['tracks/show'],
+
   submittedCommentTemplate: JST['feeds/submitted_comment'],
+
   initialize: function () {
     this.likers = this.model.likers();
 
@@ -103,7 +106,6 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
       follower.destroy({
         success: function (model) {
           $followButton.removeAttr("disabled");
-
         },
         error: function (model, response) {
 
@@ -115,8 +117,6 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
       this.model.authorFollowers().create({followee_id: this.model.get("author_id") }, {
         success: function (model) {
           $followButton.removeAttr("disabled");
-
-
         },
         wait: true,
         error: function (model, response) {

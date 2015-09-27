@@ -14,8 +14,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-    this.totalFeed = options.feed
-    this.currentFeed = options.feed;
+
+    this.currentFeed = this.totalFeed = options.feed
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
     this.tracks.fetch();
@@ -28,7 +28,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.listenTo(this.tracks, "remove", this.updateTrackCount.bind(this, -1));
 
     this.renderMainFeed();
-    
+
     this.feedTypes = {
       "Tracks": this.tracks,
       "Playlists": this.playlists,
@@ -47,9 +47,10 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   renderMainFeed: function () {
-    this.currentFeed.fetch({reset: true});
+    this.currentFeed.fetch({ reset: true })
     this.feedView = new Trackstack.Views.FeedComposite({ collection: this.currentFeed })
     this.addSubview("#feed", this.feedView)
+
   },
 
   swapFeedView: function (e) {
@@ -60,10 +61,12 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     this.feedView && this.feedView.remove();
     var newFeedType = $currentTarget.data("feed-type")
+
     this.currentFeed = this.feedTypes[newFeedType]
     this.currentFeed.fetch({reset: true});
     this.feedView = new Trackstack.Views.FeedComposite({ collection: this.currentFeed })
     this.addSubview("#feed", this.feedView)
+
   },
 
   toggleFollowState: function (e) {
@@ -72,8 +75,6 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     $followButton.attr("disabled", true)
     var beforeState = $followButton.attr("data-follow-state")
     $followButton.toggleClass("button-orange-border")
-
-
 
     if (beforeState === "true") {
       $followButton.attr("data-follow-state", "false")

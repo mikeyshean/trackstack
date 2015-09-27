@@ -41,14 +41,15 @@ Trackstack.Views.Header = Backbone.View.extend({
 
     var $currentTarget = $(e.currentTarget).addClass("active")
     var $dropdown = this.$(".nav-dropdown-wrapper")
+    var that = this
 
     $dropdown.html(this.dropdownTemplate({ currentUserId: Trackstack.currentUser.id }));
     setTimeout(function () {
       $("body").one("click", function (e) {
         $currentTarget.removeClass("active")
-        this.$(".nav-dropdown-wrapper").empty();
-      }.bind(this))
-    }.bind(this), 0);
+        that.$(".nav-dropdown-wrapper").empty();
+      })
+    }, 0);
   },
 
   signOut: function(e){

@@ -75,14 +75,6 @@ Trackstack.Models.User = Backbone.Model.extend({
     return this._likes
   },
 
-  feed: function () {
-    if (!this._feed) {
-      this._feed = new Trackstack.Collections.ProfileFeed([], { user: this })
-    }
-
-    return this._feed
-  },
-
   saveFormData: function(formData, options){
     var method = this.isNew() ? "POST" : "PUT";
     var model = this;
@@ -186,13 +178,3 @@ Trackstack.Models.CurrentUser = Trackstack.Models.User.extend({
   }
 
 });
-
-
-Trackstack.Models.TrackAuthor = Trackstack.Models.User.extend({
-  initialize: function (attrs) {
-    if (attrs && attrs.followers) {
-      this.followers().set(attrs.followers)
-      this.trigger("set")
-    }
-  }
-})

@@ -21,7 +21,6 @@ Trackstack.Views.PlaylistModal = Backbone.CompositeView.extend({
   },
 
   addPlaylistSubview: function (playlist) {
-    if (!playlist.playlistTracks().length) { playlist.playlistTracks().set(playlist.get("tracks"))}
     var view = new Trackstack.Views.PlaylistModalItem({ playlist: playlist, track: this.model })
     this.addSubview("#my-playlists", view, true)
   },
@@ -40,7 +39,7 @@ Trackstack.Views.PlaylistModal = Backbone.CompositeView.extend({
 
     this.collection.create(formData.playlist, {
       success: function (model, response) {
-        if (model.get("tracks").length) {
+        if (model.playlistTracks().length) {
           this.collection.trigger("notify");
         }
         currentTarget.find("input").val("");
@@ -74,7 +73,7 @@ Trackstack.Views.PlaylistModal = Backbone.CompositeView.extend({
         alert.on("transitionend",function () {
           view.remove()
         })
-      },10000)
+      }, 10000)
      }, 0)
    },
 })

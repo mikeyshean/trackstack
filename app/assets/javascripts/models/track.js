@@ -1,19 +1,6 @@
 Trackstack.Models.Track = Backbone.Model.extend({
   urlRoot: "/api/tracks",
 
-  initialize: function(options) {
-    if (options && options.likes) {
-      this.likers().set(options.likes)
-    }
-  },
-
-  comments: function () {
-    if (!this._comments) {
-      this._comments = new Trackstack.Collections.Comments([], { track: this })
-    }
-    return this._comments
-  },
-
   saveFormData: function(formData, options){
     var method = this.isNew() ? "POST" : "PUT";
     var model = this;
@@ -35,10 +22,17 @@ Trackstack.Models.Track = Backbone.Model.extend({
     });
   },
 
-  likers: function () {
+  comments: function (trackId) {
+    if (!this._comments) {
+      this._comments = new Trackstack.Collections.Comments([], { trackId: trackId })
+    }
+    return this._comments
+  },
+
+  likers: function (trackId) {
     if (!this._likers) {
       this._likers =
-        new Trackstack.Collections.Likers([], { sound: this, sound_type: "Track" })
+        new Trackstack.Collections.Likers([], { soundId: trackId, soundType: "Track" })
     }
 
     return this._likers;
@@ -54,16 +48,18 @@ Trackstack.Models.Track = Backbone.Model.extend({
 
   parse: function (resp){
     if (resp && resp.commenters) {
-      this.comments().set(resp.commenters)
+      this.comments(resp.id).set(resp.commenters)
+
       delete resp.commenters
     }
     if (resp && resp.author_followers) {
       this.authorFollowers(resp.author_id).set(resp.author_followers)
+
       delete resp.author_followers
     }
 
     if (resp && resp.likers) {
-      this.likers().set(resp.likers)
+      this.likers(resp.id).set(resp.likers)
     }
 
     return resp;

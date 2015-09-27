@@ -18,11 +18,16 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   index: function () {
     var callback = this.index.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
-    var feed = new Trackstack.Collections.Feed([], { user: Trackstack.currentUser, feedType: "mainfeed" });
-    feed.fetch();
+    var feed = new Trackstack.Collections.Feed([], {
+      user: Trackstack.currentUser,
+      feedType: "mainfeed"
+    });
+
+    feed.fetch({ reset: true })
     var view = new Trackstack.Views.Index({ collection: feed })
 
     this._swapView(view)
+
   },
 
   show: function (id) {
@@ -33,6 +38,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     var feed = new Trackstack.Collections.Feed([], { user: user, feedType: "profilefeed" });
     var view = new Trackstack.Views.UserShow({ model: user, feed: feed });
     user.fetch();
+
     this._swapView(view);
   },
 
@@ -42,6 +48,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     track.fetch({
       success: function (model, response) {
         var view = new Trackstack.Views.TrackShow({ model: model });
+
         this._swapView(view)
       }.bind(this)
     });
@@ -58,6 +65,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
           model: model,
           collection: model.followers(),
           type: "Followers" });
+
         this._swapView(view)
       }.bind(this)
     });
@@ -72,6 +80,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
           model: model,
           collection: model.followees(),
           type: "Following" });
+
         this._swapView(view)
       }.bind(this)
     });
@@ -85,6 +94,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
           model: model,
           collection: model.likes(),
           type: "Likes" });
+
         this._swapView(view)
       }.bind(this)
     });
@@ -98,7 +108,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     this._currentView = view
     this.$rootEl.html(view.render().$el)
 
-    window.scroll(0,0)
+    window.scroll(0, 0)
   },
 
     signIn: function(callback){

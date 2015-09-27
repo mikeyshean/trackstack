@@ -3,7 +3,7 @@ module Api
 
     def create
       liking = Liking.new({user_id: current_user.id,
-        likable_id: params[:id],
+        likable_id: params[:sound_id],
         likeable_type: params[:type]
         })
 

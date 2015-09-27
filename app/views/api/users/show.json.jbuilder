@@ -21,18 +21,11 @@ end
 
 json.likes do
   json.array! @user.likings do |like|
-
-    json.extract! like, :id, :updated_at
-    json.sound_id  like.likable_id
-    json.sound_type like.likable_type
-    json.sound do
-      sound = like.likable
-
-      if sound.class == Track
-        json.partial! "api/tracks/track", track: sound
-      else
-        json.partial! "api/playlists/playlist", playlist: sound
-      end
+    sound = like.likable
+    if sound.class == Track
+      json.partial! "api/tracks/track", track: sound
+    else
+      json.partial! "api/playlists/playlist", playlist: sound
     end
   end
 end
