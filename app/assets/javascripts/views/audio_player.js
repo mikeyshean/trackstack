@@ -55,7 +55,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     wave.on('ready', function () {
       this.$("#progress").addClass("transitioning")
       wave.seekTo(0)
-    });
+    }.bind(this));
 
     wave.on('loading', function (percent, e) {
       this.updateProgress(percent)
