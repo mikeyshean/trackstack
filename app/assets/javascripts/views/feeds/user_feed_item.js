@@ -41,8 +41,8 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
     this.likers = this.sound.likers()
 
-    var audioPlayerView = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl })
-    this.addSubview("#audio-player", audioPlayerView)
+    this.waveSurfer = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl, height: 70 })
+    this.addSubview("#audio-player", this.waveSurfer)
     this.isNotifying = false;
 
     this.listenTo(this.likers, "add", this.updateLikeCount.bind(this, 1));
@@ -144,10 +144,10 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   submitComment: function (e) {
     e.preventDefault();
     var formData = $(e.currentTarget).serializeJSON()
-    var player = this.$(".player")[0]
+    var player = this.waveSurfer.wave
 
     formData["comment"]["track_id"] = this.sound.id
-    formData["comment"]["submitted_at"] = player.currentTime
+    formData["comment"]["submitted_at"] = player.getCurrentTime()
 
     this.sound.comments().create(formData.comment, {
       success: function (model, response) {
@@ -164,8 +164,8 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
   renderComment: function (comment, player) {
     var value = 0;
-    if (player.currentTime > 0) {
-      value = Math.floor((player.currentTime / player.duration) * 100)
+    if (player.getCurrentTime() > 0) {
+      value = Math.floor((player.getCurrentTime() / player.getDuration()) * 100)
     }
     var el = this.$(".submitted-comment")
 

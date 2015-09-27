@@ -12,8 +12,8 @@ class Track < ActiveRecord::Base
     :default_url => ":attachment/track_default.jpg"
 
   validates :author_id, presence: true
-  validates_attachment :img, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
-  validates_attachment :track, content_type: { content_type: [ 'application/mp3', 'application/x-mp3', 'audio/mpeg', 'audio/mp3', 'audio/mp4' ] }
+  validates_attachment_content_type :img, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :track, content_type: /\Aaudio\/.*\Z/
 
   after_save do |track|
     feed = Feed.where("sound_id = :id AND sound_type = :type", { id: track.id, type: track.class }).first

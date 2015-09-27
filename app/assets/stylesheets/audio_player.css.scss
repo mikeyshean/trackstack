@@ -1,19 +1,28 @@
 #audio {
-  margin-top: 15px;
+  margin-top: 11px;
   position: relative;
 }
 
 #progress-bar {
    background: #f50;
    opacity: .2;
-   height: 45px;
-}
-#progress {
+   height: 70px;
    position: absolute;
-   background-color: #f50;
-   height: 45px;
-   transform: translateY(-100%);
+   bottom: -70px;
+}
 
+#progress {
+   background-color: #f50;
+   height: 70px;
+   transform: translateY(-100%);
+   position: absolute;
+   bottom: -70px;
+   opacity: 1;
+}
+
+#progress.transitioning {
+   opacity: 0;
+   transition: opacity .3s ease-in-out;
 }
 
 .audio-button {
@@ -53,10 +62,11 @@
   position: relative;
   height: 100px;
   max-width: 820px;
-  bottom: 120px;
+  bottom: 115px;
 }
 
 #track-show-player #progress,
 #track-show-player #progress-bar {
-  height: 100px;
+  height: 115px;
+  bottom: -119px;
 }

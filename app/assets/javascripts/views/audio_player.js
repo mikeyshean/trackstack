@@ -10,55 +10,72 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
 
   initialize: function (options) {
     this.trackUrl = options.trackUrl || this.model.escape("track_url");
-    this.listenTo(this.model, "sync", this.extractTrackUrl);
+    this.height = options.height
+    // this.listenTo(this.model, "sync", this.extractTrackUrl);
   },
 
   togglePlay: function () {
     var playIcon = this.$(".play-icon");
     var pauseIcon = this.$(".pause-icon");
 
-    if (this.player.paused) {
-      $(".player").each(function () {
-        this.pause();
-      })
-
+    if (!this.wave.isPlaying()) {
       $(".play-icon").show();
       $(".pause-icon").hide();
-      this.player.play();
+
+      this.wave.play();
       playIcon.hide();
       pauseIcon.show();
     } else {
-      this.player.pause();
+      this.wave.pause();
       playIcon.show();
       pauseIcon.hide();
     }
-
-    this.$(".player").on("timeupdate", this.updateProgress.bind(this))
   },
 
-  pause: function () {
-    this.$("#play .audio-icon").hide()
-    this.$("#pause .audio-icon").show()
-    this.player.pause();
-  },
 
   render: function () {
     this.$el.html(this.template({ trackUrl: this.trackUrl }));
-    this.player = this.$el.find(".player")[0];
+
+    var wave = Object.create(WaveSurfer);
+    this.wave = wave
+
+    wave.init({
+        container: this.$('#audio')[0],
+        waveColor: '#666',
+        progressColor: '#f50',
+        barWidth: 2,
+        cursorColor: "#f50",
+        cursorWidth: 0,
+        normalize: true,
+        height: this.height,
+        fillParent: true,
+        hideScrollbar: true
+    });
+
+    wave.on('ready', function () {
+      this.$("#progress").addClass("transitioning")
+      wave.seekTo(0)
+    });
+
+    wave.on('loading', function (percent, e) {
+      this.updateProgress(percent)
+    }.bind(this))
+
+    $(window).resize(_.debounce(function(){
+      wave.drawer.containerWidth = wave.drawer.container.clientWidth;
+      wave.drawBuffer()
+    }, 500));
+
+    wave.load(this.trackUrl);
     return this;
   },
 
-  updateProgress: function () {
-    var player = this.player;
-    var value = 0;
-    if (player.currentTime > 0) {
-      value = Math.floor((player.currentTime / player.duration) * 100)
-    }
-    this.$("#progress").css("width", value + "%")
+  updateProgress: function (percent) {
+    this.$("#progress").css("width", percent + "%")
   },
-
-  extractTrackUrl: function (model) {
-    this.trackUrl = this.model.escape("track_url")
-    this.render();
-  }
+  //
+  // extractTrackUrl: function (model) {
+  //   this.trackUrl = this.model.escape("track_url")
+  //   this.render();
+  // }
 })

@@ -17,6 +17,7 @@
 //= require backbone
 //= require serialize_json
 //= require time_ago
+//= require wave_surfer
 //= require trackstack
 //= require_tree ./utils
 //= require_tree ./plugins

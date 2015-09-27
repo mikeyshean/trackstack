@@ -43,6 +43,9 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   trackShow: function (id) {
+    var callback = this.trackShow.bind(this, id);
+    if (!this._requireSignedIn(callback)) { return; }
+    
     var track = new Trackstack.Models.Track({ id: id });
 
     track.fetch({

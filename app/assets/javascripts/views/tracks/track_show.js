@@ -32,11 +32,11 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   submitComment: function (e) {
     e.preventDefault();
     var formData = $(e.currentTarget).serializeJSON()
-    var player = this.$(".player")[0]
-    var currentTime = player.currentTime
+    var player = this.waveSurfer.wave
+    var currentTime = player.getCurrentTime()
 
     formData["comment"]["track_id"] = this.model.id
-    formData["comment"]["submitted_at"] = currentTime
+    formData["comment"]["submitted_at"] = player.getCurrentTime()
     this.comments.create(formData.comment, {
       success: function (model, response) {
         this.renderComment(model, player);
@@ -53,8 +53,8 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
 
   renderComment: function (comment, player) {
     var value = 0;
-    if (player.currentTime > 0) {
-      value = Math.floor((player.currentTime / player.duration) * 100)
+    if (player.getCurrentTime() > 0) {
+      value = Math.floor((player.getCurrentTime() / player.getDuration()) * 100)
     }
     var el = this.$(".submitted-comment")
 
@@ -72,13 +72,15 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     var view = new Trackstack.Views.CommentComposite({ collection: this.comments })
     this.addSubview("#comments", view)
   },
+
   attachAudioPlayer: function () {
-    var audioPlayerView =
+    this.waveSurfer =
       new Trackstack.Views.AudioPlayer({
         trackUrl: this.model.escape("track_url"),
-        model: this.model
+        model: this.model,
+        height: 110
       })
-    this.addSubview("#track-show-player", audioPlayerView)
+    this.addSubview("#track-show-player", this.waveSurfer)
   },
 
   render: function () {
