@@ -1,5 +1,5 @@
 class Playlist < ActiveRecord::Base
-  has_many :playlistings
+  has_many :playlistings, dependent: :destroy
   has_many :tracks, through: :playlistings
   has_many :feeds, as: :sound, dependent: :destroy
   has_many :likings, as: :likable, dependent: :destroy

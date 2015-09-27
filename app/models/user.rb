@@ -1,30 +1,32 @@
 class User < ActiveRecord::Base
   attr_reader :password
 
-  has_many :out_follows, class_name: "Following", foreign_key: :follower_id
-  has_many :in_follows, class_name: "Following", foreign_key: :followee_id
+  has_many :out_follows, class_name: "Following", foreign_key: :follower_id, dependent: :destroy
+  has_many :in_follows, class_name: "Following", foreign_key: :followee_id, dependent: :destroy
   has_many :followers, through: :in_follows, source: :follower
   has_many :followees, through: :out_follows, source: :followee
-  has_many :playlists, foreign_key: :author_id
-  has_many :tracks, foreign_key: :author_id
-  has_many :playlistings, through: :playlists
+  has_many :playlists, foreign_key: :author_id, dependent: :destroy
+  has_many :tracks, foreign_key: :author_id, dependent: :destroy
+  has_many :playlistings, through: :playlists, dependent: :destroy
   has_many :playlist_tracks, through: :playlistings, source: :track
+  has_many :likings, dependent: :destroy
+  has_many :liked_sounds, through: :likings, source: :likable
+  has_many :feed_sounds, class_name: "Feed", foreign_key: :author_id, dependent: :destroy
+  has_many :comments, foreign_key: :author_id, dependent: :destroy
+
+  validates :username, :password_digest, :session_token, presence: true
+  validates :username, :session_token, uniqueness: true
+  validates :password, length: { minimum: 6, allow_nil: true }
+
   has_attached_file :img, styles: { badge: "50x50", profile: "200x200", comment: "40x40", track_show: "120x120", comment_icon: "20x20"},
     :convert_options => { thumb: "-quality 75 -strip", badge: "-quality 75 -strip", comment: "-quality 75 -strip" },
     :default_url => ":attachment/default.jpg"
   has_attached_file :cover_img, styles: { cover: "1240x260" },
     :default_url => ":attachment/default.jpg"
-
-  has_many :likings
-  has_many :liked_sounds, through: :likings, source: :likable
-  has_many :feed_sounds, class_name: "Feed", foreign_key: :author_id
-  has_many :comments, foreign_key: :author_id
-
-  validates :username, :password_digest, :session_token, presence: true
-  validates :username, :session_token, uniqueness: true
-  validates :password, length: { minimum: 6, allow_nil: true }
-  validates_attachment :img, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
-  validates_attachment :cover_img, content_type: { content_type: ["image/jpeg", "image/gif", "image/png"] }
+  validates_attachment_content_type :img,  content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :cover_img, content_type: /\Aimage\/.*\Z/
+  before_img_post_process :rename_img_file
+  before_cover_img_post_process :rename_cover_img_file
 
   after_initialize :ensure_session_token
 
@@ -97,7 +99,7 @@ class User < ActiveRecord::Base
   end
 
   def stop_liking(likable_id, likable_type)
-    liking = Liking.where(liking_where, {
+    liking = Liking.where(liking_condition, {
           :current_user_id => self.id,
           :likable_id => likable_id,
           :likable_type => likable_type
@@ -108,9 +110,21 @@ class User < ActiveRecord::Base
 
   private
 
-  def liking_where
+  def liking_condition
     "user_id = :current_user_id AND likable_id = :likable_id AND \
     likable_type = :likable_type"
+  end
+
+  def rename_img_file
+    extension = File.extname(img_file_name).gsub(/^\.+/, '')
+    filename = SecureRandom::urlsafe_base64
+    self.img.instance_write(:file_name, "#{filename}.#{extension}")
+  end
+
+  def rename_cover_img_file
+    extension = File.extname(cover_img_file_name).gsub(/^\.+/, '')
+    filename = SecureRandom::urlsafe_base64
+    self.cover_img.instance_write(:file_name, "#{filename}.#{extension}")
   end
 
 end

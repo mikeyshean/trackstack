@@ -11,7 +11,6 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
   initialize: function (options) {
     this.trackUrl = options.trackUrl || this.model.escape("track_url");
     this.height = options.height
-    // this.listenTo(this.model, "sync", this.extractTrackUrl);
   },
 
   togglePlay: function () {
@@ -55,6 +54,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     wave.on('ready', function () {
       this.$("#progress").addClass("transitioning")
       wave.seekTo(0)
+      
       $(window).resize(_.debounce(function(){
         wave.drawer.containerWidth = wave.drawer.container.clientWidth;
         wave.drawBuffer()
@@ -72,9 +72,5 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
   updateProgress: function (percent) {
     this.$("#progress").css("width", percent + "%")
   },
-  //
-  // extractTrackUrl: function (model) {
-  //   this.trackUrl = this.model.escape("track_url")
-  //   this.render();
-  // }
+
 })
