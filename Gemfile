@@ -30,6 +30,7 @@ gem 'paperclip'
 gem 'figaro'
 gem 'aws-sdk', '< 2.0'
 gem 'omniauth-facebook'
+gem 'omniauth-twitter'
 
 
 # Use ActiveModel has_secure_password

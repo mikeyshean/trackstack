@@ -1,5 +1,5 @@
 Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
-  
+
   template: JST['tracks/show'],
 
   submittedCommentTemplate: JST['feeds/submitted_comment'],
@@ -166,8 +166,14 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     })
     $("#modal").html(view.render().$el);
     setTimeout(function () {
+      var background = $(".modal-background")
       $("#playlist-modal").addClass("transitioning")
-      $(".modal-background").addClass("transitioning")
+      background.addClass("transitioning")
+      background.on("click", function () {
+        background.one("transitionend", function () {
+          view.remove();
+        })
+      })
     },0)
   },
 
