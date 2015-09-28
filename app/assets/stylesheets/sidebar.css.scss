@@ -29,24 +29,24 @@
 
 /* Main */
 
-.followable-list li {
+.sidebar-list li {
   padding: 10px 0;
   position: relative;
   top: -40px;
   opacity: 1;
 }
 
-.followable-list li.transitioning {
+.sidebar-list li.transitioning {
   top: 0;
   transition: top 1s ease-in-out;
 }
 
-.followable-list li.fadeout {
+.sidebar-list li.fadeout {
   opacity: 0;
   transition: opacity .6s ease-in-out;
 }
 
-.followable-badges-title {
+.sidebar-badges-title {
   position: relative;
   color: #999;
   font-family: "Interstate Light";
@@ -56,7 +56,7 @@
   z-index: 1;
 }
 
-.followable-list .followable-item-badge {
+.sidebar-list .sidebar-item-badge {
   height: 50px;
   width: 50px;
   background-size: cover;
@@ -64,12 +64,12 @@
   margin-right: 10px;
 }
 
-.followable-item-info {
+.sidebar-item-info {
   position: relative;
   font-family: "Interstate Light";
 }
 
-.followable-item-info .followable-username {
+.sidebar-item-info .followable-username {
   color: #333;
   display: block;
 }

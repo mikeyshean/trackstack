@@ -5,12 +5,14 @@ module Api
       if current_user
          followee_ids = current_user.followees.pluck(:id)
          followee_ids.push(current_user.id)
+
         @followable = User.where.not(id: followee_ids)
           .joins(:in_follows)
           .group("users.id")
           .order("count_follower_id DESC")
           .count(:follower_id)
           .first(3)
+        @likings = current_user.likings.includes(likable: :likings).order("likings.created_at DESC")
         render :show
       else
         render json: {}

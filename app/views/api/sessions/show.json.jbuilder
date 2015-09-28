@@ -10,3 +10,17 @@ json.followables do
     json.username user.username
   end
 end
+
+json.like_count @likings.count
+
+json.likes do
+  json.array! @likings.first(3) do |liking|
+    sound = liking.likable
+
+    if sound.class == Track
+      json.partial! "api/tracks/track", track: sound
+    else
+      json.partial! "api/playlists/playlist", playlist: sound
+    end
+  end
+end

@@ -188,6 +188,6 @@ Trackstack.Models.CurrentUser = Trackstack.Models.User.extend({
     }
 
     return this._followables
-  }
+  },
 
 });

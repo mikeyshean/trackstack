@@ -2,11 +2,10 @@ Trackstack.Views.FollowableItem = Backbone.View.extend({
 
   template: JST['sidebar/followable_item'],
   tagName: "li",
-  className: "followable-item group",
+  className: "sidebar-item group",
 
   initialize: function (options) {
 
-    // this.listenTo(this.model, "sync", this.render)
   },
 
   events: {

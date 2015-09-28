@@ -18,7 +18,6 @@ Trackstack.Views.SidebarComposite = Backbone.CompositeView.extend({
   },
 
   addFollowableView: function (followable) {
-    console.log(followable.id)
     var view = new Trackstack.Views.FollowableItem({ model: followable, collection: this.followables })
     this.addSubview(".followable-list", view, true)
     setTimeout(function () {
