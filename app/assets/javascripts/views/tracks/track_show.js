@@ -6,6 +6,7 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.likers = this.model.likers();
+    this.comments = this.model.comments()
 
     this.listenTo(this.model, "sync", this.render)
     this.listenTo(this.model.authorFollowers(), "add", this.updateFollowerCount.bind(this, 1))
@@ -15,7 +16,6 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     this.listenTo(this.likers, "notify", this.showNotification);
 
     this.attachAudioPlayer();
-    this.comments = this.model.comments()
     this.attachCommentsComposite()
   },
 
@@ -39,6 +39,7 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     formData["comment"]["submitted_at"] = player.getCurrentTime()
     this.comments.create(formData.comment, {
       success: function (model, response) {
+        debugger
         this.renderComment(model, player);
         this.$(".feed-comment-input")
           .val("")

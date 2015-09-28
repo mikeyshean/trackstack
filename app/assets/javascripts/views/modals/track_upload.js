@@ -91,7 +91,7 @@ Trackstack.Views.TrackUpload = Backbone.View.extend({
     this.model.saveFormData(formData, {
       success: function (model) {
         $(".modal-background").click();
-        Backbone.history.navigate("#/tracks/" + model.id)
+        Backbone.history.navigate("#/tracks/" + model.id, {trigger: true})
       },
       error: function (model, response) {
         alert("Looks like something went wrong.  Please try again.")
