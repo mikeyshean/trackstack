@@ -56,7 +56,7 @@ Trackstack.Views.SignIn = Backbone.View.extend({
   },
 
   signInDemo: function (e) {
-    var username = "BeliEBEr",
+    var username = "MusicLover123",
         password = "password",
         that = this;
 
