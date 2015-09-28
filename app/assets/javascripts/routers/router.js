@@ -22,7 +22,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
       user: Trackstack.currentUser,
       feedType: "mainfeed"
     });
-
+    
     feed.fetch({ reset: true })
     var view = new Trackstack.Views.Index({ collection: feed })
 
@@ -45,7 +45,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   trackShow: function (id) {
     var callback = this.trackShow.bind(this, id);
     if (!this._requireSignedIn(callback)) { return; }
-    
+
     var track = new Trackstack.Models.Track({ id: id });
 
     track.fetch({
