@@ -1,0 +1,148 @@
+
+.sidebar {
+  position: absolute;
+
+  width: 300px;
+  top: 0;
+  right: 0;
+  min-height: 600px;
+  font-size: 14px;
+}
+
+.sidebar-title-icons.material-icons {
+  top: 7px;
+  position: absolute;
+}
+
+.sidebar .sidebar-refresh {
+  position: relative;
+}
+.sidebar-title-icons.material-icons.refresh-icon {
+  top: -4px;
+  left: -20px;
+  position: absolute;
+}
+
+.sidebar-title {
+  margin-left: 20px;
+}
+
+/* Main */
+
+.followable-list li {
+  padding: 10px 0;
+  position: relative;
+  top: -40px;
+  opacity: 1;
+}
+
+.followable-list li.transitioning {
+  top: 0;
+  transition: top 1s ease-in-out;
+}
+
+.followable-list li.fadeout {
+  opacity: 0;
+  transition: opacity .6s ease-in-out;
+}
+
+.followable-badges-title {
+  position: relative;
+  color: #999;
+  font-family: "Interstate Light";
+  padding: 10px 0 7px 0;
+  border-bottom: 1px solid #f2f2f2;
+  background: #fff;
+  z-index: 1;
+}
+
+.followable-list .followable-item-badge {
+  height: 50px;
+  width: 50px;
+  background-size: cover;
+  float: left;
+  margin-right: 10px;
+}
+
+.followable-item-info {
+  position: relative;
+  font-family: "Interstate Light";
+}
+
+.followable-item-info .followable-username {
+  color: #333;
+  display: block;
+}
+
+.track-count.sidebar-item-icon {
+  content: image-url('tracks_icon.svg');
+  height: 16px;
+  width: 16px;
+}
+
+.sidebar .sidebar-stats {
+  color: #999;
+  font-size: 12px;
+}
+
+.sidebar-stats .sidebar-stats-count {
+  margin: 0 7px 0 3px;
+}
+
+.sidebar-stats .sidebar-item-icon {
+  position: relative;
+  top: 3px;
+}
+
+.sidebar-stats .material-icons {
+  top: 4px;
+}
+
+
+.sidebar .button.small {
+  position: relative;
+  top: 14px;
+}
+
+/* User Show */
+
+.user-stats-table {
+  color: #999;
+  width: 100%;
+  margin-bottom: 15px;
+
+}
+
+.user-stats-table td {
+  width: 33.33%;
+}
+
+.user-stats-table td:nth-child(2) {
+  border-right: 1px solid #f2f2f2;
+  border-left: 1px solid #f2f2f2;
+}
+
+.user-stats-table td:nth-child(1n + 2) {
+  padding-left: 10px;
+}
+
+.info-stats-title {
+  font-size: 14px;
+  letter-spacing: .6px;
+}
+
+.info-stats-count {
+  font-size: 24px;
+  letter-spacing: .6px;
+  margin-top: 0px;
+}
+
+.user-stats-table a:hover {
+  color: #333;
+}
+
+.user-description {
+  font-size: 12px;
+  font-family: "Interstate Light";
+  letter-spacing: .5px;
+}

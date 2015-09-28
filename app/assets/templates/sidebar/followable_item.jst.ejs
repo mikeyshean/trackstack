@@ -1,0 +1,13 @@
+
+<div class="followable-item-badge" style="background-image: url(<%= user.escape('badge_img') %>);"></div>
+
+<div class="followable-item-info">
+  <div class="user-info left">
+    <span class="followable-username"><a href="#/users/<%= user.id %>"><%= user.escape("username") %></a></span>
+    <div class="sidebar-stats">
+      <i class="material-icons md-18 sidebar-item-icon">&#xE7EF;</i><span class="sidebar-stats-count"><%= user.escape("follower_count") %></span>
+      <span class="track-count sidebar-item-icon"></span><span class="sidebar-stats-count"><%= user.escape("track_count") %></span>
+    </div>
+  </div>
+  <button class="button follow-button small right" data-follow-state="false"></button>
+</div>

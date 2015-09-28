@@ -4,7 +4,7 @@ module Api
      def show
       if current_user
          followee_ids = current_user.followees.pluck(:id)
-
+         followee_ids.push(current_user.id)
         @followable = User.where.not(id: followee_ids)
           .joins(:in_follows)
           .group("users.id")

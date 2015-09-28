@@ -27,6 +27,11 @@ Trackstack.Models.User = Backbone.Model.extend({
       delete response.likes;
     }
 
+    if (response.followables) {
+      this.followables().set(response.followables);
+      delete response.followables;
+    }
+
     return response;
   },
 
@@ -175,6 +180,14 @@ Trackstack.Models.CurrentUser = Trackstack.Models.User.extend({
     } else {
       this.trigger("signOut");
     }
+  },
+
+  followables: function () {
+    if (!this._followables) {
+      this._followables = new Trackstack.Collections.Followables()
+    }
+
+    return this._followables
   }
 
 });

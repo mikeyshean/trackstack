@@ -38,5 +38,7 @@ Rails.application.routes.draw do
         delete "tracks/:track_id", to: "playlistings#destroy"
       end
     end
+
+    get "followables", to: "users#followables"
   end
 end
