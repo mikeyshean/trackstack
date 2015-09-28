@@ -108,6 +108,8 @@
   display: inline-block;
   height: 60px;
   border-left: 1px solid #f50;
+  z-index: 1;
+  position: relative;
 }
 
 /* Comment form for Track Show page */
@@ -120,12 +122,12 @@
 
 .submitted-comment.track-show {
   position: absolute;
-  top: -155px;
+  top: -127px;
   font-size: 14px;
 }
 
 .track-show .comment-tool-tip {
-  height: 122px;
+  height: 100px;
 }
 /* ------------------------------   */
 

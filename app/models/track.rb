@@ -12,7 +12,7 @@ class Track < ActiveRecord::Base
     :convert_options => { badge: "-quality 75 -strip" },
     :default_url => ":attachment/track_default.jpg"
 
-  validates :title, :author_id, presence: true
+  validates :author_id, presence: true
   validates_attachment_content_type :img, content_type: /\Aimage\/.*\Z/
   validates_attachment_content_type :track, content_type: /\Aaudio\/.*\Z/
   before_img_post_process :rename_img_file

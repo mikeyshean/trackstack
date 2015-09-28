@@ -174,7 +174,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     el.addClass("transitioning")
     setTimeout(function () {
       el.removeClass("transitioning")
-    }, 5000)
+    }, 7000)
 
   },
 

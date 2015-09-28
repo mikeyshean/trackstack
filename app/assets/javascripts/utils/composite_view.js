@@ -63,6 +63,7 @@ Backbone.CompositeView = Backbone.View.extend({
   remove: function () {
     Backbone.View.prototype.remove.call(this);
     this.eachSubview(function (subview) {
+      subview.wave && subview.wave.destroy();
       subview.remove();
     });
   },
