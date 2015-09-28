@@ -20,20 +20,21 @@
       <article id="signin-content" class="active tab-content-item">
 
         <div class="omniauth group">
-          <a href="/auth/facebook" class="facebook left"><img id="facebook-icon" width="175px" height="39px"></a>
-          <a href="/auth/twitter" class="twitter right"><img id="twitter-icon" width="165px" height="30px"></a>
+          <a href="/auth/facebook" class="facebook left"><img id="facebook-icon" width="185px" height="30px"></a>
+          <a href="/auth/twitter" class="twitter right"><img id="twitter-icon" width="180px" height="30px"></a>
           <i>or</i>
         </div>
 
 
         <form action="/session" id="signin-form" method="post">
           <label class="input-label">Your username:</label><br>
-            <input name="user[username]" type="text" class="form-field"><br>
+            <input id="username-signin" name="user[username]" type="text" class="form-field"><br>
           <br>
           <label class="input-label">Your password:</label><br>
-          <input name="user[password]" type="password" class="form-field"><br>
+          <input id="password" name="user[password]" type="password" class="form-field"><br>
           <button class="button button-orange">Sign In</button><br>
         </form>
+        <button class="button" id="demo-signin">Demo Account</button>
 
       </article>
       <article id="create-account-content" class="tab-content-item" >

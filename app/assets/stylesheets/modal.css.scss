@@ -104,12 +104,8 @@
 
 }
 
-.omniauth .twitter {
-  bottom: -4px;
-  right: 10px;
-}
-.omniauth .facebook {
-  left: 10px;
+.omniauth a {
+  top: 4px;
 }
 
 .omniauth i {
@@ -128,6 +124,15 @@
 }
 #twitter-icon {
   content: image-url('twitter_login.png');
+}
+
+#demo-signin {
+  margin-top: 20px;
+  border: 1px solid #f50;
+  color: #f50;
+}
+#demo-signin:hover {
+
 }
 
 /* Track Upload */
