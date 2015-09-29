@@ -47,7 +47,7 @@ Trackstack.Views.SocialIndex = Backbone.CompositeView.extend({
 
   isEmptyPlaylist: function(model) {
     return model instanceof Trackstack.Models.Playlist &&
-      model.get("tracks").length === 0
+      model.playlistTracks().length === 0
   }
 
 

@@ -1,13 +1,15 @@
 
-<div class="sidebar-item-badge" style="background-image: url(<%= user.escape('badge_img') %>);"></div>
+<div class="sidebar-item-badge" style="background-image: url(<%= sound.escape('badge_img') %>);"></div>
 
 <div class="sidebar-item-info">
   <div class="user-info left">
-    <span class="followable-username"><a href="#/users/<%= user.id %>"><%= user.escape("username") %></a></span>
+    <span class="like-author"><a href="#/users/<%= sound.escape('author_id')%>"><%= sound.escape("author") %></a></span>
+    <span class="like-title"><a href="#/tracks/<%= trackId %>"><%= sound.escape("title") %></a></span>
     <div class="sidebar-stats">
-      <i class="material-icons md-18 sidebar-item-icon">&#xE7EF;</i><span class="sidebar-stats-count"><%= user.escape("follower_count") %></span>
-      <span class="track-count sidebar-item-icon"></span><span class="sidebar-stats-count"><%= user.escape("track_count") %></span>
+      <i class="material-icons md-18 sidebar-item-icon">&#xE87D;</i><span class="sidebar-stats-count" id="like-count"><%= sound.likers().length %></span>
+      <% if (sound.get("sound_type") === "Track") {  %>
+        <i class="material-icons md-18 sidebar-item-icon">&#xE0CA;</i><span class="sidebar-stats-count" id="comment-count"><%= sound.comments().length %></span>
+      <% }; %>
     </div>
   </div>
-  <button class="button follow-button small right" data-follow-state="false"></button>
 </div>

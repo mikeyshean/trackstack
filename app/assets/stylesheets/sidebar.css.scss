@@ -9,6 +9,11 @@
   font-size: 14px;
 }
 
+.sidebar-wrapper {
+  height: 242px;
+  margin-bottom: 20px;
+}
+
 .sidebar-title-icons.material-icons {
   top: 7px;
   position: absolute;
@@ -69,9 +74,21 @@
   font-family: "Interstate Light";
 }
 
-.sidebar-item-info .followable-username {
+.sidebar-item-info .followable-username,
+.sidebar-item-info .like-username,
+.sidebar-item-info .like-author, {
   color: #333;
   display: block;
+}
+.sidebar-item-info .like-author, {
+  font-size: 12px;
+  color: #999;
+  margin-bottom: 5px;
+}
+.sidebar-item-info .like-title,
+.sidebar-item-info .followable-username {
+  font-family: "Interstate";
+  color: #333;
 }
 
 .track-count.sidebar-item-icon {
