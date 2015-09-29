@@ -40,7 +40,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
 
     wave.init({
         container: this.$('#audio')[0],
-        waveColor: '#666',
+        waveColor: '#919191',
         progressColor: '#f50',
         barWidth: 2,
         cursorColor: "#f50",
@@ -54,7 +54,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     wave.on('ready', function () {
       this.$("#progress").addClass("transitioning")
       wave.seekTo(0)
-      
+
       $(window).resize(_.debounce(function(){
         wave.drawer.containerWidth = wave.drawer.container.clientWidth;
         wave.drawBuffer()
