@@ -8,6 +8,7 @@ Trackstack.Views.SidebarComposite = Backbone.CompositeView.extend({
 
     this.listenTo(this.followables, "add", this.addFollowableView)
     this.listenTo(this.followables, "remove", this.fetchFollowable)
+
     this.addFollowableSubviews();
     this.addLikeSubviews();
   },

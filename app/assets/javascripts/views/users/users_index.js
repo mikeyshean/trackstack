@@ -4,18 +4,22 @@ Trackstack.Views.Index = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.listenTo(this.collection, "sync", this.render)
-    this.listenTo(Trackstack.currentUser, "sync", this.render)
 
     var feedView = new Trackstack.Views.FeedComposite({collection: this.collection, feedType: "All"})
-    var sidebarView = new Trackstack.Views.SidebarComposite()
-
     this.addSubview("#feed", feedView)
-    this.addSubview(".sidebar", sidebarView)
+
+    this.addSidebar()
   },
 
   render: function () {
     this.$el.html(this.template({ user: Trackstack.currentUser }))
     this.attachSubviews();
     return this;
+  },
+
+  addSidebar: function () {
+    var sidebarView = new Trackstack.Views.SidebarComposite()
+    this.addSubview(".sidebar", sidebarView)
   }
+
 });

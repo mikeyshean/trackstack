@@ -18,16 +18,20 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   index: function () {
     var callback = this.index.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
-    var feed = new Trackstack.Collections.Feed([], {
-      user: Trackstack.currentUser,
-      feedType: "mainfeed"
+
+    Trackstack.currentUser.fetch({
+      success: function (model) {
+        var feed = new Trackstack.Collections.Feed([], {
+          user: model,
+          feedType: "mainfeed"
+        })
+
+        feed.fetch({ reset: true })
+        var view = new Trackstack.Views.Index({ collection: feed, model: model })
+
+        this._swapView(view)
+      }.bind(this),
     });
-    
-    feed.fetch({ reset: true })
-    var view = new Trackstack.Views.Index({ collection: feed })
-
-    this._swapView(view)
-
   },
 
   show: function (id) {
