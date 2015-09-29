@@ -151,7 +151,7 @@ Trackstack.Models.CurrentUser = Trackstack.Models.User.extend({
       data: credentials,
       dataType: "json",
       success: function(data){
-        model.set(model.parse.call(this, data));
+        model.set(data);
         options.success && options.success();
       },
       error: function(){

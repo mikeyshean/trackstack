@@ -1,7 +1,7 @@
 json.partial! "api/users/user", user: current_user
 
 json.followables do
-  json.array! @followable do |followable|
+  json.array! @followables do |followable|
     user = User.find(followable[0])
     json.id followable[0]
     json.follower_count followable[1]

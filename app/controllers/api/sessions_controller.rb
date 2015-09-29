@@ -3,16 +3,10 @@ module Api
 
      def show
       if current_user
-         followee_ids = current_user.followees.pluck(:id)
-         followee_ids.push(current_user.id)
 
-        @followable = User.where.not(id: followee_ids)
-          .joins(:in_follows)
-          .group("users.id")
-          .order("count_follower_id DESC")
-          .count(:follower_id)
-          .first(3)
-        @likings = current_user.likings.includes(likable: :likings).order("likings.created_at DESC")
+
+        @followables = followables
+        @likings = likables
         render :show
       else
         render json: {}
@@ -27,6 +21,8 @@ module Api
 
       if @user
         sign_in!(@user)
+        @followables = followables
+        @likings = likables
         render :show
       else
         head :unprocessable_entity
@@ -42,6 +38,22 @@ module Api
       user = User.find_or_create_by(auth_hash)
       sign_in!(user)
       redirect_to root_url
+    end
+
+    def followables
+      followee_ids = current_user.followees.pluck(:id)
+      followee_ids.push(current_user.id)
+      
+      User.where.not(id: followee_ids)
+        .joins(:in_follows)
+        .group("users.id")
+        .order("count_follower_id DESC")
+        .count(:follower_id)
+        .first(3)
+    end
+
+    def likables
+      current_user.likings.includes(likable: :likings).order("likings.created_at DESC")
     end
 
     private
