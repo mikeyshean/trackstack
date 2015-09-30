@@ -66,7 +66,7 @@ Trackstack.Views.SignIn = Backbone.View.extend({
       if (i > username.length) {
         clearInterval(nameInterval)
       }
-    }, 100)
+    }, 90)
 
     setTimeout(function () {
       var j = 0
@@ -77,7 +77,7 @@ Trackstack.Views.SignIn = Backbone.View.extend({
 
           setTimeout(function () {
             that.$("#signin-form").submit();
-          }, 800)
+          }, 700)
         }
       }, 100)
     },0)
