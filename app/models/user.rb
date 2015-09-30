@@ -20,13 +20,13 @@ class User < ActiveRecord::Base
 
   has_attached_file :img, styles: { badge: "50x50", profile: "200x200", comment: "40x40", track_show: "120x120", comment_icon: "20x20"},
     :convert_options => { thumb: "-quality 75 -strip", badge: "-quality 75 -strip", comment: "-quality 75 -strip" },
-    :default_url => ":attachment/default.jpg"
+    :default_url => ":attachment/default.jpg",
+    :path => "imgs/:class/:id_:timestamp.:style.:extension"
   has_attached_file :cover_img, styles: { cover: "1240x260" },
-    :default_url => ":attachment/default.jpg"
+    :default_url => ":attachment/default.jpg",
+    :path => "cover_imgs/:class/:id_:timestamp.:style.:extension"
   validates_attachment_content_type :img,  content_type: /\Aimage\/.*\Z/
   validates_attachment_content_type :cover_img, content_type: /\Aimage\/.*\Z/
-  before_img_post_process :rename_img_file
-  before_cover_img_post_process :rename_cover_img_file
 
   after_initialize :ensure_session_token
 
@@ -113,18 +113,6 @@ class User < ActiveRecord::Base
   def liking_condition
     "user_id = :current_user_id AND likable_id = :likable_id AND \
     likable_type = :likable_type"
-  end
-
-  def rename_img_file
-    extension = File.extname(img_file_name).gsub(/^\.+/, '')
-    filename = SecureRandom::urlsafe_base64
-    self.img.instance_write(:file_name, "#{filename}.#{extension}")
-  end
-
-  def rename_cover_img_file
-    extension = File.extname(cover_img_file_name).gsub(/^\.+/, '')
-    filename = SecureRandom::urlsafe_base64
-    self.cover_img.instance_write(:file_name, "#{filename}.#{extension}")
   end
 
 end
