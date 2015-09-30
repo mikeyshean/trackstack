@@ -58,7 +58,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
       $(window).resize(_.debounce(function(){
         wave.drawer.containerWidth = wave.drawer.container.clientWidth;
         wave.drawBuffer()
-      }, 500));
+      }, 700));
     }.bind(this));
 
     wave.on('loading', function (percent, e) {
