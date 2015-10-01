@@ -38,6 +38,8 @@ Trackstack.Views.Header = Backbone.View.extend({
 
   showDropdown: function (e) {
     e.preventDefault();
+    if (this.dropdownActive) { return; }
+    this.dropdownActive = true
 
     var $currentTarget = $(e.currentTarget).addClass("active")
     var $dropdown = this.$(".nav-dropdown-wrapper")
@@ -48,6 +50,7 @@ Trackstack.Views.Header = Backbone.View.extend({
       $("body").one("click", function (e) {
         $currentTarget.removeClass("active")
         that.$(".nav-dropdown-wrapper").empty();
+        that.dropdownActive = false
       })
     }, 0);
   },
