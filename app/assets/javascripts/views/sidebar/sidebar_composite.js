@@ -1,6 +1,6 @@
 Trackstack.Views.SidebarComposite = Backbone.CompositeView.extend({
 
-  template: JST['sidebar/main'],
+  template: JST['sidebar/sidebar'],
 
   initialize: function (options) {
     this.followables = Trackstack.currentUser.followables();
@@ -8,6 +8,8 @@ Trackstack.Views.SidebarComposite = Backbone.CompositeView.extend({
 
     this.listenTo(this.followables, "add", this.addFollowableView)
     this.listenTo(this.followables, "remove", this.fetchFollowable)
+    this.listenTo(this.likes, "add", this.updateLikeCount.bind(this, 1))
+    this.listenTo(this.likes, "remove", this.updateLikeCount.bind(this, -1))
 
     this.addFollowableSubviews();
     this.addLikeSubviews();
@@ -15,7 +17,7 @@ Trackstack.Views.SidebarComposite = Backbone.CompositeView.extend({
 
   render: function () {
 
-    this.$el.html(this.template());
+    this.$el.html(this.template({ likes: this.likes }));
     this.attachSubviews();
     return this;
   },
@@ -36,12 +38,21 @@ Trackstack.Views.SidebarComposite = Backbone.CompositeView.extend({
 
   addLikeSubviews: function () {
     this.likes.each(function (like) {
-      var view = new Trackstack.Views.LikeItem({ model: like })
-      this.addSubview(".likes-list", view)
-      setTimeout(function () {
-        view.$el.addClass("transitioning")
-      }, 0)
+      this.addLikeSubview(like)
     }.bind(this))
+  },
+
+  addLikeSubview: function (model) {
+    var view = new Trackstack.Views.LikeItem({ model: model })
+    this.addSubview(".likes-list", view)
+    setTimeout(function () {
+      view.$el.addClass("transitioning")
+    }, 0)
+  },
+
+  updateLikeCount: function (incr) {
+    var count = this.$("#user-likes-count").text()
+    this.$("#user-likes-count").text(+count + incr);
   },
 
   fetchFollowable: function (model) {

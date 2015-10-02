@@ -99,9 +99,10 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
       var liker = this.likers.findWhere({ id: Trackstack.currentUser.id })
 
       liker.destroy({
-        success: function () {
+        success: function (model) {
           $button.removeAttr("disabled");
-        }
+          Trackstack.currentUser.likes().remove(this.sound)
+        }.bind(this)
       })
     } else {
       $button.attr("data-like-state", "true")
@@ -109,6 +110,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
         success: function (model) {
           this.likers.trigger("notify");
           $button.removeAttr("disabled");
+          Trackstack.currentUser.likes().add(this.sound)
         }.bind(this)
       })
     }
