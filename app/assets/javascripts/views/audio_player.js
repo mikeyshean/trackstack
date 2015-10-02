@@ -94,8 +94,8 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
       }
 
       $(window).resize(_.debounce(function(){
-        wave.drawer.containerWidth = wave.drawer.container.clientWidth;
-        wave.drawBuffer()
+        this.wave.drawer.containerWidth = wave.drawer.container.clientWidth;
+        this.wave.drawBuffer()
       }, 700));
     }.bind(this));
 
@@ -111,6 +111,8 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
         }
       }
       this.showPlay();
+      $("#track-play .play-icon").show();
+      $("#track-play .pause-icon").hide();
     }.bind(this));
   },
 
