@@ -6,7 +6,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     "users/:id/followers": "followersIndex",
     "users/:id/following": "followingIndex",
     "users/:id/likes": "likesIndex",
-    "users/:id": "show",
+    "users/:id/:type": "show",
     "session/new": "signIn",
     "tracks/:id": "trackShow"
   },
@@ -34,16 +34,18 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     });
   },
 
-  show: function (id) {
-    var callback = this.show.bind(this, id);
+  show: function (id, type) {
+    var callback = this.show.bind(this, id, type);
     if (!this._requireSignedIn(callback)) { return; }
-
     var user = new Trackstack.Models.User({id: id});
     var feed = new Trackstack.Collections.Feed([], { user: user, feedType: "profilefeed" });
-    var view = new Trackstack.Views.UserShow({ model: user, feed: feed });
+    var view = new Trackstack.Views.UserShow({ model: user, totalFeed: feed, feedType: type });
     user.fetch();
 
     this._swapView(view);
+    setTimeout(function () {
+      view.$el.find("#" + type).addClass("active")
+    }, 0)
   },
 
   trackShow: function (id) {

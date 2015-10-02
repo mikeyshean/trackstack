@@ -8,7 +8,6 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
   },
 
   render: function () {
-
     this.$el.html(this.template());
     this.attachSubviews();
     return this;

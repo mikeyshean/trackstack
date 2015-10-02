@@ -14,12 +14,11 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   },
 
   initialize: function (options) {
-
-    this.currentFeed = this.totalFeed = options.feed
+    this.totalFeed = options.totalFeed
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
-    this.tracks.fetch();
     this.playlists = this.model.playlists();
+    this.tracks.fetch();
 
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.followers, "add", this.updateFollowerCount.bind(this, 1));
@@ -27,30 +26,31 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.listenTo(this.tracks, "add", this.updateTrackCount.bind(this, 1));
     this.listenTo(this.tracks, "remove", this.updateTrackCount.bind(this, -1));
 
-    this.renderMainFeed();
-
     this.feedTypes = {
-      "Tracks": this.tracks,
-      "Playlists": this.playlists,
-      "All": this.totalFeed
-    }
+      "tracks": this.tracks,
+      "playlists": this.playlists,
+      "all": this.totalFeed
+    };
+
+    this.currentFeed = this.feedTypes[options.feedType]
+    this.currentFeedType = options.feedType
+    this.renderMainFeed(this.currentFeedType);
   },
 
   render: function () {
     this.$el.html(this.template({ user: this.model, currentUser: Trackstack.currentUser }));
     this.$el.append(this.modalProfileTemplate({user: this.model }));
     this.$el.append(this.modalCoverTemplate({user: this.model }));
-
     this.attachSubviews()
-
+    this.$("#" + this.currentFeedType).addClass("active")
     return this;
   },
 
   renderMainFeed: function () {
     this.currentFeed.fetch({ reset: true })
+
     this.feedView = new Trackstack.Views.FeedComposite({ collection: this.currentFeed })
     this.addSubview("#feed", this.feedView)
-
   },
 
   swapFeedView: function (e) {

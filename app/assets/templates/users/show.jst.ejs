@@ -42,9 +42,9 @@
   <div class="user-tabs-wrapper">
     <div class="user-tabs-container group">
       <ul class="user-tabs-list left">
-        <li class="left"><a class="active feed-links" href="#" data-feed-type="All">All</a></li>
-        <li class="left"><a class="feed-links" href="#" data-feed-type="Tracks">Tracks</a></li>
-        <li class="left"><a class="feed-links" href="#" data-feed-type="Playlists">Playlists</a></li>
+        <li class="left"><a class="feed-links" id="all" href="#" data-feed-type="all">All</a></li>
+        <li class="left"><a class="feed-links" id="tracks" href="#" data-feed-type="tracks">Tracks</a></li>
+        <li class="left"><a class="feed-links" id="playlists" href="#" data-feed-type="playlists">Playlists</a></li>
 
       </ul>
       <% if (user.id !== currentUser.id) { %>
