@@ -44,13 +44,19 @@ Trackstack.Views.SidebarComposite = Backbone.CompositeView.extend({
 
   addLikeSubview: function (model) {
     var view = new Trackstack.Views.LikeItem({ model: model })
-    this.addSubview(".likes-list", view)
+    this.addSubview(".likes-list", view, true)
     setTimeout(function () {
       view.$el.addClass("transitioning")
     }, 0)
   },
 
-  updateLikeCount: function (incr) {
+  updateLikeCount: function (incr, model) {
+    if (incr === 1) {
+      this.addLikeSubview(model)
+    } else {
+      this.removeModelSubview(".likes-list", model)
+    }
+
     var count = this.$("#user-likes-count").text()
     this.$("#user-likes-count").text(+count + incr);
   },
