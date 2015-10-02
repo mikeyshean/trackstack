@@ -61,7 +61,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     this.feedView && this.feedView.remove();
     var newFeedType = $currentTarget.data("feed-type")
-
+    window.history.pushState(null, null,"#/users/" + this.model.id + "/" + newFeedType)
     this.currentFeed = this.feedTypes[newFeedType]
     this.currentFeed.fetch({reset: true});
     this.feedView = new Trackstack.Views.FeedComposite({ collection: this.currentFeed })

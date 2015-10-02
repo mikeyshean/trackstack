@@ -9,7 +9,7 @@ window.Trackstack = {
     this.currentUser.fetch();
     this.header = new Trackstack.Views.Header({ el: $("#header"), $modalEl: $("#modal")})
 
-    new Trackstack.Routers.Router({ $rootEl: $("#content") })
+    Trackstack.router = new Trackstack.Routers.Router({ $rootEl: $("#content") })
     Backbone.history.start();
   }
 };

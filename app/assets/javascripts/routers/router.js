@@ -35,6 +35,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   show: function (id, type) {
+    console.log("router")
     var callback = this.show.bind(this, id, type);
     if (!this._requireSignedIn(callback)) { return; }
     var user = new Trackstack.Models.User({id: id});
