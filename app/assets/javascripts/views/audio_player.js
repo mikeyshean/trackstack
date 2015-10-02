@@ -10,7 +10,8 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
 
   initialize: function (options) {
     this.trackUrl = options.trackUrl || this.model.escape("track_url");
-    this.height = options.height
+    this.sound = options.sound;
+    this.height = options.height;
   },
 
   togglePlay: function () {
@@ -18,6 +19,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     var pauseIcon = this.$(".pause-icon");
 
     if (!this.wave.isPlaying()) {
+      this.sound.trigger("playing")
       $(".play-icon").show();
       $(".pause-icon").hide();
 
@@ -31,6 +33,13 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     }
   },
 
+  pause: function () {
+    if (this.wave.isPlaying()) {
+      this.wave.pause()
+      $(".play-icon").show();
+      $(".pause-icon").hide();
+    }
+  },
 
   render: function () {
     this.$el.html(this.template({ trackUrl: this.trackUrl }));

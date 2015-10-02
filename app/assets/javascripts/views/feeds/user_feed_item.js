@@ -41,7 +41,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
 
     this.likers = this.sound.likers()
 
-    this.waveSurfer = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl, height: 70 })
+    this.waveSurfer = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl, height: 70, sound: this.sound })
     this.addSubview("#audio-player", this.waveSurfer)
     this.isNotifying = false;
 

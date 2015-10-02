@@ -5,6 +5,7 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.listenTo(this.collection, "add remove", this.addSoundSubview)
     this.listenTo(this.collection, "reset", this.addSoundSubviews)
+    this.listenTo(this.collection, "playing", this.pausePlayers)
   },
 
   render: function () {
@@ -30,6 +31,12 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
   isEmptyPlaylist: function(model) {
     return model instanceof Trackstack.Models.Playlist &&
       model.playlistTracks().length === 0
+  },
+
+  pausePlayers: function () {
+    this.eachSubview(function (subview, selector) {
+      subview.waveSurfer.pause();
+    })
   }
 
 });
