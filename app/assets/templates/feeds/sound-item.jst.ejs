@@ -71,7 +71,7 @@
     <% if (sound_type === "Playlist") { %>
       <ul class="playlist-tracks-list">
         <% sound.playlistTracks().each(function (track, idx) { %>
-        <li class="playlist-tracks-item">
+        <li class="playlist-tracks-item" data-track-id="<%= track.id %>">
           <div class="playlist-track-image" style="background-image: url(<%= track.escape('badge_img') %>);"></div>
           <div class="playlist-track-text">
             <span class="playlist-track-num"><%= idx + 1 %></span>

@@ -13,7 +13,8 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     "click .feed-comment-input": "clearInput",
     "submit .feed-comment-form": "submitComment",
     "blur .feed-comment-input": "addPlaceholder",
-    "click a": "navigate"
+    "click a": "navigate",
+    "click .playlist-tracks-item": "newTrack"
 
   },
 
@@ -23,25 +24,34 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   initialize: function (options) {
     this.sound_type = this.model.get("sound_type");
     this.sound = this.model;
+    this.firstTrack = this.sound;
+    this.playlistTracks;
 
     if (this.sound instanceof Trackstack.Models.Playlist) {
-      var firstTrack = this.sound.playlistTracks().first()
-      this.trackUrl = firstTrack.escape("track_url")
-      this.badgeUrl = firstTrack.escape("badge_img")
-      this.feedImg = firstTrack.escape("feed_img")
-      this.trackId = firstTrack.id
+      var track = this.firstTrack = this.sound.playlistTracks().first()
+      this.trackUrl = track.escape("track_url")
+      this.badgeUrl = track.escape("badge_img")
+      this.feedImg = track.escape("feed_img")
+      this.trackId = track.id
+      this.playlistTracks = this.sound.playlistTracks();
     } else {
       this.trackUrl = this.sound.escape("track_url")
       this.badgeUrl = this.sound.escape("badge_img")
       this.feedImg = this.sound.escape("feed_img")
       this.trackId = this.sound.id
-
       this.comments = this.sound.comments()
     }
 
     this.likers = this.sound.likers()
 
-    this.waveSurfer = new Trackstack.Views.AudioPlayer({ trackUrl: this.trackUrl, height: 70, sound: this.sound })
+    this.waveSurfer = new Trackstack.Views.AudioPlayer({
+      trackUrl: this.trackUrl,
+      height: 70,
+      track: this.firstTrack,
+      sound: this.sound,
+      playlistTracks: this.playlistTracks
+    })
+
     this.addSubview("#audio-player", this.waveSurfer)
     this.isNotifying = false;
 
@@ -211,6 +221,13 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
     var url = $(e.currentTarget).attr("href");
 
     Backbone.history.navigate(url, { trigger: true })
+  },
+
+  newTrack: function (e) {
+    e.preventDefault();
+    var trackId = $(e.currentTarget).data("track-id");
+    var track = this.playlistTracks.get(trackId);
+    track.trigger("playTrack", track);
   }
 
 

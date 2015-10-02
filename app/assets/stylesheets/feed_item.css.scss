@@ -88,6 +88,11 @@
   border-bottom: 1px solid #f2f2f2;
 }
 
+.playlist-tracks-list li:hover {
+  cursor: pointer;
+  background: #f2f2f2;
+}
+
 .playlist-tracks-list li:last-child {
   border: none;
 }
