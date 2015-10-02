@@ -68,4 +68,18 @@
           <% }; %>
       </div>
     </div>
+    <% if (sound_type === "Playlist") { %>
+      <ul class="playlist-tracks-list">
+        <% sound.playlistTracks().each(function (track, idx) { %>
+        <li class="playlist-tracks-item">
+          <div class="playlist-track-image" style="background-image: url(<%= track.escape('badge_img') %>);"></div>
+          <div class="playlist-track-text">
+            <span class="playlist-track-num"><%= idx + 1 %></span>
+            <span class="playlist-track-author"><%= track.escape("author") %> - </span>
+            <span class="playlist-track-title"><%= track.escape("title") %></span>
+          </div>
+        </li>
+        <% }) %>
+      </ul>
+    <% }; %>
   </div>

@@ -50,6 +50,8 @@
   border: 1px solid green;
 }
 
+/* Footer */
+
 .sound-list-item .feed-sound-footer {
   margin-top: 10px;
 }
@@ -65,6 +67,43 @@
 .feed-sound-footer .feed-stats-list li {
   margin-left: 10px;
 }
+
+/* Playlist Tracks */
+
+.playlist-tracks-list {
+  margin-top: 15px;
+  border: 1px solid #f2f2f2;
+  font-size: 12px;
+  font-family: "Interstate Light";
+  color: #333;
+}
+
+.playlist-track-text {
+  display: inline-block;
+  vertical-align: super;
+}
+
+.playlist-tracks-list li {
+  padding: 5px;
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.playlist-tracks-list li:last-child {
+  border: none;
+}
+
+.playlist-tracks-list .playlist-track-author {
+  color: #999;
+}
+
+.playlist-tracks-list .playlist-track-image{
+  height: 20px;
+  width: 20px;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+/* Comment Container */
 
 .sound-list-item .feed-comment-container {
   margin-top: 20px;
