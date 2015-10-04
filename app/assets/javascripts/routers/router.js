@@ -7,6 +7,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     "users/:id/following": "followingIndex",
     "users/:id/likes": "likesIndex",
     "users/:id/:type": "show",
+    "users/:id": "show",
     "session/new": "signIn",
     "tracks/:id": "trackShow"
   },

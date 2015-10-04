@@ -32,8 +32,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
       "all": this.totalFeed
     };
 
-    this.currentFeed = this.feedTypes[options.feedType]
-    this.currentFeedType = options.feedType
+    this.currentFeedType = options.feedType || "all"
+    this.currentFeed = this.feedTypes[this.currentFeedType]
     this.renderMainFeed(this.currentFeedType);
   },
 
