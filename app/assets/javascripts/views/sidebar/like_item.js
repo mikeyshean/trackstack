@@ -28,7 +28,7 @@ Trackstack.Views.LikeItem = Backbone.View.extend({
   },
 
   render: function () {
-    this.$el.html(this.template({ sound: this.model, trackId: this.trackId }));
+    this.$el.html(this.template({ sound: this.model, trackId: this.trackId, badgeUrl: this.badgeUrl }));
     return this;
   },
 
