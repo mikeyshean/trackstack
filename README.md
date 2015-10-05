@@ -1,6 +1,8 @@
 # TrackStack
 
-[Live Demo][heroku]
+*TrackStack* is a social music web app inspired by *SoundCloud* built on Rails and Backbone.js.  Check out the live demo below:
+
+[trackstack.audio][heroku]
 
 [heroku]: http://trackstack.audio
 
