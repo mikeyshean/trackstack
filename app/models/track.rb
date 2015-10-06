@@ -9,6 +9,9 @@ class Track < ActiveRecord::Base
 
   has_attached_file :track,
     :path => "tracks/:class/:id_:timestamp.:style.:extension"
+  has_attached_file :peaks,
+    :path => "peaks/:class/:id_:timestamp.:style.:extension",
+    :default_url => ""
   has_attached_file :img, styles: { badge: "50x50", track_show: "340x340", feed: "120x120" },
     :convert_options => { badge: "-quality 75 -strip" },
     :default_url => ":attachment/track_default.jpg",
@@ -17,6 +20,7 @@ class Track < ActiveRecord::Base
   validates :author_id, presence: true
   validates_attachment_content_type :img, content_type: /\Aimage\/.*\Z/
   validates_attachment_content_type :track, content_type: /\Aaudio\/.*\Z/
+  validates_attachment_content_type :peaks, content_type: "text/plain"
 
   after_save do |track|
     feed = Feed.where("sound_id = :id AND sound_type = :type", { id: track.id, type: track.class }).first

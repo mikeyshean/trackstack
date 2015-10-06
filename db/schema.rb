@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921161359) do
+ActiveRecord::Schema.define(version: 20151006195056) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -93,6 +93,10 @@ ActiveRecord::Schema.define(version: 20150921161359) do
     t.string   "img_content_type"
     t.integer  "img_file_size"
     t.datetime "img_updated_at"
+    t.string   "peaks_file_name"
+    t.string   "peaks_content_type"
+    t.integer  "peaks_file_size"
+    t.datetime "peaks_updated_at"
   end
 
   add_index "tracks", ["author_id"], name: "index_tracks_on_author_id", using: :btree
