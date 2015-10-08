@@ -54,26 +54,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     this.$el.html(this.template({ trackUrl: this.trackUrl }));
     this.wave || this.initializeWave();
 
-    // if (this.decodedPeaks.length) {
-    //   var peaks = JSON.parse(this.decodedPeaks)
-    //   this.wave.load(this.trackUrl, peaks);
-    // } else {
-    //   this.wave.load(this.trackUrl);
-    // }
-
-    if (this.peaksUrl.length) {
-      this.wave.util.ajax({
-        responseType: 'json',
-        url: this.peaksUrl
-      }).on('success', function (data) {
-        this.wave.load(
-            this.trackUrl,
-            data
-        );
-      }.bind(this));
-    } else {
-      this.wave.load(this.trackUrl);
-    }
+    this.loadPlayer();
     this.attachWaveListeners();
 
     return this;
@@ -158,9 +139,27 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
   playTrack: function (track) {
     this.trackUrl = track.escape("track_url");
     this.track = track;
-    var peaks = JSON.parse(this.track.escape("decoded_peaks"))
-    this.wave.load(this.trackUrl, peaks);
+    // var peaks = JSON.parse(this.track.escape("decoded_peaks"))
+    // this.wave.load(this.trackUrl, peaks);
+    // this.attachWaveListeners(true);
+    this.loadPlayer();
     this.attachWaveListeners(true);
+  },
+
+  loadPlayer: function () {
+    if (this.peaksUrl.length) {
+      this.wave.util.ajax({
+        responseType: 'json',
+        url: this.peaksUrl
+      }).on('success', function (data) {
+        this.wave.load(
+            this.trackUrl,
+            data
+        );
+      }.bind(this));
+    } else {
+      this.wave.load(this.trackUrl);
+    }
   }
 
 })
