@@ -85,10 +85,10 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
 
   attachWaveListeners: function (autoplay) {
     this.wave.on('ready', function () {
-      this.$("#progress").addClass("transitioning")
-      this.$("#progress").one("transitionend", function () {
-        this.$("#progress").removeClass("transitioning").css("width", 0)
-      }.bind(this))
+      // this.$("#progress").addClass("transitioning")
+      // this.$("#progress").one("transitionend", function () {
+      //   this.$("#progress").removeClass("transitioning").css("width", 0)
+      // }.bind(this))
 
       this.wave.seekTo(0)
 
@@ -102,14 +102,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
         var params = {}
         params["peaks"] = JSON.stringify(peaks);
 
-        this.track.save(params, {
-          success: function (model, response) {
-            console.log("track save success");
-          },
-          error: function (model, response) {
-            console.log("track save error");
-          }
-        })
+        this.track.save(params)
       }
 
       $(window).resize(_.debounce(function(){
