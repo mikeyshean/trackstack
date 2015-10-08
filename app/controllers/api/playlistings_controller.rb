@@ -21,6 +21,28 @@ module Api
       end
     end
 
+    def update
+
+      @track = current_user.tracks.find(params[:track_id])
+      peaks = @track.peaks.url.length > 0
+
+      if params[:peaks] && !peaks
+        file = Tempfile.new(["peaks#{@track.id}", '.txt'])
+        begin
+           file.write(params[:peaks])
+           file.read
+           @track.peaks = file
+           @track.save!
+        ensure
+           file.close
+           file.unlink   # deletes the temp file
+        end
+        render :show
+      else
+        render json: @track.errors.full_messages, status: 422
+      end
+    end
+
     def destroy
       playlist = current_user.playlists.find(params[:id])
       playlisting = playlist.playlistings.where(track_id: params[:track_id]).first

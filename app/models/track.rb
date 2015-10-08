@@ -30,4 +30,8 @@ class Track < ActiveRecord::Base
       track.feeds.create({ author_id: track.author_id })
     end
   end
+
+  def decoded_peaks
+    URI.parse(self.peaks.url).read
+  end
 end

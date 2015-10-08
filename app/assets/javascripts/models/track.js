@@ -46,6 +46,10 @@ Trackstack.Models.Track = Backbone.Model.extend({
     return this._followers
   },
 
+  toJSON: function () {
+    return { "track": _.clone(this.attributes) }
+  },
+
   parse: function (resp){
     if (resp && resp.commenters) {
       this.comments(resp.id).set(resp.commenters)

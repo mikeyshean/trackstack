@@ -13,6 +13,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     this.playlistTracks = options.playlistTracks;
     this.track = options.track;
     this.sound = options.sound;
+    this.peaksUrl = options.peaksUrl || this.track.escape("peaks_url")
     this.height = options.height;
     this.listenTo(this.playlistTracks, "playTrack", this.playTrack)
   },
@@ -53,7 +54,26 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     this.$el.html(this.template({ trackUrl: this.trackUrl }));
     this.wave || this.initializeWave();
 
-    this.wave.load(this.trackUrl);
+    // if (this.decodedPeaks.length) {
+    //   var peaks = JSON.parse(this.decodedPeaks)
+    //   this.wave.load(this.trackUrl, peaks);
+    // } else {
+    //   this.wave.load(this.trackUrl);
+    // }
+
+    if (this.peaksUrl.length) {
+      this.wave.util.ajax({
+        responseType: 'json',
+        url: this.peaksUrl
+      }).on('success', function (data) {
+        this.wave.load(
+            this.trackUrl,
+            data
+        );
+      }.bind(this));
+    } else {
+      this.wave.load(this.trackUrl);
+    }
     this.attachWaveListeners();
 
     return this;
@@ -69,13 +89,16 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
       container: this.$('#audio')[0],
       waveColor: '#919191',
       progressColor: '#f50',
-      barWidth: 2,
+      // barWidth: 1,
       cursorColor: "#f50",
       cursorWidth: 0,
       normalize: true,
       height: this.height,
       fillParent: true,
-      hideScrollbar: true
+      hideScrollbar: true,
+      backend: 'MediaElement',
+      pixelRatio: 1,
+      minimap: true
     });
   },
 
@@ -91,6 +114,21 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
       if (autoplay) {
         this.wave.play();
         this.hidePlay();
+      }
+
+      if (!this.peaksUrl.length) {
+        var peaks = this.wave.backend.getPeaks(900)
+        var params = {}
+        params["peaks"] = JSON.stringify(peaks);
+
+        this.track.save(params, {
+          success: function (model, response) {
+            console.log("track save success");
+          },
+          error: function (model, response) {
+            console.log("track save error");
+          }
+        })
       }
 
       $(window).resize(_.debounce(function(){
@@ -110,6 +148,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
           this.playTrack(this.playlistTracks.at(nextIdx))
         }
       }
+
       this.showPlay();
       $("#track-play .play-icon").show();
       $("#track-play .pause-icon").hide();
@@ -119,7 +158,8 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
   playTrack: function (track) {
     this.trackUrl = track.escape("track_url");
     this.track = track;
-    this.wave.load(this.trackUrl);
+    var peaks = JSON.parse(this.track.escape("decoded_peaks"))
+    this.wave.load(this.trackUrl, peaks);
     this.attachWaveListeners(true);
   }
 
