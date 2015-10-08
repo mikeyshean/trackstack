@@ -26,7 +26,8 @@ module Api
       @track = current_user.tracks.find(params[:track_id])
       peaks = @track.peaks.url.length > 0
 
-      if params[:peaks] && !peaks
+      # if params[:peaks] && !peaks
+      if params[:peaks]
         file = Tempfile.new(["peaks#{@track.id}", '.txt'])
         begin
            file.write(params[:peaks])
