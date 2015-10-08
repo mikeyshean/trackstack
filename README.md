@@ -6,6 +6,20 @@
 
 [heroku]: http://trackstack.audio
 
+## Features
+
+- Backbone authentication with Twitter/Facebook Omniauth
+- Uploads user/track images and audio files to AWS S3 with Cloudfront distribution
+- Live notifications for Track/Playlist "Likes" and Playlist adds
+
+![notification]
+[notification]: ./docs/images/notification.gif
+
+- Dynamic comment animation during track playback
+
+![comment]
+[comment]: ./docs/images/comment.gif
+
 ## Minimum Viable Product
 TrackStack is a clone of SoundCloud built on Rails and Backbone. Users can:
 
