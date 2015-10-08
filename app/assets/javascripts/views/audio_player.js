@@ -96,14 +96,12 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
         this.hidePlay();
       }
 
-      // if (!this.peaksUrl.length) {
+      if (!this.peaksUrl.length) {
         var peaks = this.wave.backend.getPeaks(900)
         var params = {}
         params["peaks"] = JSON.stringify(peaks);
-        if (peaks.length) {
-          this.track.save(params)          
-        }
-      // }
+        this.track.save(params)
+      }
 
       $(window).resize(_.debounce(function(){
         this.wave.drawer.containerWidth = this.wave.drawer.container.clientWidth;
@@ -138,19 +136,19 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
   },
 
   loadPlayer: function () {
-    // if (this.peaksUrl.length) {
-    //   this.wave.util.ajax({
-    //     responseType: 'json',
-    //     url: this.peaksUrl
-    //   }).on('success', function (data) {
-    //     this.wave.load(
-    //         this.trackUrl,
-    //         data
-    //     );
-    //   }.bind(this));
-    // } else {
+    if (this.peaksUrl.length) {
+      this.wave.util.ajax({
+        responseType: 'json',
+        url: this.peaksUrl
+      }).on('success', function (data) {
+        this.wave.load(
+            this.trackUrl,
+            data
+        );
+      }.bind(this));
+    } else {
       this.wave.load(this.trackUrl);
     }
-  // }
+  }
 
 })
