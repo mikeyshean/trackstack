@@ -54,7 +54,19 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     this.$el.html(this.template({ trackUrl: this.trackUrl }));
     this.wave || this.initializeWave();
 
-    this.wave.load(this.trackUrl);
+    if (this.peaksUrl.length) {
+      this.wave.util.ajax({
+        responseType: 'json',
+        url: this.peaksUrl
+      }).on('success', function (data) {
+        this.wave.load(
+            this.trackUrl,
+            data
+        );
+      }.bind(this));
+    } else {
+      this.wave.load(this.trackUrl);
+    }
     this.attachWaveListeners();
 
     return this;
