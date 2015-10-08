@@ -95,11 +95,11 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
         this.wave.play();
         this.hidePlay();
       }
+        console.log(this.wave.backend.getPeaks(900))
 
       // if (!this.peaksUrl.length) {
         var peaks = this.wave.backend.getPeaks(900)
         var params = {}
-        debugger
         params["peaks"] = JSON.stringify(peaks);
 
         this.track.save(params)
@@ -111,9 +111,9 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
       }.bind(this), 700));
     }.bind(this));
 
-    // this.wave.on('loading', function (percent, e) {
-    //   this.updateProgress(percent)
-    // }.bind(this))
+    this.wave.on('loading', function (percent, e) {
+      this.updateProgress(percent)
+    }.bind(this))
 
     this.wave.on("finish", function () {
       if (this.playlistTracks) {
