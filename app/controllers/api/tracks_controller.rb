@@ -30,8 +30,23 @@ module Api
     def update
 
       @track = current_user.tracks.find(params[:id])
+      peaks = @track.peaks.url.length > 0
 
-      if @track.update(track_params)
+      if params[:track][:peaks] && !peaks
+        file = Tempfile.new(["peaks#{@track.id}", '.txt'])
+        begin
+           file.write(params[:track][:peaks])
+           file.read
+           @track.peaks = file
+           @track.save!
+        ensure
+           file.close
+           file.unlink   # deletes the temp file
+        end
+        render :show
+      elsif true
+        params[:track].delete :peaks
+        @track.update(track_params)
         render :show
       else
         render json: @track.errors.full_messages, status: 422

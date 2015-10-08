@@ -36,6 +36,7 @@ Rails.application.routes.draw do
         get "tracks", to: "playlistings#index"
         post "tracks", to: "playlistings#create"
         delete "tracks/:track_id", to: "playlistings#destroy"
+        put "tracks/:track_id", to: "playlistings#update"
       end
     end
 
