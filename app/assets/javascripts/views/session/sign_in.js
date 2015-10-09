@@ -19,9 +19,9 @@ Trackstack.Views.SignIn = Backbone.View.extend({
     return this;
   },
 
-  submit: function(event){
-    event.preventDefault();
-    var $form = $(event.currentTarget);
+  submit: function(e){
+    e.preventDefault();
+    var $form = $(e.currentTarget);
     var formData = $form.serializeJSON().user;
 
     Trackstack.currentUser.signIn({
@@ -33,9 +33,9 @@ Trackstack.Views.SignIn = Backbone.View.extend({
     });
   },
 
-  create: function(event){
-    event.preventDefault();
-    var $form = $(event.currentTarget);
+  create: function(e){
+    e.preventDefault();
+    var $form = $(e.currentTarget);
     var formData = $form.serializeJSON().user;
 
     Trackstack.currentUser.create({
