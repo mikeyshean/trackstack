@@ -162,8 +162,6 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
 
   loadPlayer: function () {
     if (this.peaksUrl.length) {
-      this.wave.params.backend = "MediaElement"
-
       this.wave.util.ajax({
         responseType: 'json',
         url: this.peaksUrl
