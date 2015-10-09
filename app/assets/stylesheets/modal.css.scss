@@ -31,6 +31,10 @@
   top: 10%;
   left: 50%;
   transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
   width: 500px;
   height: auto;
   background: #fff;
@@ -113,6 +117,10 @@
   left: 50%;
   bottom: 0;
   transform: translateX(-50%) translateY(50%);
+  -ms-transform: translateX(-50%) translateY(50%);
+  -webkit-transform: translateX(-50%) translateY(50%);
+  -moz-transform: translateX(-50%) translateY(50%);
+  -o-transform: translateX(-50%) translateY(50%);
   color: #aaa;
   padding: 0 3px;
   background: #fff;
@@ -192,6 +200,10 @@
   top: 120%;
   left: 50%;
   transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
 }
 
 #coming-soon {
@@ -211,12 +223,20 @@
   position: relative;
   left: 50%;
   transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
 }
 
 .track-preview .track-photo-button {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
   bottom: 10%;
   background: #fff
 }
@@ -232,6 +252,10 @@
   bottom: 50px;
   left: 50%;
   transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
 }
 
 #save-details-button {
@@ -241,6 +265,10 @@
   left: 0;
   left: 50%;
   transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
   float: none;
 }
 

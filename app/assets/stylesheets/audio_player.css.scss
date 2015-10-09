@@ -15,6 +15,10 @@
    background-color: #f50;
    height: 70px;
    transform: translateY(-100%);
+	 -ms-transform: translateY(-100%);
+   -webkit-transform: translateY(-100%);
+   -moz-transform: translateY(-100%);
+   -o-transform: translateY(-100%);
    position: absolute;
    bottom: -70px;
    opacity: .95;
