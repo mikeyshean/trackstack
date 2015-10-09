@@ -31,6 +31,14 @@ class Track < ActiveRecord::Base
     end
   end
 
+  def self.reset_peaks
+    self.all.each { |track| track.peaks.destroy; track.peaks.clear; track.save }
+  end
+
+  def self.peak_size
+    self.all.each { |track| puts track.peaks_file_size }
+  end
+
   def decoded_peaks
     URI.parse(self.peaks.url).read
   end
