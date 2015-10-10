@@ -53,7 +53,6 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
   render: function () {
     this.$el.html(this.template({ trackUrl: this.trackUrl }));
 
-
     if (this.peaksUrl.length) {
       this.wave || this.initializeWave({ backend: "MediaElement" });
 
@@ -72,7 +71,6 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
       this.wave.load(this.trackUrl);
       this.attachWaveListeners({ save: true });
     }
-
 
     return this;
   },
@@ -99,10 +97,7 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
 
   attachWaveListeners: function (options) {
     this.wave.on('ready', function () {
-      this.$("#progress").addClass("transitioning")
-      this.$("#progress").one("transitionend", function () {
-        this.$("#progress").removeClass("transitioning").css("width", 0)
-      }.bind(this))
+      this.$("#loading").hide()
 
       this.wave.seekTo(0)
 
@@ -128,10 +123,6 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
         this.wave.drawBuffer()
       }.bind(this), 700));
     }.bind(this));
-
-    this.wave.on('loading', function (percent, e) {
-      this.updateProgress(percent)
-    }.bind(this))
 
     this.wave.on("finish", function () {
       if (this.playlistTracks) {

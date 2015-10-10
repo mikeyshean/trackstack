@@ -3,30 +3,16 @@
   position: relative;
 }
 
-#progress-bar {
-   background: #f50;
-   opacity: .2;
-   height: 70px;
-   position: absolute;
-   bottom: -70px;
-}
-
-#progress {
-   background-color: #f50;
-   height: 70px;
-   transform: translateY(-100%);
-	 -ms-transform: translateY(-100%);
-   -webkit-transform: translateY(-100%);
-   -moz-transform: translateY(-100%);
-   -o-transform: translateY(-100%);
-   position: absolute;
-   bottom: -70px;
-   opacity: .95;
-}
-
-#progress.transitioning {
-   opacity: 0;
-   transition: opacity .3s ease-in-out;
+#loading {
+  position: absolute;
+  content: image-url("loading_spinner.gif");
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
 }
 
 .audio-button {
@@ -67,12 +53,6 @@
   height: 100px;
   max-width: 820px;
   bottom: 115px;
-}
-
-#track-show-player #progress,
-#track-show-player #progress-bar {
-  height: 115px;
-  bottom: -119px;
 }
 
 wave {
