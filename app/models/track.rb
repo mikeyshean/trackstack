@@ -8,7 +8,8 @@ class Track < ActiveRecord::Base
   has_many :comments, dependent: :destroy
 
   has_attached_file :track,
-    :path => "tracks/:class/:id_:timestamp.:style.:extension"
+    :path => "tracks/:class/:id_:timestamp.:style.:extension",
+    :s3_host_alias => Proc.new {|attachment| "tracks#{attachment.instance.id % 4}.trackstack.audio" }
   has_attached_file :peaks,
     :path => "peaks/:class/:id_:timestamp.:style.:extension",
     :default_url => "",
