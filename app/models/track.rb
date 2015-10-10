@@ -12,7 +12,8 @@ class Track < ActiveRecord::Base
   has_attached_file :peaks,
     :path => "peaks/:class/:id_:timestamp.:style.:extension",
     :default_url => "",
-    :s3_host_alias => Proc.new {|attachment| "peaks#{attachment.instance.id % 4}.trackstack.audio" }
+    :s3_host_alias => "peaks0.trackstack.audio"
+    # :s3_host_alias => Proc.new {|attachment| "peaks#{attachment.instance.id % 4}.trackstack.audio" }
   has_attached_file :img, styles: { badge: "50x50", track_show: "340x340", feed: "120x120" },
     :convert_options => { badge: "-quality 75 -strip" },
     :default_url => ":attachment/track_default.jpg",
