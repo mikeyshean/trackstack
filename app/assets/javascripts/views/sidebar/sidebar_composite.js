@@ -3,8 +3,10 @@ Trackstack.Views.SidebarComposite = Backbone.CompositeView.extend({
   template: JST['sidebar/sidebar'],
 
   initialize: function (options) {
-    this.followables = Trackstack.currentUser.followables();
-    this.likes = Trackstack.currentUser.likes();
+    // this.followables = Trackstack.currentUser.followables();
+    // this.likes = Trackstack.currentUser.likes();
+    this.followables = this.model.followables();
+    this.likes = this.model.likes();
 
     this.listenTo(this.followables, "add", this.addFollowableView)
     this.listenTo(this.followables, "remove", this.fetchFollowable)

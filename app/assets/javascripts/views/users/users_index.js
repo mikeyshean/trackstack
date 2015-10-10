@@ -12,13 +12,13 @@ Trackstack.Views.Index = Backbone.CompositeView.extend({
   },
 
   render: function () {
-    this.$el.html(this.template({ user: Trackstack.currentUser }))
+    this.$el.html(this.template({ user: this.model }))
     this.attachSubviews();
     return this;
   },
 
   addSidebar: function () {
-    var sidebarView = new Trackstack.Views.SidebarComposite()
+    var sidebarView = new Trackstack.Views.SidebarComposite({ model: this.model})
     this.addSubview(".sidebar", sidebarView)
   }
 
