@@ -27,7 +27,6 @@
   right: 0;
 }
 
-
 .profile-header .profile-user-text {
   background: #000;
   display: inline-block;
@@ -81,8 +80,11 @@
   font-weight: 500;
 }
 
-.user-tabs-list a:hover {
+.user-tabs-container .follow-button {
+  top: -5px;
+}
 
+.user-tabs-list a:hover {
   border-bottom: 1px solid #333;
 }
 
