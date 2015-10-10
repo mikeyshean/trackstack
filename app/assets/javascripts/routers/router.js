@@ -23,16 +23,15 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     var feed = new Trackstack.Collections.Feed([], {
       user: Trackstack.currentUser,
       feedType: "mainfeed"
-    })
+    });
 
     feed.fetch({ reset: true })
     var view = new Trackstack.Views.Index({
       collection: feed,
       model: Trackstack.currentUser
-    })
+    });
 
-    this._swapView(view)
-
+    this._swapView(view);
   },
 
   show: function (id, type) {
@@ -45,7 +44,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
     this._swapView(view);
     setTimeout(function () {
-      view.$el.find("#" + type).addClass("active")
+      view.$el.find("#" + type).addClass("active");
     }, 0)
   },
 
@@ -59,7 +58,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
       success: function (model, response) {
         var view = new Trackstack.Views.TrackShow({ model: model });
 
-        this._swapView(view)
+        this._swapView(view);
       }.bind(this)
     });
 
@@ -76,7 +75,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
           collection: model.followers(),
           type: "Followers" });
 
-        this._swapView(view)
+        this._swapView(view);
       }.bind(this)
     });
   },
@@ -91,7 +90,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
           collection: model.followees(),
           type: "Following" });
 
-        this._swapView(view)
+        this._swapView(view);
       }.bind(this)
     });
   },
@@ -105,7 +104,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
           collection: model.likes(),
           type: "Likes" });
 
-        this._swapView(view)
+        this._swapView(view);
       }.bind(this)
     });
   },
@@ -115,13 +114,13 @@ Trackstack.Routers.Router = Backbone.Router.extend({
       this._currentView.remove();
     }
 
-    this._currentView = view
-    this.$rootEl.html(view.render().$el)
+    this._currentView = view;
+    this.$rootEl.html(view.render().$el);
 
-    window.scroll(0, 0)
+    window.scroll(0, 0);
   },
 
-    signIn: function(callback){
+    signIn: function (callback){
     if (!this._requireSignedOut(callback)) { return; }
 
     var signInView = new Trackstack.Views.SignIn({
@@ -130,7 +129,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     this._swapView(signInView);
   },
 
-  _requireSignedIn: function(callback){
+  _requireSignedIn: function (callback) {
     if (!Trackstack.currentUser.isSignedIn()) {
       callback = callback || this._goHome.bind(this);
       this.signIn(callback);
@@ -140,7 +139,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     return true;
   },
 
-  _requireSignedOut: function(callback){
+  _requireSignedOut: function (callback) {
     if (Trackstack.currentUser.isSignedIn()) {
       callback = callback || this._goHome.bind(this);
       callback();
@@ -150,7 +149,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
     return true;
   },
 
-  _goHome: function(){
+  _goHome: function () {
     Backbone.history.navigate("", { trigger: true });
   }
 
