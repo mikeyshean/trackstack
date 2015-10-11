@@ -21,10 +21,10 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.tracks.fetch();
 
     this.listenTo(this.model, "sync", this.render);
-    this.listenTo(this.followers, "add", this.updateFollowerCount.bind(this, 1));
-    this.listenTo(this.followers, "remove", this.updateFollowerCount.bind(this, -1));
-    this.listenTo(this.tracks, "add", this.updateTrackCount.bind(this, 1));
-    this.listenTo(this.tracks, "remove", this.updateTrackCount.bind(this, -1));
+    this.listenTo(this.followers, "add", this._updateFollowerCount.bind(this, 1));
+    this.listenTo(this.followers, "remove", this._updateFollowerCount.bind(this, -1));
+    this.listenTo(this.tracks, "add", this._updateTrackCount.bind(this, 1));
+    this.listenTo(this.tracks, "remove", this._updateTrackCount.bind(this, -1));
 
     this.feedTypes = {
       "tracks": this.tracks,
@@ -61,7 +61,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     this.feedView && this.feedView.remove();
     var newFeedType = $currentTarget.data("feed-type")
-    window.history.pushState(null, null,"#/users/" + this.model.id + "/" + newFeedType)
+    this.updateUrl(newFeedType)
     this.currentFeed = this.feedTypes[newFeedType]
     this.currentFeed.fetch({reset: true});
     this.feedView = new Trackstack.Views.FeedComposite({ collection: this.currentFeed })
@@ -78,29 +78,30 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
     if (beforeState === "true") {
       $followButton.attr("data-follow-state", "false")
-      var follower = this.followers.findWhere({ id: Trackstack.currentUser.id })
-      follower.destroy({
-        success: function (model) {
-          $followButton.removeAttr("disabled");
-
-        },
-        error: function (model, response) {
-          this.followers.add(follower)
-        }.bind(this)
-      })
+      this.stopFollowing($followButton);
     } else {
       $followButton.attr("data-follow-state", "true")
-      this.followers.create({followee_id: this.model.id }, {
-        success: function (model) {
-          $followButton.removeAttr("disabled");
-          Trackstack.currentUser.followables().remove(this.model)
-        }.bind(this),
-        wait: true,
-        error: function (model, response) {
-
-        }.bind(this)
-      })
+      this.startFollowing($followButton);
     }
+  },
+
+  stopFollowing: function (button) {
+    var follower = this.followers.findWhere({ id: Trackstack.currentUser.id })
+    follower.destroy({
+      success: function (model) {
+        button.removeAttr("disabled");
+      }
+    })
+  },
+
+  startFollowing: function (button) {
+    this.followers.create({followee_id: this.model.id }, {
+      success: function (model) {
+        button.removeAttr("disabled");
+        Trackstack.currentUser.followables().remove(this.model)
+      }.bind(this),
+      wait: true
+    })
   },
 
   submit: function(e){
@@ -159,7 +160,11 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     $(formType).click();
   },
 
-  updateFollowerCount: function (incr) {
+  updateUrl: function (feedType) {
+    window.history.pushState(null, null,"#/users/" + this.model.id + "/" + feedType)
+  },
+
+  _updateFollowerCount: function (incr) {
     var count = this.$("#follower-count").text()
     this.$("#follower-count").text(+count + incr);
   },
@@ -168,10 +173,9 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.$el.find(selector).attr("src", src);
   },
 
-  updateTrackCount: function (incr) {
+  _updateTrackCount: function (incr) {
     var count = this.$("#track-count").text()
     this.$("#track-count").text(+count + incr);
   }
-
 
 });
