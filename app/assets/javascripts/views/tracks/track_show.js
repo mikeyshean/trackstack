@@ -6,13 +6,13 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
 
   initialize: function () {
     this.likers = this.model.likers();
-    this.comments = this.model.comments()
-
-    this.listenTo(this.model, "sync", this.render)
-    this.listenTo(this.model.authorFollowers(), "add", this.updateFollowerCount.bind(this, 1))
-    this.listenTo(this.model.authorFollowers(), "remove", this.updateFollowerCount.bind(this, -1))
-    this.listenTo(this.comments, "add", this.updateCommentCount.bind(this, 1))
-    this.listenTo(this.comments, "remove", this.updateCommentCount.bind(this, -1))
+    this.comments = this.model.comments();
+    this.sound = this.model;
+    this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.model.authorFollowers(), "add", this.updateFollowerCount.bind(this, 1));
+    this.listenTo(this.model.authorFollowers(), "remove", this.updateFollowerCount.bind(this, -1));
+    this.listenTo(this.comments, "add", this.updateCommentCount.bind(this, 1));
+    this.listenTo(this.comments, "remove", this.updateCommentCount.bind(this, -1));
     this.listenTo(this.likers, "notify", this.showNotification);
 
     this.attachAudioPlayer();
@@ -131,31 +131,7 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   },
 
   toggleLike: function (e) {
-    e.preventDefault();
-    var $button = $(e.currentTarget)
-    $button.attr("disabled", true)
-    $button.toggleClass("button-orange-border").addClass("disabled")
-
-    var beforeState = $button.attr("data-like-state")
-    if (beforeState === "true") {
-      $button.attr("data-like-state", "false")
-
-      var liker = this.likers.findWhere({ id: Trackstack.currentUser.id })
-
-      liker.destroy({
-        success: function () {
-          $button.removeAttr("disabled");
-        }
-      })
-    } else {
-      $button.attr("data-like-state", "true")
-      this.likers.create({sound_type: this.sound_type, sound_id: this.sound_id}, {
-        success: function (model) {
-          this.likers.trigger("notify");
-          $button.removeAttr("disabled");
-        }.bind(this)
-      })
-    }
+    Trackstack.Util.toggleLike.call(this, e)
   },
 
   clearInput: function (e) {
