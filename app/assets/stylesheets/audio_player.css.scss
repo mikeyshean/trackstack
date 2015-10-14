@@ -6,7 +6,8 @@
 #loading {
   position: absolute;
   content: image-url("loading_spinner.gif");
-  height: 100%;
+  background: transparent;
+  height: 50px;
   left: 50%;
   transform: translateX(-50%);
   -ms-transform: translateX(-50%);

@@ -1,6 +1,7 @@
 Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
 
   template: JST['feeds/user_feed'],
+  loadingGif: function () { return $("<div></div>").addClass("loading-gif") },
 
   initialize: function (options) {
     this.listenTo(this.collection, "add", this.addSoundSubview)
@@ -8,10 +9,6 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "playing", this.pausePlayers)
 
     this.attachInfiniteScroll();
-  },
-
-  events: {
-    "click .feed-items": "fetchFeed"
   },
 
   render: function () {
@@ -46,11 +43,17 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
 
   attachInfiniteScroll: function () {
     var $feed = this.$el
+    var that = this;
     $(window).scroll(function () {
       if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        this.collection.fetch();
+        that.$el.append(that.loadingGif())
+        that.collection.fetch({
+          success: function () {
+            that.$(".loading-gif").remove();
+          }
+        });
       }
-    }.bind(this))
+    })
   },
 
 });

@@ -10,7 +10,11 @@ module Api
         .order("updated_at DESC")
         .limit(LIMIT)
 
-      render :feed
+      if !@feed.empty?
+        render :feed
+      else
+        render json: {}
+      end
     end
 
     def main_feed
@@ -30,7 +34,11 @@ module Api
           .limit(LIMIT)
       end
 
-      render :feed
+      if !@feed.empty?
+        render :feed
+      else
+        render json: {}
+      end
     end
 
     private

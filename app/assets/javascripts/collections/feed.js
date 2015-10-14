@@ -20,7 +20,7 @@ Trackstack.Collections.Feed = Backbone.Collection.extend({
   },
 
   parse: function (resp) {
-    this.oldest_entry = resp.oldest_entry
+    this.oldest_entry = resp.oldest_entry || this.oldest_entry
     return resp.feed
   }
 
