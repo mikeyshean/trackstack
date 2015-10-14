@@ -98,7 +98,7 @@ Trackstack.Views.UserFeedItem = Backbone.CompositeView.extend({
   },
 
   toggleLike: function (e) {
-    Trackstack.Util.toggleLike.call(this, e)
+    Trackstack.Util.toggleLike(e, this)
   },
 
   updateLikeCount: function (incr) {

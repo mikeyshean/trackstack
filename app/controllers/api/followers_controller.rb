@@ -5,7 +5,7 @@ module Api
       following = Following.new({follower_id: current_user.id, followee_id: params[:followee_id]})
 
       if following.save
-        render :follower
+        render json: { id: following.followee_id }
       else
         render json: following.errors.full_messages, status: 422
       end

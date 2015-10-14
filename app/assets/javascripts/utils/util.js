@@ -1,5 +1,6 @@
 Trackstack.Util = {
-  toggleLike: function (e) {
+
+  toggleLike: function (e, view) {
     e.preventDefault();
     var $button = $(e.currentTarget)
     $button.attr("disabled", true)
@@ -8,10 +9,10 @@ Trackstack.Util = {
     var beforeState = $button.attr("data-like-state")
     if (beforeState === "true") {
       $button.attr("data-like-state", "false");
-      Trackstack.Util.destroyLike.call(this, $button);
+      this.destroyLike.call(view, $button);
     } else {
       $button.attr("data-like-state", "true");
-      Trackstack.Util.createLike.call(this, $button);
+      this.createLike.call(view, $button);
     }
   },
 
@@ -33,6 +34,42 @@ Trackstack.Util = {
         button.removeAttr("disabled");
         Trackstack.currentUser.likes().add(this.sound)
       }.bind(this)
+    })
+  },
+
+  toggleFollow: function (e, view) {
+    e.preventDefault()
+    var $followButton = $(e.currentTarget)
+    $followButton.attr("disabled", true)
+    var beforeState = $followButton.attr("data-follow-state")
+    $followButton.toggleClass("button-orange-border")
+
+    if (beforeState === "true") {
+      $followButton.attr("data-follow-state", "false")
+      this.stopFollowing.call(view, $followButton);
+    } else {
+      $followButton.attr("data-follow-state", "true")
+      this.startFollowing.call(view, $followButton);
+    }
+  },
+
+  stopFollowing: function (button) {
+    var follower = this.followers.findWhere({ id: Trackstack.currentUser.id })
+    follower.destroy({
+      success: function (model) {
+        button.removeAttr("disabled");
+      }
+    })
+  },
+
+  startFollowing: function (button) {
+    this.followers.create({followee_id: this.followee_id }, {
+      success: function (model) {
+        
+        button.removeAttr("disabled");
+        Trackstack.currentUser.followables().remove(model)
+      }.bind(this),
+      wait: true
     })
   },
 

@@ -8,6 +8,9 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     this.likers = this.model.likers();
     this.comments = this.model.comments();
     this.sound = this.model;
+    this.followee_id = this.model.get("author_id");
+    this.followers = this.model.authorFollowers();
+
     this.listenTo(this.model, "sync", this.render);
     this.listenTo(this.model.authorFollowers(), "add", this.updateFollowerCount.bind(this, 1));
     this.listenTo(this.model.authorFollowers(), "remove", this.updateFollowerCount.bind(this, -1));
@@ -22,7 +25,7 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
   events: {
     "submit .feed-comment-form": "submitComment",
     "click #track-play": "togglePlay",
-    "click .follow-button": "toggleFollowState",
+    "click .follow-button": "toggleFollow",
     "click .like-button": "toggleLike",
     "click .add-to-playlist-button": "triggerModal",
     "click .feed-comment-input": "clearInput",
@@ -96,42 +99,12 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     this.$(".track-show-button i").toggle();
   },
 
-  toggleFollowState: function (e) {
-    e.preventDefault()
-
-    var $followButton = $(e.currentTarget)
-    $followButton.attr("disabled", true)
-    var beforeState = $followButton.attr("data-follow-state")
-    $followButton.toggleClass("button-orange-border")
-
-    if (beforeState === "true") {
-      $followButton.attr("data-follow-state", "false")
-      var follower = this.model.authorFollowers().findWhere({ id: Trackstack.currentUser.id })
-      follower.destroy({
-        success: function (model) {
-          $followButton.removeAttr("disabled");
-        },
-        error: function (model, response) {
-
-
-        }.bind(this)
-      })
-    } else {
-      $followButton.attr("data-follow-state", "true")
-      this.model.authorFollowers().create({followee_id: this.model.get("author_id") }, {
-        success: function (model) {
-          $followButton.removeAttr("disabled");
-        },
-        wait: true,
-        error: function (model, response) {
-
-        }.bind(this)
-      })
-    }
+  toggleFollow: function (e) {
+    Trackstack.Util.toggleFollow(e, this)
   },
 
   toggleLike: function (e) {
-    Trackstack.Util.toggleLike.call(this, e)
+    Trackstack.Util.toggleLike(e, this)
   },
 
   clearInput: function (e) {

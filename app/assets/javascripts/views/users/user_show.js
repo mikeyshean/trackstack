@@ -6,7 +6,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
   modalBackgroundTemplate: JST['modals/modal_background'],
 
   events: {
-    "click .follow-button": "toggleFollowState",
+    "click .follow-button": "toggleFollow",
     "click .css-file-input": "openFileBrowser",
     "submit .photo-form": "submit",
     "change .file-input-button": "fileInputChange",
@@ -18,6 +18,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
     this.playlists = this.model.playlists();
+    this.followee_id = this.model.id;
     this.tracks.fetch();
 
     this.listenTo(this.model, "sync", this.render);
@@ -69,39 +70,8 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
 
   },
 
-  toggleFollowState: function (e) {
-    e.preventDefault()
-    var $followButton = $(e.currentTarget)
-    $followButton.attr("disabled", true)
-    var beforeState = $followButton.attr("data-follow-state")
-    $followButton.toggleClass("button-orange-border")
-
-    if (beforeState === "true") {
-      $followButton.attr("data-follow-state", "false")
-      this.stopFollowing($followButton);
-    } else {
-      $followButton.attr("data-follow-state", "true")
-      this.startFollowing($followButton);
-    }
-  },
-
-  stopFollowing: function (button) {
-    var follower = this.followers.findWhere({ id: Trackstack.currentUser.id })
-    follower.destroy({
-      success: function (model) {
-        button.removeAttr("disabled");
-      }
-    })
-  },
-
-  startFollowing: function (button) {
-    this.followers.create({followee_id: this.model.id }, {
-      success: function (model) {
-        button.removeAttr("disabled");
-        Trackstack.currentUser.followables().remove(this.model)
-      }.bind(this),
-      wait: true
-    })
+  toggleFollow: function (e) {
+    Trackstack.Util.toggleFollow(e, this)
   },
 
   submit: function(e){
