@@ -17,6 +17,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   index: function () {
+    this._cancelAjax();
     var callback = this.index.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
 
@@ -35,6 +36,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   show: function (id, type) {
+    this._cancelAjax();
     var callback = this.show.bind(this, id, type);
     if (!this._requireSignedIn(callback)) { return; }
     var user = new Trackstack.Models.User({id: id});
@@ -49,6 +51,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   trackShow: function (id) {
+    this._cancelAjax();
     var callback = this.trackShow.bind(this, id);
     if (!this._requireSignedIn(callback)) { return; }
 
@@ -66,6 +69,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   followersIndex: function (id) {
+    this._cancelAjax();
     var user = new Trackstack.Models.User({ id: id });
 
     user.fetch({
@@ -81,6 +85,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   followingIndex: function (id) {
+    this._cancelAjax();
     var user = new Trackstack.Models.User({ id: id });
 
     user.fetch({
@@ -96,6 +101,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   likesIndex: function (id) {
+    this._cancelAjax();
     var user = new Trackstack.Models.User({ id: id });
     user.fetch({
       success: function (model, response) {
@@ -111,24 +117,26 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
   _swapView: function (view) {
     if (this._currentView) {
-
-      // Cancel open downloads
-      if(window.stop !== undefined) {
-        window.stop();
-      }
-      else if(document.execCommand !== undefined) {
-        document.execCommand("Stop", false);
-      }
       this._currentView.remove();
     }
 
     this._currentView = view;
     this.$rootEl.html(view.render().$el);
-    
+
     window.scroll(0, 0);
   },
 
-    signIn: function (callback){
+  _cancelAjax: function () {
+    // Cancel open downloads
+    if(window.stop !== undefined) {
+      window.stop();
+    }
+    else if(document.execCommand !== undefined) {
+      document.execCommand("Stop", false);
+    }
+  },
+
+  signIn: function (callback){
     if (!this._requireSignedOut(callback)) { return; }
 
     var signInView = new Trackstack.Views.SignIn({
