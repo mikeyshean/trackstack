@@ -46,10 +46,14 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
     var that = this;
     $(window).scroll(function () {
       if ($(window).scrollTop() + $(window).height() == $(document).height()) {
-        that.$el.append(that.loadingGif())
+        if (!that.loading) {
+          that.$el.append(that.loadingGif())
+          that.loading = true
+        }
         that.collection.fetch({
           success: function () {
             that.$(".loading-gif").remove();
+            that.loading = false;
           }
         });
       }
