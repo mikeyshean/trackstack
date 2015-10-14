@@ -17,7 +17,6 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   index: function () {
-    this._cancelAjax();
     var callback = this.index.bind(this);
     if (!this._requireSignedIn(callback)) { return; }
 
@@ -36,7 +35,6 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   show: function (id, type) {
-    this._cancelAjax();
     var callback = this.show.bind(this, id, type);
     if (!this._requireSignedIn(callback)) { return; }
     var user = new Trackstack.Models.User({id: id});
@@ -51,7 +49,6 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   trackShow: function (id) {
-    this._cancelAjax();
     var callback = this.trackShow.bind(this, id);
     if (!this._requireSignedIn(callback)) { return; }
 
@@ -69,7 +66,8 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   followersIndex: function (id) {
-    this._cancelAjax();
+    var callback = this.followersIndex.bind(this, id);
+    if (!this._requireSignedIn(callback)) { return; }
     var user = new Trackstack.Models.User({ id: id });
 
     user.fetch({
@@ -85,7 +83,8 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   followingIndex: function (id) {
-    this._cancelAjax();
+    var callback = this.followingIndex.bind(this, id);
+    if (!this._requireSignedIn(callback)) { return; }
     var user = new Trackstack.Models.User({ id: id });
 
     user.fetch({
@@ -101,7 +100,9 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   likesIndex: function (id) {
-    this._cancelAjax();
+    var callback = this.likesIndex.bind(this, id);
+    if (!this._requireSignedIn(callback)) { return; }
+
     var user = new Trackstack.Models.User({ id: id });
     user.fetch({
       success: function (model, response) {
@@ -146,6 +147,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   _requireSignedIn: function (callback) {
+    this._cancelAjax();
     if (!Trackstack.currentUser.isSignedIn()) {
       callback = callback || this._goHome.bind(this);
       this.signIn(callback);
