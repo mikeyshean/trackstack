@@ -1,7 +1,7 @@
 module Api
   class FeedsController < ApplicationController
 
-    LIMIT = 2
+    LIMIT = 4
 
     def profile_feed
       @feed = Feed.includes(:sound => :author)
