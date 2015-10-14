@@ -12,8 +12,8 @@ Rails.application.routes.draw do
         get "following", to: "users#following"
         post "followers", to: "followers#create"
         delete "followers/:current_user_id", to: "followers#destroy"
-        get "profilefeed", to: "feeds#profile_feed"
-        get "mainfeed", to: "feeds#main_feed"
+        get "profilefeed/:oldest_entry", to: "feeds#profile_feed"
+        get "mainfeed/:oldest_entry", to: "feeds#main_feed"
 
         resources :tracks, param: :track_id, only: [:index]
         resources :playlists, param: :playlist_id, only: [:index, :show]

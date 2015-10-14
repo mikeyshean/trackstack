@@ -129,10 +129,10 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
   _cancelAjax: function () {
     // Cancel open downloads
-    if(window.stop !== undefined) {
+    if (window.stop !== undefined) {
       window.stop();
     }
-    else if(document.execCommand !== undefined) {
+    else if (document.execCommand !== undefined) {
       document.execCommand("Stop", false);
     }
   },

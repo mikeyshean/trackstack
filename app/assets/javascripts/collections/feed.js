@@ -1,7 +1,7 @@
 Trackstack.Collections.Feed = Backbone.Collection.extend({
 
   url: function () {
-    return "api/users/" + this.user.id + "/" + this.feedType
+    return "api/users/" + this.user.id + "/" + this.feedType + "/" + this.oldest_entry
   },
 
   initialize: function(models, options) {
@@ -17,6 +17,11 @@ Trackstack.Collections.Feed = Backbone.Collection.extend({
 
   modelId: function (attrs) {
     return attrs.sound_type + "-" + attrs.id;
+  },
+
+  parse: function (resp) {
+    this.oldest_entry = resp.oldest_entry
+    return resp.feed
   }
 
 });
