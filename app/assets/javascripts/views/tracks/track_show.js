@@ -42,7 +42,6 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     formData["comment"]["submitted_at"] = player.getCurrentTime()
     this.comments.create(formData.comment, {
       success: function (model, response) {
-        debugger
         this.renderComment(model, player);
         this.$(".feed-comment-input")
           .val("")
@@ -66,9 +65,9 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     el.addClass("track-show")
     el.css("left", value + "%" )
     el.addClass("transitioning")
-    setTimeout(function () {
-      el.removeClass("transitioning")
-    }, 5000)
+    // setTimeout(function () {
+    //   el.removeClass("transitioning")
+    // }, 5000)
 
   },
 
