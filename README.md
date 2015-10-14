@@ -10,6 +10,7 @@
 
 - Backbone authentication with Twitter/Facebook Omniauth
 - Uploads user/track images and audio files to AWS S3 with Cloudfront distribution
+- Infinite Scroll
 - Live notifications for Track/Playlist "Likes" and Playlist adds
 
 ![notification]
