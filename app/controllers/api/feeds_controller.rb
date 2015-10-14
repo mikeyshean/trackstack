@@ -22,6 +22,7 @@ module Api
         .order("updated_at DESC")
         .limit(LIMIT)
 
+      # For new users
       if @feed.length < LIMIT
         @feed = Feed.includes(:sound => :author)
           .order("updated_at DESC")
@@ -33,7 +34,7 @@ module Api
     end
 
     private
-    
+
     def oldest_entry
       if params[:oldest_entry] == "undefined"
         return Time.now

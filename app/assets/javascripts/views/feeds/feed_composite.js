@@ -6,16 +6,12 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
     this.listenTo(this.collection, "add", this.addSoundSubview)
     this.listenTo(this.collection, "reset", this.addSoundSubviews)
     this.listenTo(this.collection, "playing", this.pausePlayers)
+
+    this.attachInfiniteScroll();
   },
 
   events: {
     "click .feed-items": "fetchFeed"
-  },
-
-  fetchFeed: function (e) {
-    console.log("fetch");
-    e.preventDefault();
-    this.collection.fetch();
   },
 
   render: function () {
@@ -46,6 +42,15 @@ Trackstack.Views.FeedComposite = Backbone.CompositeView.extend({
     this.eachSubview(function (subview, selector) {
       subview.waveSurfer.pause();
     })
+  },
+
+  attachInfiniteScroll: function () {
+    var $feed = this.$el
+    $(window).scroll(function () {
+      if ($(window).scrollTop() + $(window).height() == $(document).height()) {
+        this.collection.fetch();
+      }
+    }.bind(this))
   },
 
 });
