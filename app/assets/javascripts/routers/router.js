@@ -111,12 +111,20 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
   _swapView: function (view) {
     if (this._currentView) {
+
+      // Cancel open downloads
+      if(window.stop !== undefined) {
+        window.stop();
+      }
+      else if(document.execCommand !== undefined) {
+        document.execCommand("Stop", false);
+      }
       this._currentView.remove();
     }
 
     this._currentView = view;
     this.$rootEl.html(view.render().$el);
-
+    
     window.scroll(0, 0);
   },
 
