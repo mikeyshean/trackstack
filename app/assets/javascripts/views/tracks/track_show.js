@@ -82,6 +82,7 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
         trackUrl: this.model.escape("track_url"),
         peaksUrl: this.model.escape("peaks_url"),
         sound: this.model,
+        track: this.model,
         height: 110
       })
     this.addSubview("#track-show-player", this.waveSurfer)

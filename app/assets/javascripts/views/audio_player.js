@@ -13,7 +13,11 @@ Trackstack.Views.AudioPlayer = Backbone.View.extend({
     this.playlistTracks = options.playlistTracks;
     this.track = options.track;
     this.sound = options.sound;
-    this.peaksUrl = options.peaksUrl || this.track.escape("peaks_url")
+    if (typeof options.peaksUrl === "string") {
+      this.peaksUrl = options.peaksUrl;
+    } else {
+      this.peaksUrl = this.track.escape("peaks_url");
+    }
     this.height = options.height;
     this.listenTo(this.playlistTracks, "playTrack", this.playTrack)
   },
