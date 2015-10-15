@@ -14,6 +14,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
   initialize: function (options) {
     this.$rootEl = options.$rootEl;
+    this.firstRender = true;
   },
 
   index: function () {
@@ -129,12 +130,13 @@ Trackstack.Routers.Router = Backbone.Router.extend({
 
   _cancelAjax: function () {
     // Cancel open downloads
-    if (window.stop !== undefined) {
+    if (window.stop !== undefined && !this.firstRender) {
       window.stop();
     }
     else if (document.execCommand !== undefined) {
       document.execCommand("Stop", false);
     }
+    this.firstRender = false
   },
 
   signIn: function (callback){
