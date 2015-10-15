@@ -29,7 +29,7 @@ module Api
 
     def update
 
-      @track = current_user.tracks.find(params[:id])
+      @track = Track.find(params[:id])
       peaks = @track.peaks.url.length > 0
 
       if params[:track][:peaks] && !peaks
