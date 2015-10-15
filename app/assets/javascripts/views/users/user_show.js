@@ -18,7 +18,7 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
     this.followers = this.model.followers();
     this.tracks = this.model.tracks();
     this.playlists = this.model.playlists();
-    this.followee_id = this.model.id;
+    this.followee_id = Trackstack.currentUser.id;
     this.tracks.fetch();
 
     this.listenTo(this.model, "sync", this.render);
