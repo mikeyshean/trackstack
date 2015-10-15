@@ -150,7 +150,7 @@ Trackstack.Routers.Router = Backbone.Router.extend({
   },
 
   _requireSignedIn: function (callback) {
-    this._cancelAjax();
+    // this._cancelAjax();
     if (!Trackstack.currentUser.isSignedIn()) {
       callback = callback || this._goHome.bind(this);
       this.signIn(callback);
