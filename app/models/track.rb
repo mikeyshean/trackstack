@@ -1,11 +1,11 @@
 class Track < ActiveRecord::Base
   has_many :playlistings
   has_many :playlists, through: :playlistings
-  belongs_to :author, class_name: "User", foreign_key: :author_id
   has_many :feeds, as: :sound, dependent: :destroy
   has_many :likings, as: :likable, dependent: :destroy
   has_many :likers, through: :likings, source: :liker
   has_many :comments, dependent: :destroy
+  belongs_to :author, class_name: "User", foreign_key: :author_id
 
   has_attached_file :track,
     :path => "tracks/:class/:id_:timestamp.:style.:extension",
@@ -25,7 +25,10 @@ class Track < ActiveRecord::Base
   validates_attachment_content_type :peaks, content_type: "text/plain"
 
   after_save do |track|
-    feed = Feed.where("sound_id = :id AND sound_type = :type", { id: track.id, type: track.class }).first
+    feed = Feed.where(
+      "sound_id = :id AND sound_type = :type",
+      { id: track.id, type: track.class }
+    ).first
     if feed
       feed.update(updated_at: track.updated_at)
     else
@@ -42,6 +45,10 @@ class Track < ActiveRecord::Base
   end
 
   def decoded_peaks
-    URI.parse(self.peaks.url).read
+    if self.peaks.url == ""
+      ""
+    else
+      URI.parse(self.peaks.url).read
+    end
   end
 end
