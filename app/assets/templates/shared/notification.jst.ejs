@@ -5,7 +5,7 @@
       <%= sound.escape('title') %>
     </p>
     <% if (type === "Playlist") { %>
-      <p>was added to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>"><%= playlistTitle %></a>.</p>
+      <p>was added to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>/playlists"><%= playlistTitle %></a>.</p>
     <% } else { %>
       <p>was saved to <a class="blue-link" href="#/users/<%= Trackstack.currentUser.id %>/likes">your Collection</a>.</p>
     <% }; %>
