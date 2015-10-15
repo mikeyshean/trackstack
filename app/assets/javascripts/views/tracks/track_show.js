@@ -65,9 +65,9 @@ Trackstack.Views.TrackShow = Backbone.CompositeView.extend({
     el.addClass("track-show")
     el.css("left", value + "%" )
     el.addClass("transitioning")
-    // setTimeout(function () {
-    //   el.removeClass("transitioning")
-    // }, 5000)
+    setTimeout(function () {
+      el.removeClass("transitioning")
+    }, 5000)
 
   },
 
