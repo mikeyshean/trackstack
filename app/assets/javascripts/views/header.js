@@ -6,7 +6,6 @@ Trackstack.Views.Header = Backbone.View.extend({
   initialize: function (options) {
     this.listenTo(Trackstack.currentUser, "signIn signOut", this.render)
     this.listenTo(Trackstack.currentUser, "sync", this.render)
-    // this.render();
     this.$modalEl = options.$modalEl;
     this.$navBarDropdown = this.$("#user-nav-dropdown");
   },

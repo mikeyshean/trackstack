@@ -90,6 +90,9 @@ Trackstack.Views.UserShow = Backbone.CompositeView.extend({
       success: function(model, response){
         Trackstack.currentUser.set(response)
         Backbone.history.navigate("#/users/" + that.model.id, { trigger: true });
+        setTimeout(function () {
+          Trackstack.header.render();
+        }, 0)
       }
     });
   },
