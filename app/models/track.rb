@@ -17,7 +17,8 @@ class Track < ActiveRecord::Base
   has_attached_file :img, styles: { badge: "50x50", track_show: "340x340", feed: "120x120" },
     :convert_options => { badge: "-quality 75 -strip" },
     :default_url => ":attachment/track_default.jpg",
-    :path => "imgs/:class/:id_:timestamp.:style.:extension"
+    :path => "imgs/:class/:id_:timestamp.:style.:extension",
+    :s3_host_alias => Proc.new {|attachment| "cdn#{attachment.instance.id % 4}.trackstack.audio" }
 
   validates :author_id, presence: true
   validates_attachment_content_type :img, content_type: /\Aimage\/.*\Z/
